@@ -11,6 +11,10 @@
       ./linux-host.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      # User settings
+      ./home/jw910731/linux-host
+      ./home/jw910731
+      ./home
     ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -43,19 +47,6 @@
     xkbVariant = "";
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.jw910731 = {
-    isNormalUser = true;
-    description = "Jerry Wu";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      brave
-      _1password
-      _1password-gui
-      vscode
-    ];
-  };
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
   
@@ -83,6 +74,16 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.cloudflared = {
+    enable = true;
+    tunnels = {
+      "9abf9847-04b5-4aa9-8d79-2fbd8a2e5ca6" = {
+        credentialsFile = "/etc/cloudflared/credentials.json";
+        default = "http_status:404";
+      };
+    };
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

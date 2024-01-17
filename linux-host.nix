@@ -3,6 +3,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  boot.initrd.kernelModules = [ "amdgpu" ];
   
   networking.hostName = "jw910731-nixos"; # Define your hostname.
 
@@ -11,6 +13,7 @@
   
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.xserver.videoDrivers = [ "amdgpu" ];
 
   # Enable the Budgie Desktop environment.
   services.xserver.displayManager.lightdm.enable = true;
