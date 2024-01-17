@@ -7,7 +7,7 @@
 
     # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -15,13 +15,21 @@
     nil.url = "github:oxalica/nil";
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
       "linux-host" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          {_module.args=inputs;}
           ./configuration.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.jw910731 = import ./home.nix;
+            home-manager.extraSpecialArgs = inputs;
+          }
         ];
       };
     };

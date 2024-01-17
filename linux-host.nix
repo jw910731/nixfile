@@ -5,6 +5,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.loader.systemd-boot.configurationLimit = 10;
   
   networking.hostName = "jw910731-nixos"; # Define your hostname.
 
@@ -12,12 +13,18 @@
   time.timeZone = "Asia/Taipei";
   
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver = {
+    enable = true;
+    videoDrivers = [ "amdgpu" ];
+    dpi = 180;
 
-  # Enable the Budgie Desktop environment.
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.desktopManager.budgie.enable = true;
+    # Setup the desktop environment.
+    displayManager.sddm = {
+      enable = true;
+      enableHidpi = true;
+    };
+    desktopManager.plasma5.enable = true;
+  };
 
   # Disable CUPS for print documents.
   services.printing.enable = false;
@@ -41,4 +48,13 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  # nix config
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 1w";
+  };
+
+  nix.settings.auto-optimise-store = true;
 }

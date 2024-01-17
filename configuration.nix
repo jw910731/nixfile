@@ -12,9 +12,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # User settings
-      ./home/jw910731/linux-host
-      ./home/jw910731
-      ./home
+      ./user.nix
     ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -61,6 +59,14 @@
     joe
     cloudflared
   ];
+
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    # Certain features, including CLI integration and system authentication support,
+    # require enabling PolKit integration on some desktop environments (e.g. Plasma).
+    polkitPolicyOwners = [ "jw910731" ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
