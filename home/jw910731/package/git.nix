@@ -1,10 +1,50 @@
 {...}:
 {
   programs.git = {
+    # Basic
     enable = true;
     userName = "jw910731";
     userEmail = "jw910731@gmail.com";
 
+    # LFS
+    lfs.enable = true;
+
+    # Sign
+    signing= {
+      signByDefault = true;
+      key="16D83FE3495FA263";
+    };
+
+    # Extra config
+    extraConfig = {
+      core = {
+        editor="\"emacs -nw\"";
+        autocrlf = "input";
+        excludesfile = "~/.gitignore_global";
+      };
+      diff.tool = "vscode";
+      "difftool \"vscode\"".cmd = "code --wait --diff $LOCAL $REMOTE";
+
+      color.ui = true;
+      "color \"diff-highlight\"" = {
+        oldNormal = "red bold";
+        oldHighlight = "white bold 52";
+        newNormal = "green bold";
+        newHighlight = "white bold 22";
+      };
+
+      pull.rebse = false;
+
+      merge = {
+        tool = "emacs";
+        guitool = "vscode";
+      };
+
+      "mergetool \"emacs\"".cmd = "emacs -nw";
+      "mergetool \"vscode\"".cmd = "code --wait $MERGED";
+    };
+
+    # Alias
     aliases = {
       # add
       a = "add";
