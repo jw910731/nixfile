@@ -4,6 +4,7 @@
     ./fcitx5
     ./git.nix
     ./gpg.nix
+    ./zsh.nix
   ];
 
   home.packages = with pkgs;[
