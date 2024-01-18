@@ -15,12 +15,13 @@
     nil.url = "github:oxalica/nil";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
+  {
     nixosConfigurations = {
       "linux-host" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
+          ./system/linux-host/configuration.nix
 
           home-manager.nixosModules.home-manager
           {

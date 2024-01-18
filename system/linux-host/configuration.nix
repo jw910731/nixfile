@@ -12,7 +12,7 @@
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # User settings
-      ./user.nix
+      ../user.nix
     ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -38,6 +38,11 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "zh_TW.UTF-8/UTF-8"
+  ];
 
   # Configure keymap in X11
   services.xserver = {

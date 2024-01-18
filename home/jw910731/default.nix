@@ -1,37 +1,11 @@
-{ config, pkgs, nil, ... }:
+{ ... }:
 {
   imports = [
-    ./fcitx5
+    ./package
   ];
 
   home.username = "jw910731";
   home.homeDirectory = "/home/jw910731";
-
-  programs.git = {
-    enable = true;
-    userName = "jw910731";
-    userEmail = "jw910731@gmail.com";
-  };
-
-  home.packages = with pkgs;[
-    vscode
-    fira-code
-    nerdfonts
-    brave
-    (wrapOBS { plugins = [ obs-studio-plugins.obs-vaapi ]; })
-    _1password
-    _1password-gui
-    nil.packages.${pkgs.system}.default
-    noto-fonts-cjk
-  ];
-
-  i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime
-      fcitx5-configtool
-    ];
-  };
 
   home.language = {
     base = "zh_TW.utf8";
