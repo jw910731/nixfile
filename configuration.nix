@@ -60,6 +60,8 @@
     cloudflared
   ];
 
+  programs.nix-ld.enable = true;
+
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
@@ -79,7 +81,12 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
+  services.openssh = {
+    enable = true;
+    settings.PasswordAuthentication = false;
+    settings.KbdInteractiveAuthentication = false;
+    settings.PermitRootLogin = "no";
+  };
 
   services.cloudflared = {
     enable = true;

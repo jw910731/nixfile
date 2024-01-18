@@ -3,6 +3,5 @@
     isNormalUser = true;
     description = "Jerry Wu";
     extraGroups = [ "networkmanager" "wheel" ];
-    
   };
 }
