@@ -27,7 +27,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.jw910731 = import ./home.nix;
+            home-manager.users = import ./home;
             home-manager.extraSpecialArgs = inputs;
           }
         ];

@@ -1,7 +1,7 @@
 { config, pkgs, nil, ... }:
 {
   imports = [
-    ./home/fcitx5
+    ./fcitx5
   ];
 
   home.username = "jw910731";
