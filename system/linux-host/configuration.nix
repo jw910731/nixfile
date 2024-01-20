@@ -63,6 +63,7 @@
     vim
     joe
     cloudflared
+    zsh
   ];
 
   programs.nix-ld.enable = true;

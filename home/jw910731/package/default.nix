@@ -4,7 +4,8 @@
     ./fcitx5
     ./git.nix
     ./gpg.nix
-    ./zsh.nix
+    ./zsh
+    ./prismlauncher.nix
   ];
 
   home.packages = with pkgs;[
@@ -20,5 +21,13 @@
     noto-fonts-cjk
     pinentry-qt
     gnupg
+    just
+    telegram-desktop
+    fzf
+    most
+    lsd
+    bat
+    prismlauncher
+    discord
   ];
 }
