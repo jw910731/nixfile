@@ -21,6 +21,16 @@
     # Setup the desktop environment.
     displayManager = {
         gdm.enable = true;
+        session = [
+          {
+            name = "home-manager";
+            manage = "window";
+            start = ''
+              ${pkgs.runtimeShell} $HOME/.hm-xsession &
+              waitPID=$!
+            '';
+          }
+        ];
     };
     desktopManager.gnome.enable = true;
     desktopManager.xterm.enable = false;

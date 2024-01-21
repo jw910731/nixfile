@@ -1,6 +1,7 @@
 { pkgs, nil, ... }:
 {
   imports = [
+    ./xsession
     ./fcitx5
     ./git.nix
     ./gpg.nix
@@ -29,5 +30,7 @@
     bat
     prismlauncher
     discord
+    python3
+    
   ];
 }
