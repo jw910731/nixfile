@@ -19,12 +19,14 @@
     dpi = 180;
 
     # Setup the desktop environment.
-    displayManager.sddm = {
-      enable = true;
-      enableHidpi = true;
+    displayManager = {
+        gdm.enable = true;
     };
-    desktopManager.plasma5.enable = true;
+    desktopManager.gnome.enable = true;
+    desktopManager.xterm.enable = false;
   };
+
+  programs.dconf.enable = true;
 
   # Disable CUPS for print documents.
   services.printing.enable = false;
