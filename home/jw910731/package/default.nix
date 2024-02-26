@@ -33,5 +33,8 @@
     pavucontrol
     zip
     unzip
+    clang
+    cmake
+    dig
   ];
 }

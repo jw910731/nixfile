@@ -66,6 +66,9 @@
     zsh
     man-pages
     man-pages-posix
+    strace
+    gcc
+    gnumake
   ];
 
   programs.nix-ld.enable = true;
