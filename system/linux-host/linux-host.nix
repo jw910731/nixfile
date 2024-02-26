@@ -20,7 +20,10 @@
 
     # Setup the desktop environment.
     displayManager = {
-        gdm.enable = true;
+        gdm = {
+          enable = true;
+          autoSuspend = false;
+        };
         session = [
           {
             name = "home-manager";
@@ -35,11 +38,19 @@
     desktopManager.gnome.enable = true;
     desktopManager.xterm.enable = false;
   };
+  documentation.dev.enable = true;
 
   programs.dconf.enable = true;
 
   # Disable CUPS for print documents.
   services.printing.enable = false;
+
+  # Enable flatpak
+  services.flatpak.enable = true;
+  fonts.fontDir.enable = true;
+
+  # Enable docker
+  virtualisation.docker.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;

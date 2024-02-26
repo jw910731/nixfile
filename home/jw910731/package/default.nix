@@ -29,8 +29,9 @@
     lsd
     bat
     prismlauncher
-    discord
     python3
-    
+    pavucontrol
+    zip
+    unzip
   ];
 }

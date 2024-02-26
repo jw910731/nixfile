@@ -64,6 +64,8 @@
     joe
     cloudflared
     zsh
+    man-pages
+    man-pages-posix
   ];
 
   programs.nix-ld.enable = true;
@@ -92,6 +94,7 @@
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
+    settings.StreamLocalBindUnlink = "yes";
   };
 
   services.cloudflared = {
@@ -117,5 +120,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }

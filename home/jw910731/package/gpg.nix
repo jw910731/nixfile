@@ -43,7 +43,7 @@ HmYkbYL+G1V+N1UnMasb7YeVxtxOVzEH
   services.gpg-agent = {
     enable = true;
     enableSshSupport = true;
-    enableExtraSocket = true;
+    enableExtraSocket = false;
     enableZshIntegration = true;
     pinentryFlavor = "qt";
     sshKeys = [ "A988C648FFB9E3AFFB6B80894057734400EDA14E" ];
