@@ -6,8 +6,18 @@
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.systemd-boot.configurationLimit = 10;
+
+  fileSystems."/data" = {
+    device = "/dev/sda2";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
   
   networking.hostName = "jw910731-nixos"; # Define your hostname.
+  networking.interfaces.enp6s0.wakeOnLan = {
+    enable = true;
+    policy = ["magic"];
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
