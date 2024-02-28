@@ -8,7 +8,7 @@
   boot.loader.systemd-boot.configurationLimit = 10;
 
   fileSystems."/data" = {
-    device = "/dev/sda2";
+    device = "/dev/disk/by-uuid/ead80857-c6ff-4153-9d22-f5e54b9adab1";
     fsType = "ext4";
     options = [ "nofail" ];
   };
