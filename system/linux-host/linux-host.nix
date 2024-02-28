@@ -14,9 +14,12 @@
   };
   
   networking.hostName = "jw910731-nixos"; # Define your hostname.
-  networking.interfaces.enp6s0.wakeOnLan = {
-    enable = true;
-    policy = ["magic"];
+  networking.interfaces.enp6s0 = {
+    wakeOnLan = {
+      enable = true;
+      policy = ["magic"];
+    };
+    useDHCP = true;
   };
 
   # Set your time zone.
