@@ -69,6 +69,8 @@
     strace
     gcc
     gnumake
+    tmux
+    killall
   ];
 
   programs.nix-ld.enable = true;
