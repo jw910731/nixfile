@@ -22,6 +22,9 @@
     useDHCP = true;
   };
 
+  # networking.nftables.enable = true;
+  networking.firewall.enable = false;
+
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
   
