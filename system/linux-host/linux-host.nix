@@ -4,6 +4,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
+  boot.extraModulePackages = [ config.boot.kernelPackages.amdgpu-pro ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.systemd-boot.configurationLimit = 10;
 
