@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 {
+  imports = [
+    ./linux-host-network.nix
+  ];
+  
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -13,21 +17,42 @@
     fsType = "ext4";
     options = [ "nofail" ];
   };
-  
-  networking.hostName = "jw910731-nixos"; # Define your hostname.
-  networking.interfaces.enp6s0 = {
-    wakeOnLan = {
-      enable = true;
-      policy = ["magic"];
-    };
-    useDHCP = true;
-  };
-
-  # networking.nftables.enable = true;
-  networking.firewall.enable = false;
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
+
+  # RKE2
+  environment.systemPackages = with pkgs; [
+    rke2
+  ];
+  systemd.services = {
+    "rke2-server" = {
+      enable = true;
+      path = [pkgs.mount];
+      description = "Rancher Kubernetes Engine v2 (server)";
+      documentation = ["https://github.com/rancher/rke2"];
+      wants = ["network-online.target"];
+      after = ["network-online.target"];
+      conflicts = ["rke2-agent.service"];
+      wantedBy = ["multi-user.target"];
+      serviceConfig = {
+        Type="notify";
+        EnvironmentFile=["-/etc/default/%N" "-/etc/sysconfig/%N" "-/usr/local/lib/systemd/system/%N.env"];
+        KillMode="process";
+        Delegate="yes";
+        LimitNOFILE=1048576;
+        LimitNPROC="infinity";
+        LimitCORE="infinity";
+        TasksMax="infinity";
+        TimeoutStartSec=0;
+        Restart="always";
+        RestartSec="5s";
+        ExecStartPre=["/bin/sh -xc '! /usr/bin/systemctl is-enabled --quiet nm-cloud-setup.service'" "-/sbin/modprobe br_netfilter" "-/sbin/modprobe overlay"];
+        ExecStart=["/run/current-system/sw/bin/rke2 server"];
+        ExecStopPost=["-/bin/sh -c \"systemd-cgls /system.slice/%n | grep -Eo '[0-9]+ (containerd|kubelet)' | awk '{print $1}' | xargs -r kill\""];
+      };
+    };
+  };
   
   # Enable the X11 windowing system.
   services.xserver = {

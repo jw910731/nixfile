@@ -62,7 +62,6 @@
     git
     vim
     joe
-    cloudflared
     zsh
     man-pages
     man-pages-posix
@@ -100,16 +99,6 @@
     settings.KbdInteractiveAuthentication = false;
     settings.PermitRootLogin = "no";
     settings.StreamLocalBindUnlink = "yes";
-  };
-
-  services.cloudflared = {
-    enable = true;
-    tunnels = {
-      "9abf9847-04b5-4aa9-8d79-2fbd8a2e5ca6" = {
-        credentialsFile = "/etc/cloudflared/credentials.json";
-        default = "http_status:404";
-      };
-    };
   };
 
   # Open ports in the firewall.
