@@ -10,7 +10,11 @@
   };
 
   # networking.nftables.enable = true;
-  networking.firewall.enable = false;
+  networking.firewall = {
+    enable = true;
+    trustedInterfaces = ["wlp5s0"];
+    allowedTCPPorts = [9345 6443 80 443];
+  };
 
   networking.networkmanager.unmanaged = ["cali*" "flannel*"];
 
