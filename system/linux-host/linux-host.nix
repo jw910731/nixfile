@@ -21,6 +21,11 @@
     fsType = "ext4";
     options = [ "nofail" ];
   };
+  fileSystems."/k8s-pv" = {
+    device = "/dev/disk/by-uuid/93a12fb5-ecae-47c5-870e-9782df34c581";
+    fsType = "xfs";
+    options = [ "nofail" ];
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
