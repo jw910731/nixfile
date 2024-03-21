@@ -33,11 +33,21 @@
   # RKE2
   environment.systemPackages = with pkgs; [
     rke2
+    openiscsi
+  ];
+
+  services.openiscsi = {
+    enable = true;
+    name = "iqn.2016-04.com.open-iscsi:f471e56c1026";
+  };
+
+  systemd.tmpfiles.rules = [
+    "L+ /usr/local/bin - - - - /run/current-system/sw/bin/"
   ];
   systemd.services = {
     "rke2-server" = {
       enable = true;
-      path = [pkgs.mount pkgs.iptables];
+      path = [pkgs.mount pkgs.iptables pkgs.rke2];
       description = "Rancher Kubernetes Engine v2 (server)";
       documentation = ["https://github.com/rancher/rke2"];
       wants = ["network-online.target"];
@@ -57,12 +67,26 @@
         Restart="always";
         RestartSec="5s";
         ExecStartPre=["/bin/sh -xc '! /usr/bin/systemctl is-enabled --quiet nm-cloud-setup.service'" "-/sbin/modprobe br_netfilter" "-/sbin/modprobe overlay"];
-        ExecStart=["/run/current-system/sw/bin/rke2 server"];
+        ExecStart=["${pkgs.rke2.outPath}/bin/rke2 server"];
         ExecStopPost=["-/bin/sh -c \"systemd-cgls /system.slice/%n | grep -Eo '[0-9]+ (containerd|kubelet)' | awk '{print $1}' | xargs -r kill\""];
       };
     };
   };
   
+  environment.etc = {
+    "rancher/rke2/config.yaml" = {
+      text = ''
+        kubelet-arg:
+          - "max-pods=256"
+        kube-apiserver-arg:
+          - "oidc-issuer-url=https://auth.h.jw910731.dev/realms/master"
+          - "oidc-client-id=kubernetes"
+          - "oidc-username-claim=username"
+          - "oidc-groups-claim=groups"
+      '';
+    };
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
