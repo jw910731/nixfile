@@ -81,8 +81,10 @@
         kube-apiserver-arg:
           - "oidc-issuer-url=https://auth.h.jw910731.dev/realms/master"
           - "oidc-client-id=kubernetes"
-          - "oidc-username-claim=username"
+          - "oidc-username-claim=preferred_username"
+          - "oidc-username-prefix=-"
           - "oidc-groups-claim=groups"
+          - "oidc-groups-prefix="
       '';
     };
   };
