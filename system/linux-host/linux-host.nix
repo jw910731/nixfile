@@ -47,7 +47,7 @@
   systemd.services = {
     "rke2-server" = {
       enable = true;
-      path = [pkgs.mount pkgs.iptables pkgs.rke2];
+      path = [pkgs.mount pkgs.iptables pkgs.umount];
       description = "Rancher Kubernetes Engine v2 (server)";
       documentation = ["https://github.com/rancher/rke2"];
       wants = ["network-online.target"];
