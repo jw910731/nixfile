@@ -85,6 +85,8 @@
           - "oidc-username-prefix=-"
           - "oidc-groups-claim=groups"
           - "oidc-groups-prefix="
+        tls-san:
+          - "home.jw910731.dev"
       '';
     };
   };
