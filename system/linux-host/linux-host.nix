@@ -91,32 +91,32 @@
     };
   };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "amdgpu" ];
-    dpi = 180;
+  # # Enable the X11 windowing system.
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = [ "amdgpu" ];
+  #   dpi = 180;
 
-    # # Setup the desktop environment.
-    # displayManager = {
-    #     gdm = {
-    #       enable = true;
-    #       autoSuspend = false;
-    #     };
-    #     session = [
-    #       {
-    #         name = "home-manager";
-    #         manage = "window";
-    #         start = ''
-    #           ${pkgs.runtimeShell} $HOME/.hm-xsession &
-    #           waitPID=$!
-    #         '';
-    #       }
-    #     ];
-    # };
-    # desktopManager.gnome.enable = true;
-    # desktopManager.xterm.enable = false;
-  };
+  #   # Setup the desktop environment.
+  #   displayManager = {
+  #       gdm = {
+  #         enable = true;
+  #         autoSuspend = false;
+  #       };
+  #       session = [
+  #         {
+  #           name = "home-manager";
+  #           manage = "window";
+  #           start = ''
+  #             ${pkgs.runtimeShell} $HOME/.hm-xsession &
+  #             waitPID=$!
+  #           '';
+  #         }
+  #       ];
+  #   };
+  #   desktopManager.gnome.enable = true;
+  #   desktopManager.xterm.enable = false;
+  # };
   documentation.dev.enable = true;
 
   programs.dconf.enable = true;
