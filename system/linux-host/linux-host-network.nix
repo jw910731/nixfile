@@ -27,19 +27,4 @@
   ];
 
   networking.networkmanager.unmanaged = ["cali*" "flannel*"];
-
-  # Linux Host Network packages
-  environment.systemPackages = with pkgs; [
-    cloudflared
-  ];
-
-  services.cloudflared = {
-    enable = true;
-    tunnels = {
-      "9abf9847-04b5-4aa9-8d79-2fbd8a2e5ca6" = {
-        credentialsFile = "/etc/cloudflared/credentials.json";
-        default = "http_status:404";
-      };
-    };
-  };
 }
