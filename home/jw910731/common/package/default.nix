@@ -12,10 +12,8 @@
     fira-code
     nerdfonts
     _1password
-    _1password-gui
     gnupg
     just
-    telegram-desktop
     fzf
     most
     lsd
