@@ -15,6 +15,11 @@
   boot.extraModulePackages = [ config.boot.kernelPackages.amdgpu-pro ];
   boot.initrd.kernelModules = [ "amdgpu" ];
   boot.loader.systemd-boot.configurationLimit = 10;
+  boot.kernel.sysctl = {
+    "fs.inotify.max_user_watches"=2099999999;
+    "fs.inotify.max_user_instances"=2099999999;
+    "fs.inotify.max_queued_events"=2099999999;
+  };
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/ead80857-c6ff-4153-9d22-f5e54b9adab1";
