@@ -10,12 +10,6 @@
   ];
 
   home.packages = with pkgs;[
-    brave
-    (wrapOBS { plugins = [ obs-studio-plugins.obs-vaapi ]; })
-    noto-fonts-cjk
-    pinentry-qt
-    prismlauncher
-    pavucontrol
     podman
     podman-compose
     gdb
