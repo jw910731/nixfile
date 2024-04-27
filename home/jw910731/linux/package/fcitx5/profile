@@ -1,0 +1,33 @@
+[Groups/0]
+# Group Name
+Name=Default
+# Layout
+Default Layout=us
+# Default Input Method
+DefaultIM=rime
+
+[Groups/0/Items/0]
+Name=keyboard-us
+Layout=
+
+[Groups/0/Items/1]
+# Name
+Name=rime
+# Layout
+Layout=
+
+[Groups/1]
+# Group Name
+Name=English
+# Layout
+Default Layout=us
+# Default Input Method
+DefaultIM=keyboard-us
+
+[Groups/1/Items/0]
+Name=keyboard-us
+Layout=
+
+[GroupOrder]
+0=Default
+1=English

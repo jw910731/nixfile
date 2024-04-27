@@ -22,6 +22,16 @@
         system = "x86_64-linux";
         modules = [
           ./system/linux-host/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users = {
+              jw910731 = import ./home/jw910731/linux.nix;
+            };
+            home-manager.extraSpecialArgs = inputs;
+          }
         ];
       };
     };
