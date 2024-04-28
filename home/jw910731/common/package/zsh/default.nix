@@ -27,11 +27,35 @@ in
         source "${homeDir}/.shell/alias.zsh"
         source "${homeDir}/.shell/external.zsh"
         source "${homeDir}/.shell/keybind.zsh"
+
+        # zcompile .zshrc
+        zcompare ''${HOME}/.zshrc &
       '';
       initExtraBeforeCompInit = ''
         setopt extendedglob
         zstyle ':completion:*' use-cache on
         zstyle ':completion:*' cache-path ~/.zsh/cache
+
+        # zcompile the completion cache; siginificant speedup.
+        for file in ''${HOME}/.zcomp^(*.zwc)(.); do
+          zcompare ''${file}
+        done
+      '';
+      initExtraFirst = ''
+        zcompare() {
+          if [[ -s ''${1} && ( ! -s ''${1}.zwc || ''${1} -nt ''${1}.zwc) ]]; then
+            zcompile ''${1}
+          fi
+        }
+        source () {
+            [[ ! "$1.zwc" -nt $1 ]] || zcompile $1
+            builtin source $@ 
+        }
+
+        . () {
+            [[ ! "$1.zwc" -nt $1 ]] || zcompile $1
+            builtin . $@
+        }
       '';
 
 
