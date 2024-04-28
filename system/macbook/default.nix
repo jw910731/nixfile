@@ -44,9 +44,9 @@
 
   security.pam.enableSudoTouchIdAuth = true;
 
+  # Load nix-darwin in /etc/zshrc.
   programs.zsh.enable = true;
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
-  nix.package = pkgs.nix;
 }

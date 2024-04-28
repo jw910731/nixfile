@@ -97,6 +97,7 @@ in
         { name = "zsh-users/zsh-autosuggestions"; }
         { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
         { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" ]; }
+        { name = "plugins/git"; tags = [ "from:oh-my-zsh" ]; }
       ];
     };
 
