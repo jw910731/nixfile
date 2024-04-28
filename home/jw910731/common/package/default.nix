@@ -35,9 +35,13 @@ rec {
     zsh-completions
     zsh-fast-syntax-highlighting
     curl
-    go
     htop
     tcping-go
     rustup
   ];
+
+  programs.go = {
+    enable = true;
+    goPath = "./dev/go";
+  };
 }

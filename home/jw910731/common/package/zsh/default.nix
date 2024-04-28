@@ -13,6 +13,7 @@ in
         path=(
           $HOME/.local/bin
           $HOME/dev/bin
+          $GOBIN
           $path
         )
 
@@ -20,13 +21,7 @@ in
         source "${homeDir}/.shell/external.zsh"
       '';
       initExtraBeforeCompInit = "";
-      initExtraFirst = ''
-        # Golang env setting
-        if (( $+commands[go] )); then
-          export GOPATH=$HOME/dev/go
-          export GOBIN=$GOPATH/bin
-        fi
-      '';
+      initExtraFirst = "";
 
       plugins = [
         {
