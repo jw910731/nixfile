@@ -11,7 +11,7 @@ switch host:
   darwin-rebuild switch --flake .#{{host}}; \
   fi
   if [ {{os()}} = "linux" ]; then \
-  nixos-rebuild switch --flake .#{{host}} \
+  nixos-rebuild switch --flake .#{{host}}; \
   fi
 
 up:
