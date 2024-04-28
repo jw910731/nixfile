@@ -3,8 +3,6 @@
   imports = [
     ../common
 
-    ./package/xsession
-    ./package/fcitx5
     ./package/podman
     ./package/prismlauncher.nix
     ./package/gpg.nix

@@ -4,13 +4,12 @@
   inputs = {
     # NixPKG
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
     # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      url = "github:nix-community/home-manager/release-23.11";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-darwin = {
       url = "github:nix-community/home-manager";
@@ -45,7 +44,6 @@
             };
             home-manager.extraSpecialArgs = {
               nil = inputs.nil;
-              nixpkgs = inputs.nixpkgs-unstable;
             };
           }
         ];
