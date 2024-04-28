@@ -4,6 +4,7 @@
     ../common
 
     ./package.nix
+    ./zsh.nix
   ];
 
   home.language = {

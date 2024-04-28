@@ -28,8 +28,12 @@ in
         source "${homeDir}/.shell/external.zsh"
         source "${homeDir}/.shell/keybind.zsh"
       '';
-      initExtraBeforeCompInit = "";
-      initExtraFirst = "";
+      initExtraBeforeCompInit = ''
+        setopt extendedglob
+        zstyle ':completion:*' use-cache on
+        zstyle ':completion:*' cache-path ~/.zsh/cache
+      '';
+
 
       plugins = [
         {
@@ -48,12 +52,11 @@ in
           { name = "~/.p10k"; tags = [ "from:local" ]; }
           { name = "zsh-users/zsh-autosuggestions"; }
           { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
-          { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" ]; }
-          { name = "plugins/git"; tags = [ "from:oh-my-zsh" ]; }
-          { name = "g-plane/pnpm-shell-completion"; tags = [ "hook-build:./zplug.zsh" "defer:2" ]; }
-          { name = "modules/directory"; tags = ["from:prezto"]; }
-          { name = "MichaelAquilina/zsh-you-should-use"; }
-          { name = "wfxr/forgit"; }
+          { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" "lazy:true" ]; }
+          { name = "plugins/git"; tags = [ "from:oh-my-zsh" "lazy:true" ]; }
+          { name = "modules/directory"; tags = ["from:prezto" "lazy:true"]; }
+          { name = "MichaelAquilina/zsh-you-should-use"; tags = [ "lazy:true" ]; }
+          { name = "wfxr/forgit"; tags = [ "lazy:true" ]; }
           { name = "Aloxaf/fzf-tab"; }
         ];
       };

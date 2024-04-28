@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   programs.zsh = {
-    plugin = [
+    plugins = [
       {
         name = "auto-notify";
         src = pkgs.fetchFromGitHub {
