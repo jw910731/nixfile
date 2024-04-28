@@ -26,6 +26,7 @@ in
 
         source "${homeDir}/.shell/alias.zsh"
         source "${homeDir}/.shell/external.zsh"
+        source "${homeDir}/.shell/keybind.zsh"
       '';
       initExtraBeforeCompInit = "";
       initExtraFirst = "";
