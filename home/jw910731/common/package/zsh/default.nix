@@ -7,6 +7,8 @@ in
     {
       enable = true;
       enableCompletion = true;
+      completionInit = "autoload -Uz compinit && (compinit &; compinit -C)";
+      # zprof.enable = true;
       shellAliases = { };
       autocd = true;
       initExtra = ''
