@@ -66,14 +66,8 @@
       "homebrew/cask-fonts"
       "homebrew/cask-versions"
       "homebrew/services"
-      "isen-ng/dotnet-sdk-versions"
-      "jeffreywildman/virt-manager"
-      "osx-cross/arm"
-      "osx-cross/avr"
       "playcover/playcover"
-      "qmk/qmk"
       "tabbyml/tabby"
-      "tinygo-org/tools"
     ];
 
     masApps = {
