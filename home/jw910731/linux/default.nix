@@ -1,13 +1,13 @@
 { pkgs, ... }:
 {
   imports = [
-    import ../common
+    ../common
 
     ./package/xsession
     ./package/fcitx5
     ./package/podman
     ./package/prismlauncher.nix
-    ./package/gnupg.nix
+    ./package/gpg.nix
   ];
 
   home.packages = with pkgs;[
