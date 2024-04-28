@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, extra, ... }:
 rec {
   imports = [
     ./git.nix
-    (import ./zsh { inherit home pkgs; })
+    ./zsh
   ];
 
   home.packages = with pkgs;[
@@ -38,5 +38,6 @@ rec {
     go
     htop
     tcping-go
+    rustup
   ];
 }

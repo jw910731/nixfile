@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../common
+    import ../common
 
     ./package/xsession
     ./package/fcitx5
