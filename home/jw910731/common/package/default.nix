@@ -2,12 +2,10 @@
 {
   imports = [
     ./git.nix
-    ./gpg.nix
     ./zsh
   ];
 
   home.packages = with pkgs;[
-    vscode
     emacs
     fira-code
     nerdfonts
@@ -33,5 +31,6 @@
     kustomize
     jq
     krew
+    nixfmt
   ];
 }

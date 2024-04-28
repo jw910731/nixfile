@@ -7,6 +7,7 @@
     ./package/fcitx5
     ./package/podman
     ./package/prismlauncher.nix
+    ./package/gnupg.nix
   ];
 
   home.packages = with pkgs;[

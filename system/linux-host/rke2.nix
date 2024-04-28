@@ -1,5 +1,5 @@
 final: prev:
-let 
+let
   go_version = "1.21.7";
   go = prev.go.overrideAttrs rec {
     version = go_version;
@@ -8,11 +8,12 @@ let
       hash = "sha256-ABl6sg8zgTgyv/Yv2TzKHEKgjMaJoypmcspJWRlZv/Y=";
     };
   };
-  buildGoModule = prev.buildGo121Module.override { 
-    inherit go ;
+  buildGoModule = prev.buildGo121Module.override {
+    inherit go;
   };
 
-in {
+in
+{
   rke2 = prev.rke2.override {
     buildGoModule = args: buildGoModule (args // rec {
       nativeBuildInputs = [ prev.yq-go prev.curl prev.git ];

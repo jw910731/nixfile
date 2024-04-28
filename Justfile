@@ -6,7 +6,10 @@
 #
 ############################################################################
 
-switch:
+switch-mac:
+  darwin-rebuild switch --flake .#macbook
+
+switch-linux:
   sudo nixos-rebuild switch --flake .#linux-host
 
 up:

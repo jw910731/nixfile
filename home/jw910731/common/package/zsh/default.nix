@@ -1,7 +1,7 @@
 {
   programs.zsh = {
     enable = true;
-    shellAliases = {};
+    shellAliases = { };
     autocd = true;
     initExtra = "";
     initExtraBeforeCompInit = "";
@@ -18,8 +18,8 @@
     zplug = {
       enable = true;
       plugins = [
-        { name = "zsh-users/zsh-autosuggestions"; } 
-        { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; } 
+        { name = "zsh-users/zsh-autosuggestions"; }
+        { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
         { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" ]; }
       ];
     };

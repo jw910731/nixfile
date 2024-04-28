@@ -6,13 +6,13 @@
 
 {
   imports =
-    [ 
+    [
       # Host Dependent Configs
       ./linux-host.nix
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # User settings
-      ../user.nix
+      ./user.nix
     ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -52,7 +52,7 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  
+
   # Enable nix command and flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

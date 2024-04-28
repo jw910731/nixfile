@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   users.users.jw910731 = {
     isNormalUser = true;

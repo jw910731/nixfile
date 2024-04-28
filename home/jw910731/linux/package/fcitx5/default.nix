@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 {
-  home.file.".local/share/fcitx5/rime/default.custom.yaml".source=./default.custom.yaml;
+  home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
 
   i18n.inputMethod = {
     enabled = "fcitx5";
@@ -26,5 +26,5 @@
     "fcitx5/conf/classicui.conf".source = ./classicui.conf;
   };
 
-  
+
 }

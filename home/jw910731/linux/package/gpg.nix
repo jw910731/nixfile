@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   programs.gpg = {
     enable = true;
@@ -35,7 +35,7 @@ HmYkbYL+G1V+N1UnMasb7YeVxtxOVzEH
       }
     ];
 
-    settings ={
+    settings = {
       keyserver = "hkp://keyserver.ubuntu.com";
     };
   };

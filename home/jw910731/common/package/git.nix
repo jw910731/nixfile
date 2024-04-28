@@ -1,4 +1,4 @@
-{...}:
+{ ... }:
 {
   programs.git = {
     # Basic
@@ -10,15 +10,15 @@
     lfs.enable = true;
 
     # Sign
-    signing= {
+    signing = {
       signByDefault = true;
-      key="16D83FE3495FA263";
+      key = "16D83FE3495FA263";
     };
 
     # Extra config
     extraConfig = {
       core = {
-        editor="\"emacs -nw\"";
+        editor = "\"emacs -nw\"";
         autocrlf = "input";
         excludesfile = "~/.gitignore_global";
       };
@@ -67,10 +67,10 @@
       last = "diff HEAD^";
 
       # log
-      l="log --graph --date=short";
+      l = "log --graph --date=short";
       changes = "log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status";
-	    short = "log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"";
-	    simple = "log --pretty=format:\" * %s\"";
+      short = "log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"";
+      simple = "log --pretty=format:\" * %s\"";
 
       # pull & push
       pl = "pull";
