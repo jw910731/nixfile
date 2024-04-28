@@ -17,7 +17,7 @@ in
   rke2 = prev.rke2.override {
     buildGoModule = args: buildGoModule (args // rec {
       nativeBuildInputs = [ prev.yq-go prev.curl prev.git ];
-      version = "1.27.11+rke2r1";
+      version = "1.27.12+rke2r1";
 
       src = prev.fetchFromGitHub {
         owner = "rancher";
