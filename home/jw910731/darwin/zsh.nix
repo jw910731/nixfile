@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  programs.zsh={
+  programs.zsh = {
     plugin = [
       {
         name = "auto-notify";
