@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
-  homeDir = "/Users/jw910731";
+  homeDir = if pkgs.stdenv.isLinux then "/home/jw910731" else "/Users/jw910731";
 in
 {
   programs.zsh =
@@ -77,15 +77,6 @@ in
             repo = "docker-zsh-completion";
             rev = "1f073f461caca4773ca7b4a1c13bb267ab8bd592";
             sha256 = "sha256-jEBlJmHIVuiWkCRJ6leP5apI8vjB0VbYXxY5niI0QEo=";
-          };
-        }
-        {
-          name = "auto-notify";
-          src = pkgs.fetchFromGitHub {
-            owner = "MichaelAquilina";
-            repo = "zsh-auto-notify";
-            rev = "22b2c61ed18514b4002acc626d7f19aa7cb2e34c";
-            sha256 = "sha256-x+6UPghRB64nxuhJcBaPQ1kPhsDx3HJv0TLJT5rjZpA=";
           };
         }
         {
