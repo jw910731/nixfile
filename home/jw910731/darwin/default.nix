@@ -6,7 +6,7 @@
     ./package.nix
   ];
 
-  home.language = lib.mkForce {
+  home.language = {
     base = "zh_TW.UTF-8";
     ctype = "zh_TW.UTF-8";
     numeric = "zh_TW.UTF-8";
