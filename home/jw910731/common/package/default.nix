@@ -38,6 +38,7 @@ rec {
     htop
     tcping-go
     rustup
+    nodePackages.pnpm
   ];
 
   programs.go = {
