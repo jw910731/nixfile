@@ -7,7 +7,13 @@ in
     {
       enable = true;
       enableCompletion = true;
-      completionInit = "autoload -Uz compinit && (compinit &; compinit -C)";
+      completionInit = ''
+      autoload -Uz compinit
+      for dump in ~/.zcompdump(N.mh+24); do
+        compinit
+      done
+      compinit -C
+      '';
       shellAliases = { };
       autocd = true;
       initExtra = ''
