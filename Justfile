@@ -6,11 +6,8 @@
 #
 ############################################################################
 
-switch-mac:
-  darwin-rebuild switch --flake .#macbook
-
-switch-linux:
-  sudo nixos-rebuild switch --flake .#linux-host
+switch host:
+  darwin-rebuild switch --flake .#{{host}}
 
 up:
   nix flake update
