@@ -1,5 +1,5 @@
-{ lib, ... }:
-{
+{ lib, pkgs, ... }:
+rec {
   imports = [
     ./common
     ./darwin

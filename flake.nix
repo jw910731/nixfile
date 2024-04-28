@@ -25,48 +25,48 @@
     nil.url = "github:oxalica/nil";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, ... }@inputs:
-    {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-      formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-      nixosConfigurations = {
-        "linux-host" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./system/linux-host/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin,  ... }@inputs:
+  {
+    formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
+    formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+    nixosConfigurations = {
+      "linux-host" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./system/linux-host/configuration.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-              home-manager.users = {
-                jw910731 = import ./home/jw910731/linux.nix;
-              };
-              home-manager.extraSpecialArgs = inputs;
-            }
-          ];
-        };
-      };
-      darwinConfigurations = {
-        "macbook" = let system = "aarch64-darwin"; in darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            ./system/macbook
-            home-manager-darwin.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users = {
-                jw910731 = import ./home/jw910731/macos.nix;
-              };
-              home-manager.extraSpecialArgs = {
-                nil = inputs.nil;
-                nixpkgs = inputs.nixpkgs-darwin;
-              };
-            }
-          ];
-        };
+            home-manager.users = {
+              jw910731 = import ./home/jw910731/linux.nix;
+            };
+            home-manager.extraSpecialArgs = inputs;
+          }
+        ];
       };
     };
+    darwinConfigurations = {
+      "macbook" = let system = "aarch64-darwin"; in darwin.lib.darwinSystem {
+        inherit system;
+        modules = [
+          ./system/macbook
+          home-manager-darwin.darwinModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users = {
+              jw910731 = import ./home/jw910731/macos.nix;
+            };
+            home-manager.extraSpecialArgs = {
+              nil = inputs.nil;
+              nixpkgs = inputs.nixpkgs-darwin;
+            };
+          }
+        ];
+      };
+    };
+  };
 }

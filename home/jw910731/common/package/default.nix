@@ -1,8 +1,8 @@
 { pkgs, ... }:
-{
+rec {
   imports = [
     ./git.nix
-    ./zsh
+    (import ./zsh {inherit home pkgs;})
   ];
 
   home.packages = with pkgs;[

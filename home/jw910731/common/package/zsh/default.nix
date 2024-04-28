@@ -1,9 +1,15 @@
+{ pkgs, home,... }:
+let 
+  homeDir = "/Users/jw910731";
+in
 {
   programs.zsh = {
     enable = true;
     shellAliases = { };
     autocd = true;
-    initExtra = "";
+    initExtra = ''
+      source "${homeDir}/.shell/alias.zsh"
+    '';
     initExtraBeforeCompInit = "";
     initExtraFirst = "";
 
@@ -12,6 +18,76 @@
         name = "powerlevel10k-config";
         src = ./p10k;
         file = "p10k.zsh";
+      }
+      {
+        name = "fzf-tab";
+        src = pkgs.fetchFromGitHub {
+          owner = "Aloxaf";
+          repo = "fzf-tab";
+          rev = "f95cdcf2c390428d271f2304698c2d45f0cd4de5";
+          sha256 = "sha256-plGAwdmHQQCEBqEKOZumS1vZ0AwLE7A4tUImgljK5kI=";
+        };
+      }
+      {
+        name = "forgit";
+        src = pkgs.fetchFromGitHub {
+          owner = "wfxr";
+          repo = "forgit";
+          rev = "23.06.0";
+          sha256 = "sha256-HxdTRv4OFf7Bh3FnTB7FMjhizCLH5DbuOHzQq2SYfAE=";
+        };
+      }
+      {
+        name = "extract";
+        src = pkgs.fetchFromGitHub {
+          owner = "birkhofflee";
+          repo = "zsh-plugin-extract";
+          rev = "1.0.0";
+          sha256 = "sha256-KjQoMGqbrjuvfy+Lf3eI32aN09sLpHjh5S/tRTnhAco=";
+        };
+      }
+      {
+        name = "you-should-use";
+        src = pkgs.fetchFromGitHub {
+          owner = "MichaelAquilina";
+          repo = "zsh-you-should-use";
+          rev = "1f9cb008076d4f2011d5f814dfbcfbece94a99e0";
+          sha256 = "sha256-lKs6DhG3x/oRA5AxnRT+odCZFenpS86wPnPqxLonV2E=";
+        };
+      }
+      {
+        name = "docker-zsh-completion";
+        src = pkgs.fetchFromGitHub {
+          owner = "greymd";
+          repo = "docker-zsh-completion";
+          rev = "1f073f461caca4773ca7b4a1c13bb267ab8bd592";
+          sha256 = "sha256-jEBlJmHIVuiWkCRJ6leP5apI8vjB0VbYXxY5niI0QEo=";
+        };
+      }
+      {
+        name = "auto-notify";
+        src = pkgs.fetchFromGitHub {
+          owner = "MichaelAquilina";
+          repo = "zsh-auto-notify";
+          rev = "22b2c61ed18514b4002acc626d7f19aa7cb2e34c";
+          sha256 = "sha256-x+6UPghRB64nxuhJcBaPQ1kPhsDx3HJv0TLJT5rjZpA=";
+        };
+      }
+      {
+        name = "gnu-utility";
+        file = "";
+        src = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/sorin-ionescu/prezto/8d00c51900dfce3b2bc1e5bd99bd58f238c5668a/modules/gnu-utility/init.zsh";
+          sha256 = "sha256-5sx3r71NGT9DokDVwfjlKomYzIgpRwaA2Ky01QRN9sY=";
+        };
+      }
+      {
+        name = "directory";
+        file = "";
+        src = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/sorin-ionescu/prezto/da87c79b3a35f5a4a504ea331e9ec52b4f786976/modules/directory/init.zsh";
+          sha256 = "sha256-/RFblRzQFvXvL7f5fUftwl7x/8XJ+WSH1JxjISAM1+A=";
+        };
       }
     ];
 
@@ -23,7 +99,32 @@
         { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" ]; }
       ];
     };
+
+    history = {
+      extended = true;
+      expireDuplicatesFirst = true;
+      ignorePatterns = [ "rm * " ];
+    };
+
+  };
+
+  programs = {
+    zoxide = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
+
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 
   home.file.".p10k".source = ./p10k;
+  home.file.".shell".source = ./shell;
 }
