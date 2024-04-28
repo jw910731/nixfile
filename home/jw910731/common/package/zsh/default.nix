@@ -10,11 +10,23 @@ in
       shellAliases = { };
       autocd = true;
       initExtra = ''
+        path=(
+          $HOME/.local/bin
+          $HOME/dev/bin
+          $path
+        )
+
         source "${homeDir}/.shell/alias.zsh"
         source "${homeDir}/.shell/external.zsh"
       '';
       initExtraBeforeCompInit = "";
-      initExtraFirst = "";
+      initExtraFirst = ''
+        # Golang env setting
+        if (( $+commands[go] )); then
+          export GOPATH=$HOME/dev/go
+          export GOBIN=$GOPATH/bin
+        fi
+      '';
 
       plugins = [
         {
