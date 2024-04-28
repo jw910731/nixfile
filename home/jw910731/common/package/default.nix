@@ -2,11 +2,11 @@
 rec {
   imports = [
     ./git.nix
-    (import ./zsh {inherit home pkgs;})
+    (import ./zsh { inherit home pkgs; })
   ];
 
   home.packages = with pkgs;[
-    emacs
+    emacs-nox
     fira-code
     nerdfonts
     _1password
@@ -31,6 +31,12 @@ rec {
     kustomize
     jq
     krew
-    nixfmt
+    nixpkgs-fmt
+    zsh-completions
+    zsh-fast-syntax-highlighting
+    curl
+    go
+    htop
+    tcping-go
   ];
 }

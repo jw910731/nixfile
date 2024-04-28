@@ -3,32 +3,15 @@
   # This installs system-wide packages and Mac App Store apps.
   homebrew = {
     enable = true;
+    onActivation.cleanup = "uninstall";
 
     brews = [
-      "chezmoi"
-      "curl"
-      "fzf"
-      "git"
-      "gnupg"
-      "gnutls"
-      "go"
-      "htop"
-      "iperf3"
-      "joe"
-      "krew"
-      "kubernetes-cli"
-      "llvm"
-      "lsd"
-      "make"
-      "most"
-      "neofetch"
       "pinentry"
       "pinentry-mac"
       "pkg-config"
       "pyenv"
       "python@3.12"
-      "tcping"
-      "ykman"
+      "joe"
     ];
 
     casks = [
