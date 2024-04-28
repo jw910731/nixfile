@@ -48,7 +48,13 @@
   programs.zsh = {
     enable = true;
     interactiveShellInit = ''
-      path+=/opt/homebrew/bin
+      # This config is very dangerous
+      # Do not change order if you don't know what you are doing
+      path=(
+        $path
+        /opt/homebrew/bin
+      )
+      
       fpath+=/opt/homebrew/share/zsh/site-functions
     '';
   };
