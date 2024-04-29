@@ -8,17 +8,17 @@
   ];
 
   home.language = {
-    base = "zh_TW.UTF-8";
-    ctype = "zh_TW.UTF-8";
-    numeric = "zh_TW.UTF-8";
-    time = "zh_TW.UTF-8";
-    collate = "zh_TW.UTF-8";
-    monetary = "zh_TW.UTF-8";
-    messages = "zh_TW.UTF-8";
-    paper = "zh_TW.UTF-8";
-    name = "zh_TW.UTF-8";
-    address = "zh_TW.UTF-8";
-    telephone = "zh_TW.UTF-8";
-    measurement = "zh_TW.UTF-8";
+    base = "en_US.UTF-8";
+    ctype = "en_US.UTF-8";
+    numeric = "en_US.UTF-8";
+    time = "en_US.UTF-8";
+    collate = "en_US.UTF-8";
+    monetary = "en_US.UTF-8";
+    messages = "en_US.UTF-8";
+    paper = "en_US.UTF-8";
+    name = "en_US.UTF-8";
+    address = "en_US.UTF-8";
+    telephone = "en_US.UTF-8";
+    measurement = "en_US.UTF-8";
   };
 }
