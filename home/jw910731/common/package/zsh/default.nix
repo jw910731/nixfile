@@ -77,6 +77,7 @@ in
           { name = "MichaelAquilina/zsh-you-should-use"; }
           { name = "wfxr/forgit"; }
           { name = "Aloxaf/fzf-tab"; }
+          { name = "zsh-users/zsh-syntax-highlighting"; tags = ["defer:2"]; }
         ];
       };
 
