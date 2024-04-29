@@ -20,6 +20,7 @@ in
         path=(
           $HOME/.local/bin
           $HOME/dev/bin
+          $HOME/.krew/bin
           $GOBIN
           $path
         )
