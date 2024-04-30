@@ -66,6 +66,15 @@ in
             sha256 = "sha256-/RFblRzQFvXvL7f5fUftwl7x/8XJ+WSH1JxjISAM1+A=";
           };
         }
+        {
+          name = "pnpm-shell-completion";
+          src = pkgs.fetchFromGitHub {
+            owner = "g-plane";
+            repo = "pnpm-shell-completion";
+            rev = "v0.5.3";
+            sha256 = "sha256-UKuAUN1uGNy/1Fm4vXaTWBClHgda+Vns9C4ugfHm+0s=";
+          };
+        }
       ];
 
       zplug = {
