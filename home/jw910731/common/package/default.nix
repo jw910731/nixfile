@@ -13,7 +13,6 @@ rec {
     gnupg
     just
     fzf
-    most
     lsd
     bat
     python3
