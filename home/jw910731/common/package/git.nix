@@ -7,16 +7,10 @@
     # LFS
     lfs.enable = true;
 
-    # Sign
-    signing = {
-      signByDefault = true;
-      key = "16D83FE3495FA263";
-    };
-
     # Extra config
     extraConfig = {
       core = {
-        editor = "\"emacs -nw\"";
+        editor = "emacs";
         autocrlf = "input";
         excludesfile = "~/.gitignore_global";
       };
@@ -38,7 +32,7 @@
         guitool = "vscode";
       };
 
-      "mergetool \"emacs\"".cmd = "emacs -nw";
+      "mergetool \"emacs\"".cmd = "emacs";
       "mergetool \"vscode\"".cmd = "code --wait $MERGED";
     };
 

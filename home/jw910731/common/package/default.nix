@@ -2,6 +2,7 @@
 rec {
   imports = [
     ./zsh
+    ./git.nix
   ];
 
   home.packages = with pkgs;[
