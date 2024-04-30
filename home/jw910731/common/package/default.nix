@@ -3,10 +3,10 @@ rec {
   imports = [
     ./zsh
     ./git.nix
+    ./emacs.nix
   ];
 
   home.packages = with pkgs;[
-    emacs-nox
     fira-code
     nerdfonts
     _1password

@@ -3,7 +3,7 @@
 ( gpg-agent --daemon > /dev/null 2>&1 & )
 
 # zsh-auto-notify (https://github.com/MichaelAquilina/zsh-auto-notify)
-AUTO_NOTIFY_IGNORE+=("tmux" "bat")
+AUTO_NOTIFY_IGNORE+=("tmux" "bat" "emacs" "joe" "vim")
 
 # macOS only
 if [[ "$OSTYPE" = darwin* ]]; then
