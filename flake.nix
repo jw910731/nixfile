@@ -29,6 +29,7 @@
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
+      formatter.x86_64-darwin = nixpkgs-darwin.legacyPackages.x86_64-darwin.nixpkgs-fmt;
       nixosConfigurations = {
         "linux-host" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -50,7 +51,9 @@
         };
       };
       darwinConfigurations = {
-        "macbook" = let system = "aarch64-darwin"; in darwin.lib.darwinSystem {
+        "macbook" = let
+            system = "aarch64-darwin"; 
+          in darwin.lib.darwinSystem {
           inherit system;
           modules = [
             ./system/macbook
@@ -61,6 +64,27 @@
 
               home-manager.users = {
                 jw910731 = import ./home/jw910731/macos.nix;
+              };
+              home-manager.extraSpecialArgs = {
+                nil = inputs.nil;
+                nixpkgs = inputs.nixpkgs-darwin;
+              };
+            }
+          ];
+        };
+        "macbook-work" = let 
+            system = "x86_64-darwin"; 
+          in darwin.lib.darwinSystem {
+          inherit system;
+          modules = [
+            ./system/macbook-work
+            home-manager-darwin.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users = {
+                "jerry.wu" = import ./home/jw910731/macos-work.nix;
               };
               home-manager.extraSpecialArgs = {
                 nil = inputs.nil;

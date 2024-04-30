@@ -1,6 +1,6 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 let
-  homeDir = if pkgs.stdenv.isLinux then "/home/jw910731" else "/Users/jw910731";
+  homeDir = config.home.homeDirectory;
 in
 {
   programs.zsh =

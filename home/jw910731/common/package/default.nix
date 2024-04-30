@@ -1,7 +1,6 @@
 { pkgs, extra, ... }:
 rec {
   imports = [
-    ./git.nix
     ./zsh
   ];
 

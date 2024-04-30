@@ -3,8 +3,6 @@
   programs.git = {
     # Basic
     enable = true;
-    userName = "jw910731";
-    userEmail = "jw910731@gmail.com";
 
     # LFS
     lfs.enable = true;
