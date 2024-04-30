@@ -8,8 +8,6 @@ rec {
   home.username = "jw910731";
   home.homeDirectory = lib.mkForce "/Users/jw910731";
   programs.git = {
-    userName = "jerry.wu";
-    userEmail = "jerry.wu@appier.com";
     # Sign  
     signing = {
       signByDefault = true;
