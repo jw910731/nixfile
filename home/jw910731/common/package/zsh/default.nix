@@ -66,7 +66,7 @@ in
             sha256 = "sha256-/RFblRzQFvXvL7f5fUftwl7x/8XJ+WSH1JxjISAM1+A=";
           };
         }
-      ];      
+      ];
 
       zplug = {
         enable = true;
@@ -75,11 +75,11 @@ in
           { name = "zsh-users/zsh-autosuggestions"; }
           { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
           { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" ]; }
-          { name = "plugins/git"; tags = [ "from:oh-my-zsh"]; }
+          { name = "plugins/git"; tags = [ "from:oh-my-zsh" ]; }
           { name = "MichaelAquilina/zsh-you-should-use"; }
           { name = "wfxr/forgit"; }
           { name = "Aloxaf/fzf-tab"; }
-          { name = "zsh-users/zsh-syntax-highlighting"; tags = ["defer:2"]; }
+          { name = "zsh-users/zsh-syntax-highlighting"; tags = [ "defer:2" ]; }
         ];
       };
 

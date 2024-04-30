@@ -1,5 +1,5 @@
-{ pkgs, extra, ... }:
-rec {
+{ pkgs, ... }:
+{
   imports = [
     ./zsh
     ./git.nix
