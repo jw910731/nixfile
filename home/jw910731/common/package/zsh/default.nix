@@ -25,6 +25,7 @@ in
           $path
         )
 
+        source "${homeDir}/.shell/export.zsh"
         source "${homeDir}/.shell/alias.zsh"
         source "${homeDir}/.shell/external.zsh"
         source "${homeDir}/.shell/keybind.zsh"
