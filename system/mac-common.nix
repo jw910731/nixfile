@@ -20,6 +20,10 @@
       SecondClickThreshold = 1;
     };
 
+    loginwindow = {
+      LoginwindowText = "不可以色色";
+    };
+
     finder = {
       # Always show file extensions
       "AppleShowAllExtensions" = true;
@@ -42,7 +46,6 @@
       # Use list view in all Finder windows by default
       "FXPreferredViewStyle" = "Nlsv";
     };
-
   };
 
   environment.shells = with pkgs; [
