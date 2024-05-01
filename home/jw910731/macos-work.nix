@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ./common
@@ -23,5 +23,8 @@
       };
     };
   };
+  home.packages = with pkgs;[
+    trino-cli
+  ];
 }
 
