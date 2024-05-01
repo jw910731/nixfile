@@ -38,6 +38,7 @@
     tcping-go
     rustup
     nodePackages.pnpm
+    k9s
   ];
 
   programs.go = {
