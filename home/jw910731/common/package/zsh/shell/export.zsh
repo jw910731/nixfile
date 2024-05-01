@@ -6,6 +6,9 @@
 export EDITOR=$(which emacs)
 export VISUAL="$EDITOR"
 
+# Bat theme
+export BAT_THEME='OneHalfDark'
+
 # macOS only
 if [[ "$OSTYPE" = darwin* ]]; then
   # Workaround for Ansible forking: https://github.com/ansible/ansible/issues/76322
