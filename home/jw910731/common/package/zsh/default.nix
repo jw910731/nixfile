@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, stdenv, ... }:
 let
   homeDir = config.home.homeDirectory;
 in
@@ -68,11 +68,10 @@ in
         }
         {
           name = "pnpm-shell-completion";
-          src = pkgs.fetchFromGitHub {
-            owner = "g-plane";
-            repo = "pnpm-shell-completion";
-            rev = "v0.5.3";
-            sha256 = "sha256-UKuAUN1uGNy/1Fm4vXaTWBClHgda+Vns9C4ugfHm+0s=";
+          src = pkgs.fetchzip {
+            url = "https://github.com/g-plane/pnpm-shell-completion/releases/download/v0.5.3/pnpm-shell-completion_${pkgs.stdenv.targetPlatform.config}.zip";
+            sha256 = "sha256-4CxVVgRPpsZLPoJeznmApAaihpsacEiA+ZgA9RUhVf4=";
+            stripRoot = false;
           };
         }
       ];
