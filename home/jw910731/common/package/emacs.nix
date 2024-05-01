@@ -19,5 +19,5 @@
     fi
   '';
 
-  xdg.configFile."doom".source = ./doom ;
+  xdg.configFile."doom".source = ./doom;
 }
