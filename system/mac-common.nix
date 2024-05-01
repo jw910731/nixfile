@@ -13,6 +13,13 @@
       LSQuarantine = false;
     };
 
+    trackpad = {
+      Clicking = true;
+      Dragging = true;
+      FirstClickThreshold = 0;
+      SecondClickThreshold = 1;
+    };
+
     finder = {
       # Always show file extensions
       "AppleShowAllExtensions" = true;
