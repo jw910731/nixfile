@@ -39,7 +39,6 @@
     rustup
     nodePackages.pnpm
     k9s
-    eza
   ];
 
   programs.go = {
