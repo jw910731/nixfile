@@ -39,6 +39,7 @@
     rustup
     nodePackages.pnpm
     k9s
+    yq-go
   ];
 
   programs.go = {

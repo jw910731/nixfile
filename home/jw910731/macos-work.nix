@@ -25,6 +25,10 @@
   };
   home.packages = with pkgs;[
     trino-cli
+    vault
   ];
+  home.sessionVariables = {
+    VAULT_ADDR="https://vault.appier.us/";
+  };
 }
 
