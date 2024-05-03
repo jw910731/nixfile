@@ -76,8 +76,11 @@ zstyle ':fzf-tab:*' fzf-command fzf
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' \
 	fzf-preview 'echo ${(P)word}'
 
-# cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# preview for ls, lsd, z, and cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'lsd -1 --icon=always --color=always $realpath'
+zstyle ':fzf-tab:complete:z:*' fzf-preview 'lsd -1 --icon=always --color=always $realpath'
+zstyle ':fzf-tab:complete:lsd:*' fzf-preview 'lsd -1 --icon=always --color=always $realpath'
+zstyle ':fzf-tab:complete:ls:*' fzf-preview 'lsd -1 --icon=always --color=always $realpath'
 
 # kill/ps
 zstyle ':fzf-tab:complete:(kill|ps):*' fzf-flags \

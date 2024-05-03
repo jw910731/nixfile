@@ -3,7 +3,11 @@
   # This installs system-wide packages and Mac App Store apps.
   homebrew = {
     enable = true;
-    onActivation.cleanup = "uninstall";
+    onActivation = {
+      cleanup = "uninstall";
+      autoUpdate = true;
+      upgrade = true;
+    };
 
     brews = [
       "pinentry"
@@ -14,7 +18,13 @@
       "joe"
     ];
 
-    casks = [
+    casks = map (x: {
+      name = x;
+      greedy = true;
+      args = {
+        no_quarantine = true;
+      };
+    }) [
       "1password"
       "1password-cli"
       "aldente"
