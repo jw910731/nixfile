@@ -29,7 +29,7 @@
       "appcleaner"
       "arc"
       "bartender"
-      "cloudflare-warp"
+      # "cloudflare-warp"
       "devtoys"
       "font-hack-nerd-font"
       "google-cloud-sdk"
