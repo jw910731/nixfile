@@ -27,8 +27,5 @@
     trino-cli
     vault
   ];
-  home.sessionVariables = {
-    VAULT_ADDR="https://vault.appier.us/";
-  };
 }
 
