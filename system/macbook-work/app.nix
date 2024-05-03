@@ -42,7 +42,6 @@
       "orbstack"
       "rapidapi"
       "raycast"
-      "slack"
       "stats"
       "visual-studio-code"
       "warp"
