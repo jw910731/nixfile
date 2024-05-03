@@ -28,6 +28,7 @@
       "1password"
       "appcleaner"
       "arc"
+      "bartender"
       "cloudflare-warp"
       "devtoys"
       "font-hack-nerd-font"
