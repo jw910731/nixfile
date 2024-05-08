@@ -18,7 +18,6 @@
     python3
     zip
     unzip
-    clang
     llvm
     cmake
     dig
