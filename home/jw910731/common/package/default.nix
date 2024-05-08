@@ -40,6 +40,7 @@
     nodePackages.pnpm
     k9s
     yq-go
+    poetry
   ];
 
   programs.go = {

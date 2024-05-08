@@ -38,6 +38,7 @@
       "iterm2"
       "jetbrains-toolbox"
       "logi-options-plus"
+      "mongodb-compass"
       "openinterminal"
       "openvpn-connect"
       "orbstack"

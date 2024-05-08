@@ -13,4 +13,8 @@ in
   networking.computerName = "${hostname}";
   networking.hostName = "${hostname}";
   system.defaults.smb.NetBIOSName = "${hostname}";
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "vault-1.14.10"
+  ];
 }
