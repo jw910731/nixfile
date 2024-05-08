@@ -1,4 +1,8 @@
 { pkgs, lib, ... }:
+let
+  hostname = "jw910731-MacBook-Air";
+  computerName = "jw910731's Macbook Air";
+in
 {
   imports = [
     ./system-package.nix
@@ -7,7 +11,7 @@
   ];
 
   # Hostname
-  # networking.computerName = "${hostname}";
-  # networking.hostName = "${hostname}";
-  # system.defaults.smb.NetBIOSName = "${hostname}";
+  networking.computerName = "${computerName}";
+  networking.hostName = "${hostname}";
+  system.defaults.smb.NetBIOSName = "${hostname}";
 }
