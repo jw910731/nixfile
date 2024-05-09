@@ -1,4 +1,4 @@
-{ pkgs, lib, config, stdenv, ... }:
+{ pkgs, lib, config, naersk, ... }:
 let
   homeDir = config.home.homeDirectory;
 in
@@ -68,11 +68,7 @@ in
         }
         {
           name = "pnpm-shell-completion";
-          src = pkgs.fetchzip {
-            url = "https://github.com/g-plane/pnpm-shell-completion/releases/download/v0.5.3/pnpm-shell-completion_${pkgs.stdenv.targetPlatform.config}.zip";
-            sha256 = "sha256-4CxVVgRPpsZLPoJeznmApAaihpsacEiA+ZgA9RUhVf4=";
-            stripRoot = false;
-          };
+          src = (import ./pnpm-shell-completion.nix) {inherit lib pkgs naersk;};
         }
       ];
 

@@ -21,11 +21,11 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
-    # Nil LSP
-    nil.url = "github:oxalica/nil";
+    # Rust builder
+    naersk.url = "github:nix-community/naersk";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, ... }@inputs:
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
@@ -44,7 +44,7 @@
                 jw910731 = import ./home/jw910731/linux.nix;
               };
               home-manager.extraSpecialArgs = {
-                nil = inputs.nil;
+                naersk = inputs.naersk;
               };
             }
           ];
@@ -68,8 +68,7 @@
                   jw910731 = import ./home/jw910731/macos.nix;
                 };
                 home-manager.extraSpecialArgs = {
-                  nil = inputs.nil;
-                  nixpkgs = inputs.nixpkgs-darwin;
+                  naersk = inputs.naersk;
                 };
               }
             ];
@@ -91,8 +90,7 @@
                   "jerry.wu" = import ./home/jw910731/macos-work.nix;
                 };
                 home-manager.extraSpecialArgs = {
-                  nil = inputs.nil;
-                  nixpkgs = inputs.nixpkgs-darwin;
+                  naersk = inputs.naersk;
                 };
               }
             ];
