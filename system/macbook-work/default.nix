@@ -1,5 +1,5 @@
 { pkgs, lib, ... }:
-let 
+let
   hostname = "jerrywu-macbook";
 in
 {

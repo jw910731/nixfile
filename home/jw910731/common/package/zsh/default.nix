@@ -68,7 +68,7 @@ in
         }
         {
           name = "pnpm-shell-completion";
-          src = (import ./pnpm-shell-completion.nix) {inherit lib pkgs naersk;};
+          src = (import ./pnpm-shell-completion.nix) { inherit lib pkgs naersk; };
         }
       ];
 

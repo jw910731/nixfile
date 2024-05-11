@@ -18,13 +18,14 @@
       "joe"
     ];
 
-    casks = map (x: {
-      name = x;
-      greedy = true;
-      args = {
-        no_quarantine = true;
-      };
-    }) [
+    casks = map
+      (x: {
+        name = x;
+        greedy = true;
+        args = {
+          no_quarantine = true;
+        };
+      }) [
       "1password"
       "1password-cli"
       "aldente"
