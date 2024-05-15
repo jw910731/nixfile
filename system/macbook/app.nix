@@ -30,6 +30,7 @@
       "1password-cli"
       "aldente"
       "android-platform-tools"
+      "anytype"
       "arc"
       "balenaetcher"
       "bartender"
