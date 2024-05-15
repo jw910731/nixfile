@@ -58,10 +58,10 @@
 ;;
 ;; Here are some additional functions/macros that will help you configure Doom.
 ;;
-;; - `load!' for loading external *.el files relative to this one
+;; - `load!' for loading exteing code after a package has loaded
+;; - `add-lornal *.el files relative to this one
 ;; - `use-package!' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
+;; - `after!' for runnad-path!' for adding directories to the `load-path', relative to
 ;;   this file. Emacs searches the `load-path' when you load packages with
 ;;   `require' or `use-package'.
 ;; - `map!' for binding new keys
@@ -77,3 +77,6 @@
 
 ;; Disable confirm quit emacs
 (setq confirm-kill-emacs nil)
+
+;; Disable C-z for minimize
+(global-set-key "\C-z" nil)
