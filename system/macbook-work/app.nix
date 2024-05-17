@@ -32,7 +32,6 @@
       "bartender"
       # "cloudflare-warp"
       "devtoys"
-      "font-hack-nerd-font"
       "google-cloud-sdk"
       "heptabase"
       "iina"
