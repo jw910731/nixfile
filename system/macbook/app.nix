@@ -74,12 +74,8 @@
     taps = [
       "beeftornado/rmtree"
       "cloudflare/cloudflare"
-      "drone/drone"
-      "homebrew/cask-fonts"
       "homebrew/cask-versions"
-      "homebrew/services"
       "playcover/playcover"
-      "tabbyml/tabby"
     ];
 
     masApps = {

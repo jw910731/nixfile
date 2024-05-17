@@ -52,7 +52,6 @@
     ];
 
     taps = [
-      "homebrew/cask-fonts"
     ];
 
     masApps = {
