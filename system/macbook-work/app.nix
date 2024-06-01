@@ -30,7 +30,7 @@
       "appcleaner"
       "arc"
       "bartender"
-      # "cloudflare-warp"
+      "cloudflare-warp"
       "devtoys"
       "google-cloud-sdk"
       "heptabase"
