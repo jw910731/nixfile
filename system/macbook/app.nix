@@ -57,6 +57,7 @@
       "playcover-nightly"
       "rapidapi"
       "raycast"
+      "readmoreading"
       "stats"
       "steam"
       "telegram-desktop"
