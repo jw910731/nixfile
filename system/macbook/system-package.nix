@@ -9,4 +9,9 @@
     zsh
     wget
   ];
+
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs-nox;
+  };
 }
