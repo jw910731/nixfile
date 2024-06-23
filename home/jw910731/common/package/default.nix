@@ -40,6 +40,7 @@
     k9s
     yq-go
     poetry
+    devenv
   ];
 
   programs.go = {
