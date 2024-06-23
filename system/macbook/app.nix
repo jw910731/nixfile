@@ -35,13 +35,12 @@
       "bartender"
       "betterdisplay"
       "brave-browser"
-      "cloudflare-warp"
       "chatgpt"
       "discord"
       "element"
       "firefox"
       "font-latin-modern"
-      "heptabase"
+      "godot"
       "iina"
       "iterm2"
       "jetbrains-toolbox"
@@ -51,7 +50,6 @@
       "macfuse"
       "messenger"
       "microsoft-auto-update"
-      "microsoft-teams"
       "moonlight"
       "obs"
       "openinterminal"
@@ -70,16 +68,13 @@
 
     taps = [
       "beeftornado/rmtree"
-      "cloudflare/cloudflare"
       "homebrew/cask-versions"
       "playcover/playcover"
     ];
 
     masApps = {
       "Craft" = 1487937127;
-      # "GarageBand" = 682658836;
       "Goodnotes" = 1444383602;
-      # "iMovie" = 408981434;
       "Keynote" = 409183694;
       "LINE" = 539883307;
       "Numbers" = 409203825;
@@ -87,6 +82,7 @@
       "Slack" = 803453959;
       "Xcode" = 497799835;
       "Yoink" = 457622435;
+      "Hidden Bar" = 1452453066;
     };
   };
 }
