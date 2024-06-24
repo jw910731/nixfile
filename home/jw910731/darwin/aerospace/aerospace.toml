@@ -13,7 +13,7 @@ after-login-command = []
 # 'after-startup-command' is run after 'after-login-command'
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+    'exec-and-forget borders active_color=0xffffff inactive_color=0xff494d64 width=5.0'
 ]
 
 # Start AeroSpace at login
@@ -50,17 +50,22 @@ key-mapping.preset = 'qwerty'
 [gaps]
 inner.horizontal = 10
 inner.vertical =   10
-outer.left =       3
-outer.bottom =     3
-outer.top =        3
-outer.right =      3
+outer.left =       5
+outer.bottom =     5
+outer.top =        5
+outer.right =      5
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
 [exec]                   # Again, you don't need to copy all config sections to your config.
 inherit-env-vars = true  # If you don't touch "exec" section,
 
 [mode.main.binding]
-alt-enter = 'exec-and-forget open /Applications/iTerm.app'
+alt-enter = '''exec-and-forget osascript <<EOF
+tell application "iTerm"
+	set newWindow to (create window with default profile)
+	activate
+end tell
+EOF'''
 
 alt-a = 'focus left'
 alt-s = 'focus down'
