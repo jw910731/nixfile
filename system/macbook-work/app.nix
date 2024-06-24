@@ -27,6 +27,7 @@
         };
       }) [
       "1password"
+      "aerospace"
       "appcleaner"
       "arc"
       "bartender"
@@ -51,6 +52,7 @@
     ];
 
     taps = [
+      "nikitabobko/tap"
     ];
 
     masApps = {
