@@ -28,6 +28,7 @@
       }) [
       "1password"
       "1password-cli"
+      "aerospace"
       "aldente"
       "android-platform-tools"
       "arc"
@@ -71,6 +72,7 @@
       "beeftornado/rmtree"
       "homebrew/cask-versions"
       "playcover/playcover"
+      "nikitabobko/tap"
     ];
 
     masApps = {

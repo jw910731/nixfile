@@ -21,4 +21,8 @@
     telephone = "en_US.UTF-8";
     measurement = "en_US.UTF-8";
   };
+
+  xdg.configFile = {
+    "aerospace".source = ./aerospace;
+  };
 }
