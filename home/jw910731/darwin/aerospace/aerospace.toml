@@ -56,8 +56,7 @@ outer.top =        5
 outer.right =      5
 
 # See https://nikitabobko.github.io/AeroSpace/guide#exec-env-vars
-[exec]                   # Again, you don't need to copy all config sections to your config.
-inherit-env-vars = true  # If you don't touch "exec" section,
+# CONTENT DELETED
 
 [mode.main.binding]
 alt-enter = '''exec-and-forget osascript <<EOF
