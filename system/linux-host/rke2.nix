@@ -1,7 +1,7 @@
 final: prev:
 let
   go_version = "1.21.7";
-  go = prev.go.overrideAttrs rec {
+  go = prev.go_1_21.overrideAttrs rec {
     version = go_version;
     src = prev.fetchurl {
       url = "https://go.dev/dl/go${version}.src.tar.gz";
