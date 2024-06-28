@@ -82,8 +82,8 @@ alt-v = 'split vertical'
 
 alt-g = 'fullscreen'
 
-alt-c = 'layout v_accordion' # 'layout stacking' in i3
-alt-x = 'layout h_accordion' # 'layout tabbed' in i3
+alt-r = 'layout v_accordion' # 'layout stacking' in i3
+alt-t = 'layout h_accordion' # 'layout tabbed' in i3
 alt-e= 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
 alt-f = 'layout floating tiling' # 'floating toggle' in i3
@@ -118,7 +118,7 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
 
-alt-r = 'mode resize'
+# alt-r = 'mode resize'
 
 [mode.resize.binding]
 left = 'resize width -50'
