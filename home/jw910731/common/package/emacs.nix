@@ -19,5 +19,13 @@
     fi
   '';
 
-  xdg.configFile."doom".source = ./doom;
+  xdg.configFile."doom" = {
+    source = ./doom;
+    onChange = ''
+    #!/bin/sh
+    PATH=$PATH:${lib.getBin pkgs.emacs-nox}/bin:${lib.getBin pkgs.git}/bin
+    DOOM="${config.xdg.configHome}/emacs"
+    $DOOM/bin/doom sync
+    '';
+  };
 }
