@@ -80,3 +80,5 @@
 
 ;; Disable C-z for minimize
 (global-set-key "\C-z" nil)
+
+(load! "1password.el")
