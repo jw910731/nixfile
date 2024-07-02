@@ -41,6 +41,7 @@
       "firefox"
       "font-latin-modern"
       "godot"
+      "hhkb"
       "iina"
       "iterm2"
       "jetbrains-toolbox"
