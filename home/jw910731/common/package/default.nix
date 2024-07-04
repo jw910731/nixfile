@@ -41,6 +41,7 @@
     yq-go
     poetry
     devenv
+    tigervnc
   ];
 
   programs.go = {
