@@ -41,7 +41,6 @@
     yq-go
     poetry
     devenv
-    virt-viewer    
   ];
 
   programs.go = {
