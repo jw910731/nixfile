@@ -35,7 +35,6 @@
       "bartender"
       "betterdisplay"
       "brave-browser"
-      "chatgpt"
       "discord"
       "element"
       "firefox"

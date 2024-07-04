@@ -33,7 +33,6 @@
       "cloudflare-warp"
       "devtoys"
       "google-cloud-sdk"
-      "heptabase"
       "iina"
       "iterm2"
       "jetbrains-toolbox"
