@@ -81,22 +81,23 @@
 ;; Disable C-z for minimize
 (global-set-key "\C-z" nil)
 
-(use-package! "ht")
+;; Add trino conection info
 (load! "1password.el")
 
-(setq trino-stg-sql-info (append '('sql-product "trino")
-                                 (remq nil
-                                       (mapcar (lambda (x)
-                                                 (when
-                                                     (string-prefix-p "--" (gethash "label" x))
-                                                   (if (string= "" (gethash "value" x))
-                                                       (list (gethash "label" x))
-                                                     (list (gethash "label" x) (gethash "value" x))
-                                                     )
-                                                   )
-                                                 )
-                                               (gethash "fields" (1password-get-item "TrinoProxy"))
-                                               )))
+(setq trino-stg-sql-info  `((sql-product 'trino)
+                            (sql-trino-options ,(flatten-list (remq nil
+                                                                    (mapcar (lambda (x)
+                                                                              (when
+                                                                                  (string-prefix-p "--" (gethash "label" x))
+                                                                                (if (string= "" (gethash "value" x))
+                                                                                    (list (gethash "label" x))
+                                                                                  (list (gethash "label" x) (gethash "value" x))
+                                                                                  )
+                                                                                )
+                                                                              )
+                                                                            (gethash "fields" (1password-get-item "TrinoProxy"))
+                                                                            )))))
       )
 (setq sql-connection-alist `((trino-stg ,trino-stg-sql-info)))
+
 (global-undo-tree-mode)
