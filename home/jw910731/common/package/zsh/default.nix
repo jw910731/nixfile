@@ -119,4 +119,8 @@ in
 
   home.file.".p10k".source = ./p10k;
   home.file.".shell".source = ./shell;
+  home.file."dev/bin/remote-viewer" = {
+    source = ./dev/bin/remote-viewer;
+    executable = true;
+  };
 }

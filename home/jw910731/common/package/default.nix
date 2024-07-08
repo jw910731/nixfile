@@ -41,10 +41,15 @@
     yq-go
     poetry
     devenv
+    tigervnc
   ];
 
   programs.go = {
     enable = true;
     goPath = "./dev/go";
+  };
+
+  programs.direnv = {
+    enable = true;
   };
 }

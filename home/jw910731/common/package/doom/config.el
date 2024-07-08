@@ -99,4 +99,4 @@
                                                )))
       )
 (setq sql-connection-alist `((trino-stg ,trino-stg-sql-info)))
-                                        ;
+(global-undo-tree-mode)

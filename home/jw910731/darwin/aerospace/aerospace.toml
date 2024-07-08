@@ -59,71 +59,74 @@ outer.right =      5
 # CONTENT DELETED
 
 [mode.main.binding]
-alt-enter = '''exec-and-forget osascript <<EOF
+ctrl-enter = "mode activate"
+
+[mode.activate.binding]
+ctrl-enter = ['''exec-and-forget osascript <<EOF
 tell application "iTerm"
 	set newWindow to (create window with default profile)
 	activate
 end tell
-EOF'''
+EOF''', 'mode main']
 
-alt-a = 'focus left'
-alt-s = 'focus down'
-alt-w = 'focus up'
-alt-d = 'focus right'
+ctrl-a = ['focus left', 'mode main']
+ctrl-s = ['focus down', 'mode main']
+ctrl-w = ['focus up', 'mode main']
+ctrl-d = ['focus right', 'mode main']
 
-alt-shift-a = 'move left'
-alt-shift-s = 'move down'
-alt-shift-w = 'move up'
-alt-shift-d = 'move right'
+ctrl-shift-a = ['move left', 'mode main']
+ctrl-shift-s = ['move down', 'mode main']
+ctrl-shift-w = ['move up', 'mode main']
+ctrl-shift-d = ['move right', 'mode main']
 
 # Consider using 'join-with' command as a 'split' replacement if you want to enable normalizations
-alt-h = 'split horizontal'
-alt-v = 'split vertical'
+ctrl-h = ['split horizontal', 'mode main']
+ctrl-v = ['split vertical', 'mode main']
 
-alt-g = 'fullscreen'
+ctrl-g = ['fullscreen', 'mode main']
 
-alt-r = 'layout v_accordion' # 'layout stacking' in i3
-alt-t = 'layout h_accordion' # 'layout tabbed' in i3
-alt-e= 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+ctrl-r = ['layout v_accordion', 'mode main'] # 'layout stacking' in i3
+ctrl-t = ['layout h_accordion', 'mode main'] # 'layout tabbed' in i3
+ctrl-e= ['layout tiles horizontal vertical', 'mode main'] # 'layout toggle split' in i3
 
-alt-f = 'layout floating tiling' # 'floating toggle' in i3
+ctrl-f = ['layout floating tiling', 'mode main'] # 'floating toggle' in i3
 
 # Not supported, because this command is redundant in AeroSpace mental model.
 # See: https://nikitabobko.github.io/AeroSpace/guide#floating-windows
-#alt-space = 'focus toggle_tiling_floating'
+#ctrl-space = 'focus toggle_tiling_floating'
 
 # `focus parent`/`focus child` are not yet supported, and it's not clear whether they
 # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
-# alt-a = 'focus parent'
+# ctrl-a = 'focus parent'
 
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 10'
+ctrl-1 = ['workspace 1', 'mode main']
+ctrl-2 = ['workspace 2', 'mode main']
+ctrl-3 = ['workspace 3', 'mode main']
+ctrl-4 = ['workspace 4', 'mode main']
+ctrl-5 = ['workspace 5', 'mode main']
+ctrl-6 = ['workspace 6', 'mode main']
+ctrl-7 = ['workspace 7', 'mode main']
+ctrl-8 = ['workspace 8', 'mode main']
+ctrl-9 = ['workspace 9', 'mode main']
+ctrl-0 = ['workspace 10', 'mode main']
 
-alt-shift-1 = 'move-node-to-workspace 1'
-alt-shift-2 = 'move-node-to-workspace 2'
-alt-shift-3 = 'move-node-to-workspace 3'
-alt-shift-4 = 'move-node-to-workspace 4'
-alt-shift-5 = 'move-node-to-workspace 5'
-alt-shift-6 = 'move-node-to-workspace 6'
-alt-shift-7 = 'move-node-to-workspace 7'
-alt-shift-8 = 'move-node-to-workspace 8'
-alt-shift-9 = 'move-node-to-workspace 9'
-alt-shift-0 = 'move-node-to-workspace 10'
+ctrl-shift-1 = ['move-node-to-workspace 1', 'mode main']
+ctrl-shift-2 = ['move-node-to-workspace 2', 'mode main']
+ctrl-shift-3 = ['move-node-to-workspace 3', 'mode main']
+ctrl-shift-4 = ['move-node-to-workspace 4', 'mode main']
+ctrl-shift-5 = ['move-node-to-workspace 5', 'mode main']
+ctrl-shift-6 = ['move-node-to-workspace 6', 'mode main']
+ctrl-shift-7 = ['move-node-to-workspace 7', 'mode main']
+ctrl-shift-8 = ['move-node-to-workspace 8', 'mode main']
+ctrl-shift-9 = ['move-node-to-workspace 9', 'mode main']
+ctrl-shift-0 = ['move-node-to-workspace 10', 'mode main']
 
-# alt-r = 'mode resize'
+# ctrl-r = 'mode resize'
 
-[mode.resize.binding]
-left = 'resize width -50'
-up = 'resize height +50'
-down = 'resize height -50'
-right = 'resize width +50'
-enter = 'mode main'
-esc = 'mode main'
+# [mode.resize.binding]
+# left = 'resize width -50'
+# up = 'resize height +50'
+# down = 'resize height -50'
+# right = 'resize width +50'
+# enter = 'mode main'
+# esc = 'mode main'
