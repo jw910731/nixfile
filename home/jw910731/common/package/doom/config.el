@@ -84,18 +84,22 @@
 ;; Add trino conection info
 (load! "1password.el")
 (load! "sql-trino.el")
-(setq sql-connection-alist `((trino-stg , `(('sql-product 'trino)
-                                            ('sql-trino-options ,(flatten-list (remq nil
-                                                                                     (mapcar (lambda (x)
-                                                                                               (when
-                                                                                                   (string-prefix-p "--" (gethash "label" x))
-                                                                                                 (if (string= "" (gethash "value" x))
-                                                                                                     (list (gethash "label" x))
-                                                                                                   (list (gethash "label" x) (gethash "value" x))
-                                                                                                   )
-                                                                                                 )
-                                                                                               )
-                                                                                             (gethash "fields" (1password-get-item "TrinoProxy"))
-                                                                                             ))))))))
+(setq sql-connection-alist (list (list 'trino-stg `(sql-product 'trino)
+                                       `(sql-server ,(1password-get-field "TrinoProxy" "server"))
+                                       `(sql-user ,(1password-get-field "TrinoProxy" "username"))
+                                       `(sql-database ,(1password-get-field "TrinoProxy" "catalog"))
+                                       (flatten-list (remq nil
+                                                           (mapcar (lambda (x)
+                                                                     (when
+                                                                         (string-prefix-p "--" (gethash "label" x))
+                                                                       (if (string= "" (gethash "value" x))
+                                                                           (list (gethash "label" x))
+                                                                         (list (intern (gethash "label" x)) (gethash "value" x))
+                                                                         )
+                                                                       )
+                                                                     )
+                                                                   (gethash "fields" (1password-get-item "TrinoProxy"))
+                                                                   ))))
+                                 ))
 
 (global-undo-tree-mode)

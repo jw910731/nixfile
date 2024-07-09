@@ -117,7 +117,7 @@ The buffer with name BUFFER will be used or created."
                  :prompt-cont-regexp "^[ ]+-> "
                  :sqli-comint-func 'sql-trino-comint
                  :font-lock 'sql-mode-ansi-font-lock-keywords
-                 :sqli-login sql-trino-login-params
+                 :sqli-login 'sql-trino-login-params
                  :sqli-program 'sql-trino-program
                  :sqli-options 'sql-trino-options)
 
