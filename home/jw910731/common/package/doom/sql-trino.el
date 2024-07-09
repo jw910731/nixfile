@@ -98,6 +98,7 @@ the SQLi buffer to be named."
               (list "--server" sql-server))
           options)))
     (setenv "TRINO_PAGER" "cat")
+    (prin1 params)
     (sql-comint product params buffer-name)))
 
 ;;;###autoload
