@@ -14,7 +14,6 @@
       "pkg-config"
       "pyenv"
       "python@3.12"
-      "joe"
     ];
 
     casks = map
