@@ -6,7 +6,7 @@
 #
 ############################################################################
 
-switch host:
+switch host: emacs-clean
   if [ {{os()}} = "macos" ]; then \
   darwin-rebuild switch --flake .#{{host}}; \
   fi
@@ -28,7 +28,7 @@ history:
 repl:
   nix repl -f flake:nixpkgs
 
-clean:
+clean: emacs-clean
   # remove all generations older than 7 days
   sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
 
@@ -46,3 +46,15 @@ gc:
 fmt:
   # format the nix files in this repo
   nix fmt
+
+
+###############################################################
+# Quick Test - Neovim
+###############################################################
+
+
+emacs-clean:
+  rm -rf ${HOME}/.config/doom
+
+emacs-test: emacs-clean
+  rsync -avz --copy-links --chmod=Du=trwx,go=rx,Fu=rwx,go=r home/jw910731/common/package/doom ${HOME}/.config
