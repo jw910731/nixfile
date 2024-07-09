@@ -1,4 +1,3 @@
-# Nixfile
-An attempt of using nixOS and this is my nix flake to setup my environment.
+# jw910731's Nixfile
+Nix files that I manage my macbook and linux workstation environment.
 
-Working in progress.
