@@ -85,9 +85,9 @@
 (load! "1password.el")
 (load! "sql-trino.el")
 (setq sql-connection-alist (list (list 'trino-stg `(sql-product 'trino)
-                                       `(sql-server ,(1password-get-field "TrinoProxy" "server"))
-                                       `(sql-user ,(1password-get-field "TrinoProxy" "username"))
-                                       `(sql-database ,(1password-get-field "TrinoProxy" "catalog"))
+                                       `(sql-server (1password-get-field "TrinoProxy" "server"))
+                                       `(sql-user (1password-get-field "TrinoProxy" "username"))
+                                       `(sql-database (1password-get-field "TrinoProxy" "catalog"))
                                        `(sql-trino-options (flatten-list (remq nil
                                                                                (mapcar (lambda (x)
                                                                                          (when
