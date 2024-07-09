@@ -42,7 +42,8 @@
     poetry
     devenv
     tigervnc
-  ];
+    nodePackages.svelte-language-server
+    ];
 
   programs.go = {
     enable = true;
