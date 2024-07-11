@@ -21,7 +21,6 @@
     llvm
     cmake
     dig
-    nil
     docker-compose
     kubectl
     kubectx
@@ -35,14 +34,11 @@
     curl
     htop
     tcping-go
-    rustup
-    nodePackages.pnpm
     k9s
     yq-go
     poetry
     devenv
     tigervnc
-    nodePackages.svelte-language-server
     ];
 
   programs.go = {
