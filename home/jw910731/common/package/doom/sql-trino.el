@@ -97,7 +97,7 @@ the SQLi buffer to be named."
           (if (not (string= "" sql-server))
               (list "--server" sql-server))
           options)))
-    (setenv "TRINO_PAGER" "cat")
+    (setenv "TRINO_PAGER" "head -n 1000")
     (prin1 params)
     (sql-comint product params buffer-name)))
 
