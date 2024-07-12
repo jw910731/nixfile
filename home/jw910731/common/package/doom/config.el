@@ -78,6 +78,9 @@
 ;; Disable C-z for minimize
 (global-set-key "\C-z" nil)
 
+;;
+(setq projectile-project-search-path '("~/dev/workspace" "~/dev/git"))
+
 ;; Add trino conection info
 (load! "1password.el")
 (load! "sql-trino.el")
