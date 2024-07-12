@@ -23,9 +23,18 @@
 
     # Rust builder
     naersk.url = "github:nix-community/naersk";
+
+    # Devenv
+    nixpkgs-devenv.url = "github:cachix/devenv-nixpkgs/rolling";
+    systems.url = "github:nix-systems/default";
+    devenv.url = "github:cachix/devenv";
+    devenv.inputs.nixpkgs.follows = "nixpkgs-devenv";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, nixpkgs-devenv, systems, devenv, ... }@inputs:
+    let
+      forEachSystem = nixpkgs-devenv.lib.genAttrs (import systems);
+    in
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
@@ -96,5 +105,24 @@
             ];
           };
       };
+      packages = forEachSystem (system: {
+        devenv-up = self.devShells.${system}.default.config.procfileScript;
+      });
+
+      devShells = forEachSystem
+        (system:
+          let
+            pkgs = nixpkgs-devenv.legacyPackages.${system};
+          in
+          {
+            default = devenv.lib.mkShell {
+              inherit inputs pkgs;
+              modules = [
+                {
+                  packages = [ pkgs.nil ];
+                }
+              ];
+            };
+          });
     };
 }
