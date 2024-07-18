@@ -105,24 +105,5 @@
             ];
           };
       };
-      packages = forEachSystem (system: {
-        devenv-up = self.devShells.${system}.default.config.procfileScript;
-      });
-
-      devShells = forEachSystem
-        (system:
-          let
-            pkgs = nixpkgs-devenv.legacyPackages.${system};
-          in
-          {
-            default = devenv.lib.mkShell {
-              inherit inputs pkgs;
-              modules = [
-                {
-                  packages = [ pkgs.nil ];
-                }
-              ];
-            };
-          });
     };
 }
