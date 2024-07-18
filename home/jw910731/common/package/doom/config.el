@@ -78,7 +78,7 @@
 ;; Disable C-z for minimize
 (global-set-key "\C-z" nil)
 
-;;
+;; Set Project Search Dir
 (setq projectile-project-search-path '("~/dev/workspace" "~/dev/git"))
 
 ;; Add trino conection info
