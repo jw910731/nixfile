@@ -39,6 +39,7 @@
     poetry
     devenv
     tigervnc
+    nil
     ];
 
   programs.go = {
