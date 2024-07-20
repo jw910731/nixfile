@@ -1,4 +1,4 @@
-{ pkgs, lib, config, naersk, ... }:
+{ pkgs, lib, config, naersk, mypkgs, ... }:
 let
   homeDir = config.home.homeDirectory;
 in
@@ -6,6 +6,7 @@ in
   programs.zsh =
     {
       enable = true;
+      package = pkgs.callPackage (import ./zsh.nix) {inherit pkgs mypkgs lib;};
       enableCompletion = true;
       completionInit = ''
         autoload -Uz compinit
@@ -29,6 +30,11 @@ in
         source "${homeDir}/.shell/alias.zsh"
         source "${homeDir}/.shell/external.zsh"
         source "${homeDir}/.shell/keybind.zsh"
+
+        if [[ $TERM != "dumb" ]]; then
+           zmodload starship
+           # eval "$(starship init)"
+         fi
       '';
       initExtraBeforeCompInit = ''
         setopt extendedglob
@@ -75,9 +81,7 @@ in
       zplug = {
         enable = true;
         plugins = [
-          { name = "~/.p10k"; tags = [ "from:local" ]; }
           { name = "zsh-users/zsh-autosuggestions"; }
-          { name = "romkatv/powerlevel10k"; tags = [ "as:theme" "depth:1" ]; }
           { name = "zsh-users/zsh-history-substring-search"; tags = [ "as:plugin" ]; }
           { name = "plugins/git"; tags = [ "from:oh-my-zsh" ]; }
           { name = "MichaelAquilina/zsh-you-should-use"; }
@@ -117,7 +121,6 @@ in
     };
   };
 
-  home.file.".p10k".source = ./p10k;
   home.file.".shell".source = ./shell;
   home.file."dev/bin/remote-viewer" = {
     source = ./dev/bin/remote-viewer;

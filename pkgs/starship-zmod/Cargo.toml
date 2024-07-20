@@ -1,0 +1,22 @@
+[package]
+name = "starship-zmod"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+anyhow = "1.0.86"
+clap = "4.5.9"
+clap_complete = "4.5.8"
+log = "0.4.22"
+rand = "0.8.5"
+rayon = "1.10.0"
+starship = "1.19.0"
+zsh-module = "0.3.0"
+
+[dev-dependencies]
+anyhow = { version = "1.0.86", features = ["backtrace"] }
+clap = { version = "4.5.9", features = ["debug"] }
+clap_complete = { version = "4.5.8", features = ["debug"] }

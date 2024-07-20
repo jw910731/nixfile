@@ -22,10 +22,10 @@
   xdg.configFile."doom" = {
     source = ./doom;
     onChange = ''
-    #!/bin/sh
-    PATH=$PATH:${lib.getBin config.programs.emacs.finalPackage}/bin:${lib.getBin pkgs.git}/bin
-    DOOM="${config.xdg.configHome}/emacs"
-    $DOOM/bin/doom sync
+      #!/bin/sh
+      PATH=$PATH:${lib.getBin config.programs.emacs.finalPackage}/bin:${lib.getBin pkgs.git}/bin
+      DOOM="${config.xdg.configHome}/emacs"
+      $DOOM/bin/doom sync
     '';
   };
 }

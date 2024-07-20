@@ -40,7 +40,7 @@
     devenv
     tigervnc
     nil
-    ];
+  ];
 
   programs.go = {
     enable = true;

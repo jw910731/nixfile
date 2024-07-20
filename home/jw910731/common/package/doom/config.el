@@ -102,4 +102,9 @@
                                                                                        ))))
                                        )))
 
+(after! projectile
+  (setq projectile-project-root-files-bottom-up
+        (cons ".envrc"
+              projectile-project-root-files-bottom-up)))
+
 (global-undo-tree-mode)

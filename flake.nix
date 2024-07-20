@@ -23,6 +23,9 @@
 
     # Rust builder
     naersk.url = "github:nix-community/naersk";
+
+    mypkgs.url = "path:./pkgs";
+    mypkgs.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, ... }@inputs:
@@ -31,8 +34,13 @@
       formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
       formatter.x86_64-darwin = nixpkgs-darwin.legacyPackages.x86_64-darwin.nixpkgs-fmt;
       nixosConfigurations = {
-        "linux-host" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+        "linux-host" =
+          let
+	          system = "x86_64-linux";
+            mypkgs = inputs.mypkgs.packages.${system};
+          in
+          nixpkgs.lib.nixosSystem {
+          inherit system;
           modules = [
             ./system/linux-host/configuration.nix
             home-manager.nixosModules.home-manager
@@ -45,6 +53,7 @@
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
+                inherit mypkgs;
               };
             }
           ];
@@ -54,6 +63,7 @@
         "macbook" =
           let
             system = "aarch64-darwin";
+            mypkgs = inputs.mypkgs.packages.${system};
           in
           darwin.lib.darwinSystem {
             inherit system;
@@ -69,6 +79,7 @@
                 };
                 home-manager.extraSpecialArgs = {
                   naersk = inputs.naersk;
+                  inherit mypkgs;
                 };
               }
             ];
@@ -76,6 +87,7 @@
         "macbook-work" =
           let
             system = "x86_64-darwin";
+            mypkgs = inputs.mypkgs.packages.${system};
           in
           darwin.lib.darwinSystem {
             inherit system;
@@ -91,6 +103,7 @@
                 };
                 home-manager.extraSpecialArgs = {
                   naersk = inputs.naersk;
+                  inherit mypkgs;
                 };
               }
             ];
