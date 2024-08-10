@@ -4,6 +4,7 @@
     ./zsh
     ./git.nix
     ./emacs.nix
+    ./kitty.nix
   ];
 
   home.packages = with pkgs;[
@@ -38,7 +39,7 @@
     yq-go
     poetry
     devenv
-    tigervnc
+    kitty
     nil
     ];
 

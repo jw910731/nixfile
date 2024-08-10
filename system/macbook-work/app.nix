@@ -32,7 +32,6 @@
       "devtoys"
       "google-cloud-sdk"
       "iina"
-      "iterm2"
       "jetbrains-toolbox"
       "logi-options-plus"
       "mongodb-compass"

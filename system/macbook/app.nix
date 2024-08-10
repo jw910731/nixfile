@@ -41,7 +41,6 @@
       "godot"
       "hhkb"
       "iina"
-      "iterm2"
       "jetbrains-toolbox"
       "keka"
       "kekaexternalhelper"
