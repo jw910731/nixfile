@@ -39,7 +39,6 @@
     yq-go
     poetry
     devenv
-    kitty
     nil
     ];
 

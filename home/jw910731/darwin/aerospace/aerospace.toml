@@ -62,13 +62,6 @@ outer.right =      5
 ctrl-enter = "mode activate"
 
 [mode.activate.binding]
-ctrl-enter = ['''exec-and-forget osascript <<EOF
-tell application "iTerm"
-	set newWindow to (create window with default profile)
-	activate
-end tell
-EOF''', 'mode main']
-
 ctrl-a = ['focus left', 'mode main']
 ctrl-s = ['focus down', 'mode main']
 ctrl-w = ['focus up', 'mode main']
