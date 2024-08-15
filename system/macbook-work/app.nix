@@ -33,6 +33,7 @@
       "google-cloud-sdk"
       "iina"
       "jetbrains-toolbox"
+      "kitty"
       "logi-options-plus"
       "mongodb-compass"
       "openinterminal"

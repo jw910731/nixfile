@@ -45,6 +45,7 @@
       "keka"
       "kekaexternalhelper"
       "keycastr"
+      "kitty"
       "macfuse"
       "messenger"
       "microsoft-auto-update"
