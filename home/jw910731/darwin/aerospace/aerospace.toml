@@ -62,6 +62,8 @@ outer.right =      5
 ctrl-enter = "mode activate"
 
 [mode.activate.binding]
+ctrl-shift-t = ['''exec-and-forget kitten @ launch --type os-window''', 'mode main']
+
 ctrl-a = ['focus left', 'mode main']
 ctrl-s = ['focus down', 'mode main']
 ctrl-w = ['focus up', 'mode main']
