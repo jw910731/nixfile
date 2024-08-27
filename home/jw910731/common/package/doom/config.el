@@ -82,6 +82,7 @@
 (setq projectile-project-search-path '("~/dev/workspace" "~/dev/git"))
 
 (global-undo-tree-mode)
+
 (use-package lsp-tailwindcss
   :init
   (setq lsp-tailwindcss-add-on-mode t))
