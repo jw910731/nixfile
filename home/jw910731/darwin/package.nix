@@ -11,9 +11,8 @@
 
   programs.kitty.package = derivation {
     name = "empty";
-    builder = "${pkgs.bash}/bin/bash";
-    args = [ "-c" ''declare -xp
-    ${pkgs.uutils-coreutils-noprefix}/bin/mkdir $out'' ];
+    builder = "${pkgs.uutils-coreutils-noprefix}/bin/mkdir";
+    args = [ "${builtins.placeholder "out"}" ];
     system = pkgs.system;
   };
 }
