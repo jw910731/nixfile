@@ -40,6 +40,7 @@
     poetry
     devenv
     nil
+    nix-output-monitor
     ];
 
   programs.go = {

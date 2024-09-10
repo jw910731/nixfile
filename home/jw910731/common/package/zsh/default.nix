@@ -85,6 +85,7 @@ in
           { name = "Aloxaf/fzf-tab"; }
           { name = "zsh-users/zsh-syntax-highlighting"; tags = [ "defer:2" ]; }
           { name = "greymd/docker-zsh-completion"; }
+          { name = "sunlei/zsh-ssh"; }
         ];
       };
 
