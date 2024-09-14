@@ -7,6 +7,7 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  system.stateVersion = 5;
   system.defaults = {
     LaunchServices = {
       # Disable quarantine for downloaded applications.
