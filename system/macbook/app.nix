@@ -38,7 +38,6 @@
       "element"
       "firefox"
       "font-latin-modern"
-      "godot"
       "hhkb"
       "iina"
       "jetbrains-toolbox"
@@ -53,7 +52,6 @@
       "obs"
       "openinterminal"
       "orbstack"
-      "playcover-nightly"
       "rapidapi"
       "raycast"
       "readmoreading"
@@ -67,9 +65,7 @@
     ];
 
     taps = [
-      "beeftornado/rmtree"
       "homebrew/cask-versions"
-      "playcover/playcover"
       "nikitabobko/tap"
       "FelixKratz/formulae"
     ];
