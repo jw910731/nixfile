@@ -28,6 +28,7 @@
       "appcleaner"
       "arc"
       "bartender"
+      "betterdisplay"
       "cloudflare-warp"
       "devtoys"
       "google-cloud-sdk"
