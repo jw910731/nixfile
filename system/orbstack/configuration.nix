@@ -13,6 +13,8 @@
       ./lxd.nix
       # Include the OrbStack-specific configuration.
       ./orbstack.nix
+
+      ./custom.nix
     ];
 
   users.users.jw910731 = {
