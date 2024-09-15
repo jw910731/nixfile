@@ -39,4 +39,8 @@
 
   # Enable nix command and flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Enable zsh
+  programs.zsh.enable = true;
+  environment.pathsToLink = [ "/share/zsh" ];
 }

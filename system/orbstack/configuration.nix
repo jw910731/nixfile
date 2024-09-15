@@ -28,6 +28,7 @@
     home = "/home/jw910731";
     homeMode = "700";
     useDefaultShell = true;
+    shell = pkgs.zsh;
   };
 
   security.sudo.wheelNeedsPassword = false;
