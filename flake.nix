@@ -48,7 +48,7 @@
             }
           ];
         };
-        "orbstack" = nixpkgs.lib.nixosSystem {
+        "nixos-orbstack" = nixpkgs.lib.nixosSystem {
           system = "aarch64-linux";
           modules = [
             ./system/orbstack/configuration.nix
