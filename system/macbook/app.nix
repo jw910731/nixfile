@@ -34,6 +34,7 @@
       "bartender"
       "betterdisplay"
       "brave-browser"
+      "dash"
       "discord"
       "element"
       "firefox"

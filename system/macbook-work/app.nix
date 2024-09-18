@@ -30,7 +30,7 @@
       "bartender"
       "betterdisplay"
       "cloudflare-warp"
-      "devtoys"
+      "dash"
       "google-cloud-sdk"
       "iina"
       "jetbrains-toolbox"
