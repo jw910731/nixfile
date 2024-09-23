@@ -50,6 +50,7 @@
       "messenger"
       "microsoft-auto-update"
       "moonlight"
+      "nvidia-geforce-now"
       "obs"
       "openinterminal"
       "orbstack"
