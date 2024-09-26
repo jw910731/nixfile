@@ -12,7 +12,6 @@
       "pinentry"
       "pinentry-mac"
       "pkg-config"
-      "pyenv"
       "python@3.12"
     ];
 
