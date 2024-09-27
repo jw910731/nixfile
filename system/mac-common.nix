@@ -22,7 +22,7 @@
     };
 
     loginwindow = {
-      LoginwindowText = "不可以色色";
+      LoginwindowText = "可以色色";
     };
 
     finder = {
