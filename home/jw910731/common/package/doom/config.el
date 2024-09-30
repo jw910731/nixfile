@@ -79,7 +79,10 @@
 (global-set-key "\C-z" nil)
 
 ;; Set Project Search Dir
-(setq projectile-project-search-path '("~/dev/workspace" "~/dev/git"))
+(setq projectile-project-search-path '("~/dev/workspace" "~/dev/git" "~/course"))
+
+(projectile-register-project-type 'direnv '(".envrc")
+                                  :project-file ".envrc" )
 
 (global-undo-tree-mode)
 
