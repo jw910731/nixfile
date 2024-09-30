@@ -13,6 +13,8 @@
       "scrollback_lines" = 2000;
       "allow_remote_control" = true;
       "macos_option_as_alt" = "both";
+      "editor" = ".";
+      "env" = "TERM=xterm-256color";
     };
   };
 }
