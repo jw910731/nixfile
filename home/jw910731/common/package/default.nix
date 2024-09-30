@@ -42,6 +42,7 @@
     nil
     nix-output-monitor
     imagemagick
+    tmux
     ];
 
   programs.go = {
