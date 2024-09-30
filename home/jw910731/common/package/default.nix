@@ -41,6 +41,7 @@
     devenv
     nil
     nix-output-monitor
+    imagemagick
     ];
 
   programs.go = {
