@@ -43,4 +43,6 @@
   # Enable zsh
   programs.zsh.enable = true;
   environment.pathsToLink = [ "/share/zsh" ];
+
+  programs.nix-ld.enable = true;
 }
