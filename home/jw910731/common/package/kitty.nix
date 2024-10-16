@@ -15,6 +15,7 @@
       "macos_option_as_alt" = "both";
       "editor" = ".";
       "term" = "xterm-256color";
+      "tab_bar_style" = "powerline";
     };
   };
 }
