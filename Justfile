@@ -6,7 +6,7 @@
 #
 ############################################################################
 
-switch host: emacs-clean
+switch host:
   if [ {{os()}} = "macos" ]; then \
   darwin-rebuild switch --flake .#{{host}}; \
   fi
