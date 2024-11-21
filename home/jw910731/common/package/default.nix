@@ -5,6 +5,7 @@
     ./git.nix
     ./emacs.nix
     ./kitty.nix
+    ./rio.nix
   ];
 
   home.packages = with pkgs;[
@@ -42,7 +43,7 @@
     nil
     nix-output-monitor
     imagemagick
-    tmux
+    zellij
     ];
 
   programs.go = {

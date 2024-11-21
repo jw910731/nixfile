@@ -42,6 +42,7 @@
       "orbstack"
       "rapidapi"
       "raycast"
+      "rio"
       "stats"
       "visual-studio-code"
       "zed"
