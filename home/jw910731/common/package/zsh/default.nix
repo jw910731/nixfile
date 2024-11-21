@@ -97,6 +97,9 @@ in
 
       dirHashes = {
         dl = "$HOME/Downloads";
+        dv = "$HOME/dev";
+        git = "$HOME/dev/git";
+        ws = "$HOME/dev/workspace";
       };
 
     };
