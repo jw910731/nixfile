@@ -6,6 +6,7 @@
     ./emacs.nix
     ./kitty.nix
     ./rio.nix
+     ./zellij.nix
   ];
 
   home.packages = with pkgs;[

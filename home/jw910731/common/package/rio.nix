@@ -22,7 +22,7 @@
       };
       shell = {
         program = "${pkgs.zsh}/bin/zsh";
-        args = ["-l" "-c" "${pkgs.zellij}/bin/zellij"];
+        args = ["-l" "-c" "${pkgs.zellij}/bin/zellij options --on-force-close quit --default-layout terminal_default"];
       };
       window = {
         opacity = 0.7;
