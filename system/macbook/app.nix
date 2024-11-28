@@ -52,6 +52,7 @@
       "obs"
       "openinterminal"
       "orbstack"
+      "orion"
       "rapidapi"
       "raycast"
       "readmoreading"
