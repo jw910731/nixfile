@@ -16,13 +16,12 @@
         size = 14;
       };
       navigation = {
-        mode = "Plain";
         use-split = false;
         open-config-with-split = false;
       };
       shell = {
         program = "${pkgs.zsh}/bin/zsh";
-        args = ["-l" "-c" "${pkgs.zellij}/bin/zellij options --on-force-close quit --default-layout terminal_default"];
+        args = ["-li"];
       };
       window = {
         opacity = 0.7;

@@ -15,10 +15,13 @@
     args = [ "${builtins.placeholder "out"}" ];
     system = pkgs.system;
   };
-  programs.rio.package = derivation {
-    name = "empty";
-    builder = "${pkgs.uutils-coreutils-noprefix}/bin/mkdir";
-    args = [ "${builtins.placeholder "out"}" ];
-    system = pkgs.system;
+  programs.rio = {
+    package = derivation {
+      name = "empty";
+      builder = "${pkgs.uutils-coreutils-noprefix}/bin/mkdir";
+      args = [ "${builtins.placeholder "out"}" ];
+      system = pkgs.system;
+    };
+    settings.navigation.mode = "NativeTab";
   };
 }
