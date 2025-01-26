@@ -24,7 +24,6 @@
         };
       }) [
       "1password"
-      "aerospace"
       "appcleaner"
       "bartender"
       "betterdisplay"
@@ -42,7 +41,6 @@
       "orion"
       "rapidapi"
       "raycast"
-      "rio"
       "stats"
       "visual-studio-code"
       "zed"
