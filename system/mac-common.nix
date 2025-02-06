@@ -1,10 +1,5 @@
 { pkgs, lib, ... }:
 {
-  # Hostname
-  # networking.computerName = "${hostname}";
-  # networking.hostName = "${hostname}";
-  # system.defaults.smb.NetBIOSName = "${hostname}";
-
   nixpkgs.config.allowUnfree = true;
 
   system.stateVersion = 5;
@@ -12,6 +7,35 @@
     LaunchServices = {
       # Disable quarantine for downloaded applications.
       LSQuarantine = false;
+    };
+
+    CustomUserPreferences = {
+
+    };
+
+    dock = {
+      # Disable mission control animation
+      expose-animation-duration = 0.0;
+      # Set dock detail
+      autohide = true;
+      autohide-time-modifier = 0.25;
+      autohide-delay = 0.24;
+      orientation = "left";
+      show-recents = false;
+      # Set dock magnification
+      magnification = true;
+      tilesize = 40;
+      largesize = 64;
+      # Disable hot corner
+      wvous-tl-corner = 1;
+      wvous-bl-corner = 1;
+      wvous-tr-corner = 1;
+      wvous-br-corner = 1;
+    };
+
+    screencapture = {
+      disable-shadow = true;
+      target = "clipboard";
     };
 
     trackpad = {
