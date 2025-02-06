@@ -7,7 +7,7 @@
       package = (pkgs.nerdfonts.override { fonts = [ "Hack" ]; });
       size = 14.0;
     };
-    theme = "Japanesque";
+    themeFile = "Japanesque";
     settings = {
       "background_opacity" = "0.95";
       "scrollback_lines" = 2000;

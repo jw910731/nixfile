@@ -12,7 +12,7 @@
   home.packages = with pkgs;[
     fira-code
     nerdfonts
-    _1password
+    _1password-cli
     gnupg
     just
     fzf
