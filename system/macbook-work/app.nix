@@ -35,6 +35,7 @@
       "karabiner-elements"
       "kitty"
       "logi-options-plus"
+      "meetingbar"
       "mongodb-compass"
       "openinterminal"
       "openvpn-connect"
