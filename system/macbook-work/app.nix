@@ -32,6 +32,7 @@
       "google-cloud-sdk"
       "iina"
       "jetbrains-toolbox"
+      "karabiner-elements"
       "kitty"
       "logi-options-plus"
       "mongodb-compass"
