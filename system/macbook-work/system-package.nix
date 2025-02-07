@@ -11,7 +11,7 @@
   ];
 
   services.emacs = {
-    enable = true;
+    # enable = true;
     package = pkgs.emacs-nox;
   };
 }
