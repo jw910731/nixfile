@@ -34,7 +34,7 @@
       "jetbrains-toolbox"
       "karabiner-elements"
       "kitty"
-      "logi-options-plus"
+      "logi-options+"
       "meetingbar"
       "mongodb-compass"
       "openinterminal"
