@@ -36,6 +36,7 @@
       "element"
       "firefox"
       "font-latin-modern"
+      "halloy"
       "hhkb"
       "iina"
       "jetbrains-toolbox"

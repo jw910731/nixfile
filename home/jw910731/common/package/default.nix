@@ -7,6 +7,7 @@
     ./kitty.nix
     ./rio.nix
      ./zellij.nix
+     ./halloy.nix
   ];
 
   home.packages = with pkgs;[

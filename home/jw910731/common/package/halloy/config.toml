@@ -1,0 +1,19 @@
+theme = { light = "intellij-light", dark = "one-dark" }
+scale_factor = 1.25
+
+[servers.oftc]
+username = "jw910731"
+nickname = "jw910731"
+server = "irc.oftc.net"
+port = 6697
+channels = [
+    "#asahi",
+    "#asahi-dev",
+    "#asahi-re",
+    "#asahi-gpu",
+    "#asahi-alt",
+    "#asahi-stream",
+]
+
+[font]
+size = 14
