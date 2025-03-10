@@ -5,8 +5,6 @@
     ./git.nix
     ./emacs.nix
     ./kitty.nix
-    ./rio.nix
-     ./zellij.nix
      ./halloy.nix
   ];
 
@@ -45,7 +43,6 @@
     nil
     nix-output-monitor
     imagemagick
-    zellij
     ];
 
   programs.go = {
