@@ -5,6 +5,10 @@
     # NixPKG
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixos-apple-silicon = {
+      url = "github:tpwrules/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # Home Manager
     home-manager = {
@@ -25,7 +29,7 @@
     naersk.url = "github:nix-community/naersk";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, ... }@inputs:
+  outputs = { self, nixpkgs, nixos-apple-silicon, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, ... }@inputs:
     {
       formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
       formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
@@ -41,6 +45,24 @@
 
               home-manager.users = {
                 jw910731 = import ./home/jw910731/linux.nix;
+              };
+              home-manager.extraSpecialArgs = {
+                naersk = inputs.naersk;
+              };
+            }
+          ];
+        };
+        "asahi" = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [
+            nixos-apple-silicon.nixosModules.default
+            ./system/asahi/configuration.nix
+            home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users = {
+                jw910731 = import ./home/jw910731/linux-gui.nix;
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;

@@ -4,7 +4,6 @@
     ../common
 
     ./package/podman
-    ./package/prismlauncher.nix
     ./package/gpg.nix
   ];
 
