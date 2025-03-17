@@ -1,14 +1,14 @@
 final: prev:
 let
-  go_version = "1.21.9";
-  go = prev.go_1_21.overrideAttrs rec {
+  go_version = "1.22.12";
+  go = prev.go_1_22.overrideAttrs rec {
     version = go_version;
     src = prev.fetchurl {
       url = "https://go.dev/dl/go${version}.src.tar.gz";
-      hash = "sha256-WPDFztRaABK84v96nfA+Eoq8yIGOur5QJ7uSuv4g5CE=";
+      hash = "sha256-ASp+HzfzYsCRjB36MzRFisLaFijEuc9NnKAtuYbhfXE=";
     };
   };
-  buildGoModule = prev.buildGo121Module.override {
+  buildGoModule = prev.buildGo122Module.override {
     inherit go;
   };
 
@@ -25,17 +25,17 @@ in
             prev.curl
             prev.git
           ];
-          version = "1.28.10+rke2r1";
+          version = "1.31.6+rke2r1";
 
           src = prev.fetchFromGitHub {
             owner = "rancher";
             repo = args.pname;
             rev = "v${version}";
-            hash = "sha256-hPAmsXf+06tgiV/qtfZcIS+meAIyN7ST81t2/T4Rd/Q=";
+            hash = "sha256-5k2KZA37HXtTdVGvhGQ0IBuddokYL/HwwbcysRJMAC4=";
             leaveDotGit = true;
           };
 
-          vendorHash = "sha256-iidkTSrrHyW5ZEouzHAWUwCC9nplGz1v/E9bM2lMPeM=";
+          vendorHash = "sha256-ug1dO4t/QfPpg3mobCIJWb8/MERUoP9tEMlKRKZigXo=";
 
           postPatch = ''
             # Patch the build scripts so they work in the Nix build environment.
@@ -47,7 +47,7 @@ in
           '';
 
           buildPhase = ''
-            DRONE_TAG="v${version}" ./scripts/build-binary
+            GITHUB_ACTION_TAG="v${version}" ./scripts/build-binary
           '';
 
           installPhase = ''
