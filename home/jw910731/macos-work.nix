@@ -2,7 +2,9 @@
 {
   imports = [
     ./common
+
     ./darwin
+    ./1p-sign.nix
   ];
   home.username = "jerry.wu";
   home.homeDirectory = lib.mkForce "/Users/jerry.wu";

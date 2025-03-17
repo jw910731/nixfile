@@ -67,7 +67,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = (import ./home/jw910731/linux.nix) // (import ./home/jw910731/yubi-sign.nix);
+                jw910731 = import ./home/jw910731/linux.nix;
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -85,7 +85,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = (import ./home/jw910731/linux.nix) // (import ./home/jw910731/1p-sign.nix);
+                jw910731 = import ./home/jw910731/linux.nix;
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -109,7 +109,7 @@
                 home-manager.useUserPackages = true;
 
                 home-manager.users = {
-                  jw910731 = (import ./home/jw910731/macos.nix) // (import ./home/jw910731/1p-sign.nix);
+                  jw910731 = import ./home/jw910731/macos.nix;
                 };
                 home-manager.extraSpecialArgs = {
                   naersk = inputs.naersk;
@@ -131,7 +131,7 @@
                 home-manager.useUserPackages = true;
 
                 home-manager.users = {
-                  "jerry.wu" = (import ./home/jw910731/macos-work.nix) // (import ./home/jw910731/1p-sign.nix);
+                  "jerry.wu" = import ./home/jw910731/macos-work.nix;
                 };
                 home-manager.extraSpecialArgs = {
                   naersk = inputs.naersk;
