@@ -6,6 +6,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
 
+    # systems
+    systems.url = "github:nix-systems/default";
+
     # Home Manager
     home-manager = {
       url = "github:nix-community/home-manager/release-24.11";
@@ -25,17 +28,41 @@
     naersk.url = "github:nix-community/naersk";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, ... }@inputs:
+  outputs =
     {
-      formatter.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.nixpkgs-fmt;
-      formatter.aarch64-darwin = nixpkgs-darwin.legacyPackages.aarch64-darwin.nixpkgs-fmt;
-      formatter.x86_64-darwin = nixpkgs-darwin.legacyPackages.x86_64-darwin.nixpkgs-fmt;
+      self,
+      nixpkgs,
+      home-manager,
+      nixpkgs-darwin,
+      home-manager-darwin,
+      darwin,
+      naersk,
+      systems,
+      ...
+    }@inputs:
+    {
+      formatter =
+        (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
+          system:
+          let
+            pkgs = import nixpkgs-darwin { inherit system; };
+          in
+          pkgs.nixfmt-rfc-style
+        ))
+        // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
+          system:
+          let
+            pkgs = import nixpkgs { inherit system; };
+          in
+          pkgs.nixfmt-rfc-style
+        ));
       nixosConfigurations = {
         "linux-host" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./system/linux-host/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
@@ -52,7 +79,8 @@
           system = "aarch64-linux";
           modules = [
             ./system/orbstack/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 

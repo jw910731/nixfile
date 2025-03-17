@@ -15,56 +15,58 @@
       "python@3.12"
     ];
 
-    casks = map
-      (x: {
-        name = x;
-        greedy = true;
-        args = {
-          no_quarantine = true;
-        };
-      }) [
-      "1password"
-      "1password-cli"
-      "aldente"
-      "android-platform-tools"
-      "balenaetcher"
-      "bartender"
-      "betterdisplay"
-      "brave-browser"
-      "dash"
-      "discord"
-      "element"
-      "firefox"
-      "font-latin-modern"
-      "halloy"
-      "hhkb"
-      "iina"
-      "jetbrains-toolbox"
-      "karabiner-elements"
-      "keka"
-      "kekaexternalhelper"
-      "keycastr"
-      "kitty"
-      "macfuse"
-      "messenger"
-      "microsoft-auto-update"
-      "moonlight"
-      "obs"
-      "openinterminal"
-      "orbstack"
-      "orion"
-      "osu"
-      "rapidapi"
-      "raycast"
-      "readmoreading"
-      "stats"
-      "steam"
-      "telegram-desktop"
-      "visual-studio-code"
-      "wireshark"
-      "xquartz"
-      "zed"
-    ];
+    casks =
+      map
+        (x: {
+          name = x;
+          greedy = true;
+          args = {
+            no_quarantine = true;
+          };
+        })
+        [
+          "1password"
+          "1password-cli"
+          "aldente"
+          "android-platform-tools"
+          "balenaetcher"
+          "bartender"
+          "betterdisplay"
+          "brave-browser"
+          "dash"
+          "discord"
+          "element"
+          "firefox"
+          "font-latin-modern"
+          "halloy"
+          "hhkb"
+          "iina"
+          "jetbrains-toolbox"
+          "karabiner-elements"
+          "keka"
+          "kekaexternalhelper"
+          "keycastr"
+          "kitty"
+          "macfuse"
+          "messenger"
+          "microsoft-auto-update"
+          "moonlight"
+          "obs"
+          "openinterminal"
+          "orbstack"
+          "orion"
+          "osu"
+          "rapidapi"
+          "raycast"
+          "readmoreading"
+          "stats"
+          "steam"
+          "telegram-desktop"
+          "visual-studio-code"
+          "wireshark"
+          "xquartz"
+          "zed"
+        ];
 
     taps = [
       "homebrew/cask-versions"
