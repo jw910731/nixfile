@@ -52,7 +52,11 @@
   systemd.services = {
     "rke2-server" = {
       enable = true;
-      path = [ pkgs.mount pkgs.iptables pkgs.umount ];
+      path = [
+        pkgs.mount
+        pkgs.iptables
+        pkgs.umount
+      ];
       description = "Rancher Kubernetes Engine v2 (server)";
       documentation = [ "https://github.com/rancher/rke2" ];
       wants = [ "network-online.target" ];
@@ -61,7 +65,11 @@
       wantedBy = [ "multi-user.target" ];
       serviceConfig = {
         Type = "notify";
-        EnvironmentFile = [ "-/etc/default/%N" "-/etc/sysconfig/%N" "-/usr/local/lib/systemd/system/%N.env" ];
+        EnvironmentFile = [
+          "-/etc/default/%N"
+          "-/etc/sysconfig/%N"
+          "-/usr/local/lib/systemd/system/%N.env"
+        ];
         KillMode = "process";
         Delegate = "yes";
         LimitNOFILE = 1048576;
@@ -71,9 +79,15 @@
         TimeoutStartSec = 0;
         Restart = "always";
         RestartSec = "5s";
-        ExecStartPre = [ "/bin/sh -xc '! /usr/bin/systemctl is-enabled --quiet nm-cloud-setup.service'" "-/sbin/modprobe br_netfilter" "-/sbin/modprobe overlay" ];
+        ExecStartPre = [
+          "/bin/sh -xc '! /usr/bin/systemctl is-enabled --quiet nm-cloud-setup.service'"
+          "-/sbin/modprobe br_netfilter"
+          "-/sbin/modprobe overlay"
+        ];
         ExecStart = [ "${pkgs.rke2.outPath}/bin/rke2 server" ];
-        ExecStopPost = [ "-/bin/sh -c \"systemd-cgls /system.slice/%n | grep -Eo '[0-9]+ (containerd|kubelet)' | awk '{print $1}' | xargs -r kill\"" ];
+        ExecStopPost = [
+          "-/bin/sh -c \"systemd-cgls /system.slice/%n | grep -Eo '[0-9]+ (containerd|kubelet)' | awk '{print $1}' | xargs -r kill\""
+        ];
       };
     };
   };

@@ -15,38 +15,40 @@
       "python@3.12"
     ];
 
-    casks = map
-      (x: {
-        name = x;
-        greedy = true;
-        args = {
-          no_quarantine = true;
-        };
-      }) [
-      "1password"
-      "appcleaner"
-      "bartender"
-      "betterdisplay"
-      "cloudflare-warp"
-      "dash"
-      "google-cloud-sdk"
-      "iina"
-      "jetbrains-toolbox"
-      "karabiner-elements"
-      "kitty"
-      "logi-options+"
-      "meetingbar"
-      "mongodb-compass"
-      "openinterminal"
-      "openvpn-connect"
-      "orbstack"
-      "orion"
-      "rapidapi"
-      "raycast"
-      "stats"
-      "visual-studio-code"
-      "zed"
-    ];
+    casks =
+      map
+        (x: {
+          name = x;
+          greedy = true;
+          args = {
+            no_quarantine = true;
+          };
+        })
+        [
+          "1password"
+          "appcleaner"
+          "bartender"
+          "betterdisplay"
+          "cloudflare-warp"
+          "dash"
+          "google-cloud-sdk"
+          "iina"
+          "jetbrains-toolbox"
+          "karabiner-elements"
+          "kitty"
+          "logi-options+"
+          "meetingbar"
+          "mongodb-compass"
+          "openinterminal"
+          "openvpn-connect"
+          "orbstack"
+          "orion"
+          "rapidapi"
+          "raycast"
+          "stats"
+          "visual-studio-code"
+          "zed"
+        ];
 
     taps = [
       "nikitabobko/tap"

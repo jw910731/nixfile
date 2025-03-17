@@ -8,7 +8,7 @@
   home.username = "jw910731";
   home.homeDirectory = lib.mkForce "/Users/jw910731";
   programs.git = {
-    # Sign  
+    # Sign
     signing = {
       signByDefault = true;
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIlmEeuqIj2EQuHMhiua+C34/mibY9KeMwAyQNj299nl";

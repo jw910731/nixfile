@@ -28,15 +28,41 @@
     naersk.url = "github:nix-community/naersk";
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-darwin, home-manager-darwin, darwin, naersk, systems, ... }@inputs:
+  outputs =
     {
-      formatter = (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (system: let pkgs = import nixpkgs-darwin { inherit system; }; in pkgs.nixfmt-rfc-style)) // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux"] (system: let pkgs = import nixpkgs { inherit system; }; in pkgs.nixfmt-rfc-style));
+      self,
+      nixpkgs,
+      home-manager,
+      nixpkgs-darwin,
+      home-manager-darwin,
+      darwin,
+      naersk,
+      systems,
+      ...
+    }@inputs:
+    {
+      formatter =
+        (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
+          system:
+          let
+            pkgs = import nixpkgs-darwin { inherit system; };
+          in
+          pkgs.nixfmt-rfc-style
+        ))
+        // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
+          system:
+          let
+            pkgs = import nixpkgs { inherit system; };
+          in
+          pkgs.nixfmt-rfc-style
+        ));
       nixosConfigurations = {
         "linux-host" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
             ./system/linux-host/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
@@ -53,7 +79,8 @@
           system = "aarch64-linux";
           modules = [
             ./system/orbstack/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 

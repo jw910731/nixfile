@@ -5,10 +5,10 @@
     ./git.nix
     ./emacs.nix
     ./kitty.nix
-     ./halloy.nix
+    ./halloy.nix
   ];
 
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     fira-code
     nerdfonts
     _1password-cli
@@ -45,7 +45,7 @@
     nixfmt-rfc-style
     nix-output-monitor
     imagemagick
-    ];
+  ];
 
   programs.go = {
     enable = true;

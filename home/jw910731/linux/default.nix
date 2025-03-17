@@ -8,7 +8,7 @@
     ./package/gpg.nix
   ];
 
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     podman
     podman-compose
     gdb
