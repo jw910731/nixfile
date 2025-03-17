@@ -6,8 +6,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
 
-    # systems
+    # formatter
     systems.url = "github:nix-systems/default";
+    treefmt-nix.url = "github:numtide/treefmt-nix";
 
     # Home Manager
     home-manager = {
@@ -38,23 +39,24 @@
       darwin,
       naersk,
       systems,
+      treefmt-nix,
       ...
     }@inputs:
     {
       formatter =
+        let
+          formatter =
+            pkgs:
+            (treefmt-nix.lib.evalModule pkgs {
+              projectRootFile = "flake.nix";
+              programs.nixfmt-rfc-style.enable = true;
+            }).config.build.wrapper;
+        in
         (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
-          system:
-          let
-            pkgs = import nixpkgs-darwin { inherit system; };
-          in
-          pkgs.nixfmt-rfc-style
+          system: formatter (import nixpkgs-darwin { inherit system; })
         ))
         // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
-          system:
-          let
-            pkgs = import nixpkgs { inherit system; };
-          in
-          pkgs.nixfmt-rfc-style
+          system: formatter (import nixpkgs-darwin { inherit system; })
         ));
       nixosConfigurations = {
         "linux-host" = nixpkgs.lib.nixosSystem {
