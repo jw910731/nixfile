@@ -41,6 +41,8 @@
     poetry
     devenv
     nil
+    nixd
+    nixfmt-rfc-style
     nix-output-monitor
     imagemagick
     ];
