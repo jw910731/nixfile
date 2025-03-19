@@ -74,7 +74,25 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = import ./home/jw910731/linux.nix;
+                jw910731 = (import ./home/jw910731/linux.nix) // (import ./home/jw910731/yubi-sign.nix);
+              };
+              home-manager.extraSpecialArgs = {
+                naersk = inputs.naersk;
+              };
+            }
+          ];
+        };
+        "utm" = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./system/utm/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              home-manager.users = {
+                jw910731 = (import ./home/jw910731/linux-gui.nix) // (import ./home/jw910731/1p-sign.nix);
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -93,7 +111,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = import ./home/jw910731/linux-gui.nix;
+                jw910731 = (import ./home/jw910731/linux-gui.nix) // (import ./home/jw910731/1p-sign.nix);
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -111,7 +129,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = import ./home/jw910731/linux.nix;
+                jw910731 = (import ./home/jw910731/linux.nix) // (import ./home/jw910731/1p-sign.nix);
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
