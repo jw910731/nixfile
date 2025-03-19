@@ -5,15 +5,14 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [
-      # Host Dependent Configs
-      ./linux-host.nix
-      # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      # User settings
-      ./user.nix
-    ];
+  imports = [
+    # Host Dependent Configs
+    ./linux-host.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    # User settings
+    ./user.nix
+  ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -54,7 +53,10 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable nix command and flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

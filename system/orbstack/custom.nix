@@ -1,4 +1,4 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -38,7 +38,10 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable nix command and flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Enable zsh
   programs.zsh.enable = true;

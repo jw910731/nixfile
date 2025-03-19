@@ -26,5 +26,4 @@
     "fcitx5/conf/classicui.conf".source = ./classicui.conf;
   };
 
-
 }
