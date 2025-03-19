@@ -2,16 +2,21 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./asahi-hack.nix
-      ./user.nix
-      ./asahi.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./asahi-hack.nix
+    ./user.nix
+    ./asahi.nix
+  ];
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
     extractPeripheralFirmware = false;
@@ -28,7 +33,7 @@
     enable = true;
     settings.General.EnableNetworkConfiguration = true;
   };
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
@@ -133,4 +138,3 @@
   system.stateVersion = "25.05"; # Did you read the comment?
 
 }
-

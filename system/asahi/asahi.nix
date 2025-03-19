@@ -1,16 +1,24 @@
 { pkgs, ... }:
 {
   nix = {
-    buildMachines = [{
-      systems = ["x86_64-linux" "aarch64-linux"];
-      hostName = "ssh.jw910731.dev";
-      protocol = "ssh-ng";
-      maxJobs = 16;
-      supportedFeatures = [ "big-parallel" ];
-    }];
+    buildMachines = [
+      {
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+        ];
+        hostName = "ssh.jw910731.dev";
+        protocol = "ssh-ng";
+        maxJobs = 16;
+        supportedFeatures = [ "big-parallel" ];
+      }
+    ];
     distributedBuilds = true;
     # Enable nix command and flakes
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     extraOptions = ''
       builders-use-substitutes = true
     '';
