@@ -37,6 +37,7 @@
     {
       self,
       nixpkgs,
+      nixos-apple-silicon,
       home-manager,
       nixpkgs-darwin,
       home-manager-darwin,
@@ -86,7 +87,8 @@
           modules = [
             nixos-apple-silicon.nixosModules.default
             ./system/asahi/configuration.nix
-            home-manager.nixosModules.home-manager {
+            home-manager.nixosModules.home-manager
+            {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
 
