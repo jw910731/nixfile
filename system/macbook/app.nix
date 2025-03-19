@@ -62,6 +62,7 @@
           "stats"
           "steam"
           "telegram-desktop"
+          "utm"
           "visual-studio-code"
           "wireshark"
           "xquartz"
