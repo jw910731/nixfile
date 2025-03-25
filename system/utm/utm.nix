@@ -9,7 +9,7 @@
   services.pipewire = {
     enable = true;
     pulse.enable = true;
-  }; 
+  };
 
   services.spice-vdagentd.enable = true;
   services.spice-webdavd.enable = true;
