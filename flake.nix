@@ -74,7 +74,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = (import ./home/jw910731/linux.nix) // (import ./home/jw910731/yubi-sign.nix);
+                jw910731 = nixpkgs.lib.mkMerge [(import ./home/jw910731/linux.nix) (import ./home/jw910731/yubi-sign.nix)];
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -92,7 +92,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = (import ./home/jw910731/linux-gui.nix) // (import ./home/jw910731/1p-sign.nix);
+                jw910731 = nixpkgs.lib.mkMerge [(import ./home/jw910731/linux-gui.nix) (import ./home/jw910731/1p-sign.nix)];
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -111,7 +111,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = (import ./home/jw910731/linux-gui.nix) // (import ./home/jw910731/1p-sign.nix);
+                jw910731 = nixpkgs.lib.mkMerge [(import ./home/jw910731/linux-gui.nix) (import ./home/jw910731/1p-sign.nix)];
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
@@ -129,7 +129,7 @@
               home-manager.useUserPackages = true;
 
               home-manager.users = {
-                jw910731 = (import ./home/jw910731/linux.nix) // (import ./home/jw910731/1p-sign.nix);
+                jw910731 = nixpkgs.lib.mkMerge [(import ./home/jw910731/linux.nix)  (import ./home/jw910731/1p-sign.nix)];
               };
               home-manager.extraSpecialArgs = {
                 naersk = inputs.naersk;
