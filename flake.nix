@@ -31,7 +31,6 @@
 
   outputs =
     {
-      self,
       nixpkgs,
       nixos-apple-silicon,
       home-manager,
@@ -42,6 +41,7 @@
       ...
     }:
     {
+      # Formatter settings
       formatter =
         let
           formatter =
@@ -55,8 +55,10 @@
           system: formatter (import nixpkgs-darwin { inherit system; })
         ))
         // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
-          system: formatter (import nixpkgs-darwin { inherit system; })
+          system: formatter (import nixpkgs { inherit system; })
         ));
+
+      # NixOS configs
       nixosConfigurations = {
         "linux-host" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -132,6 +134,8 @@
           ];
         };
       };
+
+      # Darwin configs
       darwinConfigurations = {
         "macbook" =
           let
