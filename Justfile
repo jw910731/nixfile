@@ -34,8 +34,10 @@ clean:
 
 gc:
   # garbage collect all unused nix store entries
-  nix store gc --debug
   sudo nix-collect-garbage --delete-old
+  sudo nix store gc --debug
+  nix-collect-garbage --delete-old
+  nix store gc --debug
 
 ############################################################################
 #
