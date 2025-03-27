@@ -11,7 +11,7 @@ switch host:
   darwin-rebuild switch --flake .#{{host}}; \
   fi
   if [ {{os()}} = "linux" ]; then \
-  sudo nixos-rebuild switch --flake .#{{host}}; \
+  nh os switch -H {{host}} '.'; \
   fi
 
 up:
@@ -29,15 +29,7 @@ repl:
   nix repl -f flake:nixpkgs
 
 clean:
-  # remove all generations older than 7 days
-  sudo nix profile wipe-history --profile /nix/var/nix/profiles/system  --older-than 7d
-
-gc:
-  # garbage collect all unused nix store entries
-  sudo nix-collect-garbage --delete-old
-  sudo nix store gc --debug
-  nix-collect-garbage --delete-old
-  nix store gc --debug
+  nh clean all -v --ask
 
 ############################################################################
 #

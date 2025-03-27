@@ -54,7 +54,7 @@
             pkgs:
             (treefmt-nix.lib.evalModule pkgs {
               projectRootFile = "flake.nix";
-              programs.nixfmt-rfc-style.enable = true;
+              programs.nixfmt.enable = true;
             }).config.build.wrapper;
         in
         (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (

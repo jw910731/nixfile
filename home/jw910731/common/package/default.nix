@@ -40,9 +40,10 @@
     yq-go
     poetry
     devenv
+    nh
     nil
     nixd
-    nixfmt-rfc-style
+    nixfmt
     nix-output-monitor
     imagemagick
   ];
