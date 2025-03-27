@@ -11,7 +11,6 @@
     };
 
     # formatter
-    systems.url = "github:nix-systems/default";
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
     # Home Manager
@@ -28,9 +27,6 @@
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-
-    # Rust builder
-    naersk.url = "github:nix-community/naersk";
   };
 
   outputs =
@@ -42,11 +38,9 @@
       nixpkgs-darwin,
       home-manager-darwin,
       darwin,
-      naersk,
-      systems,
       treefmt-nix,
       ...
-    }@inputs:
+    }:
     {
       formatter =
         let
@@ -79,9 +73,6 @@
                   (import ./home/jw910731/yubi-sign.nix)
                 ];
               };
-              home-manager.extraSpecialArgs = {
-                naersk = inputs.naersk;
-              };
             }
           ];
         };
@@ -99,9 +90,6 @@
                   (import ./home/jw910731/linux-gui.nix)
                   (import ./home/jw910731/1p-sign.nix)
                 ];
-              };
-              home-manager.extraSpecialArgs = {
-                naersk = inputs.naersk;
               };
             }
           ];
@@ -122,9 +110,6 @@
                   (import ./home/jw910731/1p-sign.nix)
                 ];
               };
-              home-manager.extraSpecialArgs = {
-                naersk = inputs.naersk;
-              };
             }
           ];
         };
@@ -142,9 +127,6 @@
                   (import ./home/jw910731/linux.nix)
                   (import ./home/jw910731/1p-sign.nix)
                 ];
-              };
-              home-manager.extraSpecialArgs = {
-                naersk = inputs.naersk;
               };
             }
           ];
@@ -167,9 +149,6 @@
                 home-manager.users = {
                   jw910731 = import ./home/jw910731/macos.nix;
                 };
-                home-manager.extraSpecialArgs = {
-                  naersk = inputs.naersk;
-                };
               }
             ];
           };
@@ -188,9 +167,6 @@
 
                 home-manager.users = {
                   "jerry.wu" = import ./home/jw910731/macos-work.nix;
-                };
-                home-manager.extraSpecialArgs = {
-                  naersk = inputs.naersk;
                 };
               }
             ];
