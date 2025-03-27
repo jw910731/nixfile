@@ -8,7 +8,6 @@
     };
 
     brews = [
-      "borders"
       "pinentry"
       "pinentry-mac"
       "pkg-config"
@@ -71,8 +70,6 @@
 
     taps = [
       "homebrew/cask-versions"
-      "nikitabobko/tap"
-      "FelixKratz/formulae"
     ];
 
     masApps = {
