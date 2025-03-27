@@ -40,7 +40,6 @@
     yq-go
     poetry
     devenv
-    nh
     nil
     nixd
     nixfmt
@@ -54,6 +53,10 @@
   };
 
   programs.direnv = {
+    enable = true;
+  };
+
+  programs.nh = {
     enable = true;
   };
 }
