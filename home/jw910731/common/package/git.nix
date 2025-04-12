@@ -53,6 +53,9 @@
       ck = "checkout";
       nbr = "checkout -b";
 
+      # switch
+      sw = "switch";
+
       # diff
       d = "diff";
       dc = "diff --cached";
