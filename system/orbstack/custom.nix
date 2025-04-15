@@ -42,6 +42,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.package = pkgs.lix;
 
   # Enable zsh
   programs.zsh.enable = true;

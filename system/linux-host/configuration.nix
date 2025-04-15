@@ -57,6 +57,7 @@
     "nix-command"
     "flakes"
   ];
+  nix.package = pkgs.lix;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
