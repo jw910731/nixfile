@@ -32,6 +32,7 @@
           "bartender"
           "betterdisplay"
           "brave-browser"
+          "cap"
           "dash"
           "discord"
           "element"
