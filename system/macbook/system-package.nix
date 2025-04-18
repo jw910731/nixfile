@@ -12,6 +12,7 @@
 
   services.emacs = {
     enable = true;
-    package = pkgs.emacs-nox;
+    # Patch emacs on darwin, see https://github.com/NixOS/nixpkgs/issues/395169
+    package = pkgs.emacs-nox.override { withNativeCompilation = false; };
   };
 }
