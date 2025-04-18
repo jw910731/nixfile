@@ -29,19 +29,34 @@
     };
   };
 
-  outputs = { nixpkgs, nixpkgs-darwin, darwin, nixos-apple-silicon, home-manager
-    , home-manager-darwin, treefmt-nix, ... }: {
+  outputs =
+    {
+      nixpkgs,
+      nixpkgs-darwin,
+      darwin,
+      nixos-apple-silicon,
+      home-manager,
+      home-manager-darwin,
+      treefmt-nix,
+      ...
+    }:
+    {
       # Formatter settings
-      formatter = let
-        formatter = pkgs:
-          (treefmt-nix.lib.evalModule pkgs {
-            projectRootFile = "flake.nix";
-            programs.nixfmt.enable = true;
-          }).config.build.wrapper;
-      in (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ]
-        (system: formatter (import nixpkgs-darwin { inherit system; })))
-      // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ]
-        (system: formatter (import nixpkgs { inherit system; })));
+      formatter =
+        let
+          formatter =
+            pkgs:
+            (treefmt-nix.lib.evalModule pkgs {
+              projectRootFile = "flake.nix";
+              programs.nixfmt.enable = true;
+            }).config.build.wrapper;
+        in
+        (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
+          system: formatter (import nixpkgs-darwin { inherit system; })
+        ))
+        // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
+          system: formatter (import nixpkgs { inherit system; })
+        ));
 
       # NixOS configs
       nixosConfigurations = {
@@ -123,38 +138,44 @@
 
       # Darwin configs
       darwinConfigurations = {
-        "macbook" = let system = "aarch64-darwin";
-        in darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            ./system/macbook
-            home-manager-darwin.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+        "macbook" =
+          let
+            system = "aarch64-darwin";
+          in
+          darwin.lib.darwinSystem {
+            inherit system;
+            modules = [
+              ./system/macbook
+              home-manager-darwin.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
 
-              home-manager.users = {
-                jw910731 = import ./home/jw910731/macos.nix;
-              };
-            }
-          ];
-        };
-        "macbook-work" = let system = "x86_64-darwin";
-        in darwin.lib.darwinSystem {
-          inherit system;
-          modules = [
-            ./system/macbook-work
-            home-manager-darwin.darwinModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+                home-manager.users = {
+                  jw910731 = import ./home/jw910731/macos.nix;
+                };
+              }
+            ];
+          };
+        "macbook-work" =
+          let
+            system = "x86_64-darwin";
+          in
+          darwin.lib.darwinSystem {
+            inherit system;
+            modules = [
+              ./system/macbook-work
+              home-manager-darwin.darwinModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
 
-              home-manager.users = {
-                "jerry.wu" = import ./home/jw910731/macos-work.nix;
-              };
-            }
-          ];
-        };
+                home-manager.users = {
+                  "jerry.wu" = import ./home/jw910731/macos-work.nix;
+                };
+              }
+            ];
+          };
       };
     };
 }
