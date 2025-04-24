@@ -45,7 +45,6 @@
           "kekaexternalhelper"
           "keycastr"
           "kitty"
-          "messenger"
           "microsoft-auto-update"
           "moonlight"
           "obs"
@@ -73,6 +72,7 @@
       "Craft" = 1487937127;
       "Keynote" = 409183694;
       "LINE" = 539883307;
+      "Messenger" = 1480068668;
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Portal" = 1436994560;
