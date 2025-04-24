@@ -58,7 +58,6 @@
           "readmoreading"
           "stats"
           "steam"
-          "telegram-desktop"
           "utm"
           "visual-studio-code"
           "wireshark"
@@ -78,6 +77,7 @@
       "Pages" = 409201541;
       "Portal" = 1436994560;
       "Slack" = 803453959;
+      "Telegram" = 747648890;
       "Yoink" = 457622435;
     };
   };
