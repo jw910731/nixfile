@@ -8,10 +8,18 @@
 
 switch host:
   if [ {{os()}} = "macos" ]; then \
-  darwin-rebuild switch --flake .#{{host}}; \
+  nh darwin switch -H {{host}} '.'; \
   fi
   if [ {{os()}} = "linux" ]; then \
   nh os switch -H {{host}} '.'; \
+  fi
+
+lswitch host:
+  if [ {{os()}} = "macos" ]; then \
+  darwin-rebuild switch --flake .#{{host}}; \
+  fi
+  if [ {{os()}} = "linux" ]; then \
+  nixos-rebuild switch --flake .#{{host}}; \
   fi
 
 up:

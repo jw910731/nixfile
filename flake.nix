@@ -27,6 +27,16 @@
       url = "github:lnl7/nix-darwin/nix-darwin-24.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    # nh
+    nh = {
+      url = "github:nix-community/nh/v4.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nh-darwin = {
+      url = "github:nix-community/nh/v4.0.0";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
   };
 
   outputs =
@@ -38,8 +48,28 @@
       home-manager,
       home-manager-darwin,
       treefmt-nix,
+      nh,
+      nh-darwin,
       ...
     }:
+    let
+      linuxOverlays = [ nh.overlays.default ];
+      darwinOverlays = [ nh-darwin.overlays.default ];
+      moduleModifier' =
+        overlays: systemFunc: systemAttrs:
+        systemFunc (
+          (import nixpkgs {
+            system = systemAttrs.system;
+          }).lib.attrsets.updateManyAttrsByPath
+            [
+              {
+                path = [ "modules" ];
+                update = modules: modules ++ [ { nixpkgs.overlays = overlays; } ];
+              }
+            ]
+            systemAttrs
+        );
+    in
     {
       # Formatter settings
       formatter =
@@ -59,123 +89,131 @@
         ));
 
       # NixOS configs
-      nixosConfigurations = {
-        "linux-host" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
+      nixosConfigurations =
+        let
+          moduleModifier = moduleModifier' linuxOverlays;
+        in
+        {
+          "linux-host" = moduleModifier nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
 
-            ./system/linux-host/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
+              ./system/linux-host/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
 
-              home-manager.users = {
-                jw910731 = nixpkgs.lib.mkMerge [
-                  (import ./home/jw910731/linux.nix)
-                  (import ./home/jw910731/yubi-sign.nix)
-                ];
-              };
-            }
-          ];
+                home-manager.users = {
+                  jw910731 = nixpkgs.lib.mkMerge [
+                    (import ./home/jw910731/linux.nix)
+                    (import ./home/jw910731/yubi-sign.nix)
+                  ];
+                };
+              }
+            ];
+          };
+          "utm" = moduleModifier nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./system/utm/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.users = {
+                  jw910731 = nixpkgs.lib.mkMerge [
+                    (import ./home/jw910731/linux-gui.nix)
+                    (import ./home/jw910731/1p-sign.nix)
+                  ];
+                };
+              }
+            ];
+          };
+          "asahi" = moduleModifier nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              nixos-apple-silicon.nixosModules.default
+              ./system/asahi/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.users = {
+                  jw910731 = nixpkgs.lib.mkMerge [
+                    (import ./home/jw910731/linux-gui.nix)
+                    (import ./home/jw910731/1p-sign.nix)
+                  ];
+                };
+              }
+            ];
+          };
+          "nixos-orbstack" = moduleModifier nixpkgs.lib.nixosSystem {
+            system = "aarch64-linux";
+            modules = [
+              ./system/orbstack/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.users = {
+                  jw910731 = nixpkgs.lib.mkMerge [
+                    (import ./home/jw910731/linux.nix)
+                    (import ./home/jw910731/1p-sign.nix)
+                  ];
+                };
+              }
+            ];
+          };
         };
-        "utm" = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          modules = [
-            ./system/utm/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users = {
-                jw910731 = nixpkgs.lib.mkMerge [
-                  (import ./home/jw910731/linux-gui.nix)
-                  (import ./home/jw910731/1p-sign.nix)
-                ];
-              };
-            }
-          ];
-        };
-        "asahi" = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            nixos-apple-silicon.nixosModules.default
-            ./system/asahi/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users = {
-                jw910731 = nixpkgs.lib.mkMerge [
-                  (import ./home/jw910731/linux-gui.nix)
-                  (import ./home/jw910731/1p-sign.nix)
-                ];
-              };
-            }
-          ];
-        };
-        "nixos-orbstack" = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          modules = [
-            ./system/orbstack/configuration.nix
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users = {
-                jw910731 = nixpkgs.lib.mkMerge [
-                  (import ./home/jw910731/linux.nix)
-                  (import ./home/jw910731/1p-sign.nix)
-                ];
-              };
-            }
-          ];
-        };
-      };
 
       # Darwin configs
-      darwinConfigurations = {
-        "macbook" =
-          let
-            system = "aarch64-darwin";
-          in
-          darwin.lib.darwinSystem {
-            inherit system;
-            modules = [
-              ./system/macbook
-              home-manager-darwin.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
+      darwinConfigurations =
+        let
+          moduleModifier = moduleModifier' darwinOverlays;
+        in
+        {
+          "macbook" =
+            let
+              system = "aarch64-darwin";
+            in
+            moduleModifier darwin.lib.darwinSystem {
+              inherit system;
+              modules = [
+                ./system/macbook
+                home-manager-darwin.darwinModules.home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
 
-                home-manager.users = {
-                  jw910731 = import ./home/jw910731/macos.nix;
-                };
-              }
-            ];
-          };
-        "macbook-work" =
-          let
-            system = "x86_64-darwin";
-          in
-          darwin.lib.darwinSystem {
-            inherit system;
-            modules = [
-              ./system/macbook-work
-              home-manager-darwin.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
+                  home-manager.users = {
+                    jw910731 = import ./home/jw910731/macos.nix;
+                  };
+                }
+              ];
+            };
+          "macbook-work" =
+            let
+              system = "x86_64-darwin";
+            in
+            moduleModifier darwin.lib.darwinSystem {
+              inherit system;
+              modules = [
+                ./system/macbook-work
+                home-manager-darwin.darwinModules.home-manager
+                {
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
 
-                home-manager.users = {
-                  "jerry.wu" = import ./home/jw910731/macos-work.nix;
-                };
-              }
-            ];
-          };
-      };
+                  home-manager.users = {
+                    "jerry.wu" = import ./home/jw910731/macos-work.nix;
+                  };
+                }
+              ];
+            };
+        };
     };
 }

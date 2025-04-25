@@ -78,6 +78,48 @@
         "type": "github"
       }
     },
+    "nh": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1745434669,
+        "narHash": "sha256-Pqff6gVSNP2kA0Oo0t9CUy9cdf2yGnwSfwlOvS5LtKM=",
+        "owner": "nix-community",
+        "repo": "nh",
+        "rev": "29f74df5734cdaf41edc81aaa25e6ff0a73fe78f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "v4.0.0",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
+    "nh-darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-darwin"
+        ]
+      },
+      "locked": {
+        "lastModified": 1745434669,
+        "narHash": "sha256-Pqff6gVSNP2kA0Oo0t9CUy9cdf2yGnwSfwlOvS5LtKM=",
+        "owner": "nix-community",
+        "repo": "nh",
+        "rev": "29f74df5734cdaf41edc81aaa25e6ff0a73fe78f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "ref": "v4.0.0",
+        "repo": "nh",
+        "type": "github"
+      }
+    },
     "nixos-apple-silicon": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -153,6 +195,8 @@
         "darwin": "darwin",
         "home-manager": "home-manager",
         "home-manager-darwin": "home-manager-darwin",
+        "nh": "nh",
+        "nh-darwin": "nh-darwin",
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixpkgs": "nixpkgs",
         "nixpkgs-darwin": "nixpkgs-darwin",
