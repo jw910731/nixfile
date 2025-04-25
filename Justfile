@@ -37,7 +37,10 @@ repl:
   nix repl -f flake:nixpkgs
 
 clean:
-  nh clean all -v --ask
+  nh clean all --nogcroots --ask
+
+deepclean:
+  nh clean all --ask
 
 ############################################################################
 #
