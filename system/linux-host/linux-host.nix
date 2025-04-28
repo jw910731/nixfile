@@ -185,3 +185,4 @@
 
   nix.settings.auto-optimise-store = true;
 }
+// (import ../nixbuild.nix config.nixpkgs.system)
