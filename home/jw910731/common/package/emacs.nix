@@ -7,12 +7,7 @@
 {
   programs.emacs = {
     enable = true;
-    # Patch emacs on darwin, see https://github.com/NixOS/nixpkgs/issues/395169
-    package =
-      if pkgs.stdenv.targetPlatform.isDarwin then
-        pkgs.emacs-nox.override { withNativeCompilation = false; }
-      else
-        pkgs.emacs-nox;
+    package = pkgs.emacs-nox;
     extraPackages = epkgs: [ epkgs.vterm ];
   };
   home.packages = with pkgs; [
