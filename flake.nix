@@ -53,21 +53,22 @@
       ...
     }:
     let
+      lib = nixpkgs.lib;
       linuxOverlays = [ nh.overlays.default ];
       darwinOverlays = [ nh-darwin.overlays.default ];
       moduleModifier' =
         overlays: systemFunc: systemAttrs:
         systemFunc (
-          (import nixpkgs {
-            system = systemAttrs.system;
-          }).lib.attrsets.updateManyAttrsByPath
-            [
-              {
-                path = [ "modules" ];
-                update = modules: modules ++ [ { nixpkgs.overlays = overlays; } ];
-              }
-            ]
-            systemAttrs
+          lib.attrsets.updateManyAttrsByPath [
+            {
+              path = [ "modules" ];
+              update = modules: modules ++ [ { nixpkgs.overlays = overlays; } ];
+            }
+            {
+              path = [ "specialArgs" ];
+              update = specialArgs: specialArgs // { mylib = import ./lib lib; };
+            }
+          ] (systemAttrs // { specialArgs = { }; })
         );
     in
     {
@@ -81,10 +82,10 @@
               programs.nixfmt.enable = true;
             }).config.build.wrapper;
         in
-        (nixpkgs-darwin.lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
+        (lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
           system: formatter (import nixpkgs-darwin { inherit system; })
         ))
-        // (nixpkgs.lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
+        // (lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
           system: formatter (import nixpkgs { inherit system; })
         ));
 
@@ -96,8 +97,8 @@
         {
           "linux-host" = moduleModifier nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            modules = [
 
+            modules = [
               ./system/linux-host/configuration.nix
               home-manager.nixosModules.home-manager
               {
