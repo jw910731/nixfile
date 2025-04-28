@@ -21,6 +21,5 @@
         };
       }
     ];
-    # zprof.enable = true;
   };
 }
