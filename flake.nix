@@ -30,11 +30,11 @@
 
     # nh
     nh = {
-      url = "github:nix-community/nh/v4.0.0";
+      url = "github:nix-community/nh/v4.0.3";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nh-darwin = {
-      url = "github:nix-community/nh/v4.0.0";
+      url = "github:nix-community/nh/v4.0.3";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
