@@ -2,6 +2,7 @@
 {
   imports = [
     ./linux-host-network.nix
+    ../garnix.nix
   ];
 
   nixpkgs.overlays = [

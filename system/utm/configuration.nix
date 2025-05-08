@@ -12,6 +12,8 @@
     ./hardware-configuration.nix
     # User settings
     ./user.nix
+
+    ../garnix.nix
   ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

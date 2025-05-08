@@ -21,8 +21,7 @@ let
 
     # Disable systemd-resolved
     services.resolved.enable = false;
-    environment.etc."resolv.conf".source =
-      "/opt/orbstack-guest/etc/resolv.conf";
+    environment.etc."resolv.conf".source = "/opt/orbstack-guest/etc/resolv.conf";
 
     # Faster DHCP - OrbStack uses SLAAC exclusively
     networking.dhcpcd.extraConfig = ''
@@ -60,6 +59,10 @@ let
     '';
 
     # indicate builder support for emulated architectures
-    nix.settings.extra-platforms = [ "x86_64-linux" "i686-linux" ];
+    nix.settings.extra-platforms = [
+      "x86_64-linux"
+      "i686-linux"
+    ];
   };
-in output
+in
+output

@@ -19,6 +19,7 @@
     # Include the OrbStack-specific configuration.
     ./orbstack.nix
     ./custom.nix
+    ../garnix.nix
   ];
 
   users.users.jw910731 = {

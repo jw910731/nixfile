@@ -16,6 +16,7 @@
     ./asahi-hack.nix
     ./user.nix
     ./asahi.nix
+    ../garnix.nix
   ];
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
