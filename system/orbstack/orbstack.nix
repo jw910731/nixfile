@@ -2,12 +2,7 @@
 # This WILL be overwritten in the future. Make a copy and update the include
 # in configuration.nix if you want to keep your changes.
 
-{
-  lib,
-  config,
-  mylib,
-  ...
-}:
+{ lib, config, ... }:
 let
   output = {
     # Add OrbStack CLI tools to PATH
@@ -26,7 +21,8 @@ let
 
     # Disable systemd-resolved
     services.resolved.enable = false;
-    environment.etc."resolv.conf".source = "/opt/orbstack-guest/etc/resolv.conf";
+    environment.etc."resolv.conf".source =
+      "/opt/orbstack-guest/etc/resolv.conf";
 
     # Faster DHCP - OrbStack uses SLAAC exclusively
     networking.dhcpcd.extraConfig = ''
@@ -64,10 +60,6 @@ let
     '';
 
     # indicate builder support for emulated architectures
-    nix.settings.extra-platforms = [
-      "x86_64-linux"
-      "i686-linux"
-    ];
+    nix.settings.extra-platforms = [ "x86_64-linux" "i686-linux" ];
   };
-in
-mylib.recursiveMerge output (import ../nixbuild.nix config.nixpkgs.system)
+in output
