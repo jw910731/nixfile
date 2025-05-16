@@ -28,21 +28,12 @@
           "appcleaner"
           "bartender"
           "betterdisplay"
-          "cloudflare-warp"
-          "dash"
-          "google-cloud-sdk"
-          "iina"
-          "jetbrains-toolbox"
-          "karabiner-elements"
           "kitty"
           "logi-options+"
           "meetingbar"
-          "mongodb-compass"
           "openinterminal"
-          "openvpn-connect"
           "orbstack"
           "orion"
-          "rapidapi"
           "raycast"
           "stats"
           "visual-studio-code"
@@ -54,7 +45,7 @@
 
     masApps = {
       "Portal" = 1436994560;
-      "Slack" = 803453959;
+      # "Slack" = 803453959;
       "Yoink" = 457622435;
     };
   };

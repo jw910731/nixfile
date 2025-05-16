@@ -198,7 +198,7 @@
             };
           "macbook-work" =
             let
-              system = "x86_64-darwin";
+              system = "aarch64-darwin";
             in
             moduleModifier darwin.lib.darwinSystem {
               inherit system;
