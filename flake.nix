@@ -210,7 +210,7 @@
                   home-manager.useUserPackages = true;
 
                   home-manager.users = {
-                    "jerry.wu" = import ./home/jw910731/macos-work.nix;
+                    "jw910731" = import ./home/jw910731/macos-work.nix;
                   };
                 }
               ];

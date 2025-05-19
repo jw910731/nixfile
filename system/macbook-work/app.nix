@@ -24,16 +24,12 @@
           };
         })
         [
-          "1password"
           "appcleaner"
           "bartender"
-          "betterdisplay"
           "kitty"
           "logi-options+"
           "meetingbar"
           "openinterminal"
-          "orbstack"
-          "orion"
           "raycast"
           "stats"
           "visual-studio-code"
@@ -45,7 +41,7 @@
 
     masApps = {
       "Portal" = 1436994560;
-      # "Slack" = 803453959;
+      "Slack" = 803453959;
       "Yoink" = 457622435;
     };
   };
