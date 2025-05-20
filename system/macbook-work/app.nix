@@ -29,7 +29,6 @@
           "kitty"
           "logi-options+"
           "meetingbar"
-          "openinterminal"
           "raycast"
           "stats"
           "visual-studio-code"

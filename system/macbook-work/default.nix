@@ -7,7 +7,7 @@ in
     ./system-package.nix
     ./app.nix
     ../mac-common.nix
-    ../garnix.nix
+    # ../garnix.nix
   ];
 
   # Hostname
