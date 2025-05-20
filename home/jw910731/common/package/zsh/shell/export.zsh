@@ -17,9 +17,6 @@ if [[ "$OSTYPE" = darwin* ]]; then
   # GPG AGENT
   # export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
 
-  # 1Password SSH Key Agent
-  export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
-
   # Homebrew
   export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
   export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
