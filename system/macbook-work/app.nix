@@ -24,8 +24,6 @@
           };
         })
         [
-          "appcleaner"
-          "bartender"
           "kitty"
           "logi-options+"
           "meetingbar"
