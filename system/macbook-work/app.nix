@@ -25,9 +25,9 @@
         })
         [
           "kitty"
-          "logi-options+"
           "meetingbar"
           "raycast"
+          "sourcetree"
           "stats"
           "visual-studio-code"
           "zed"
