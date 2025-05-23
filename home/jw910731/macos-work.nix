@@ -9,7 +9,17 @@
   home.homeDirectory = lib.mkForce "/Users/jw910731";
   
   # Auto managed by internal tool
-  programs.git.enable = lib.mkForce false;
+  programs.git = {
+    # Sign
+    signing = {
+      signByDefault = true;
+      key = null;
+    };
+    extraConfig.gpg = {
+      format = "x509";
+      x509.program = "/usr/local/bin/ac-sign";
+    };
+  };
 
   home.packages = with pkgs; [
   ];
