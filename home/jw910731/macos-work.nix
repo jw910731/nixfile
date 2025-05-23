@@ -19,6 +19,8 @@
       format = "x509";
       x509.program = "/usr/local/bin/ac-sign";
     };
+    userName = "Jerry Wu";
+    userEmail = "jerryw999768@apple.com";
   };
 
   home.packages = with pkgs; [
