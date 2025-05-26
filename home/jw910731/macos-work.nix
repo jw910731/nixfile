@@ -1,18 +1,28 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, config, ... }:
 {
   imports = [
     ./common
 
     ./darwin
-    ./1p-sign.nix
   ];
   home.username = "jw910731";
   home.homeDirectory = lib.mkForce "/Users/jw910731";
+  
+  # Auto managed by internal tool
   programs.git = {
+    # Sign
+    signing = {
+      signByDefault = true;
+      key = null;
+    };
+    extraConfig.gpg = {
+      format = "x509";
+      x509.program = "/usr/local/bin/ac-sign";
+    };
     userName = "Jerry Wu";
-    userEmail = "jw910731@apple.com";
-    extraConfig.gpg.ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
+    userEmail = "jerryw999768@apple.com";
   };
+
   home.packages = with pkgs; [
   ];
 }

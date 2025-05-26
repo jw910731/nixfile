@@ -24,12 +24,10 @@
           };
         })
         [
-          "appcleaner"
-          "bartender"
           "kitty"
           "meetingbar"
-          "openinterminal"
           "raycast"
+          "sourcetree"
           "stats"
           "visual-studio-code"
           "zed"
