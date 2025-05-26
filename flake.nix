@@ -3,8 +3,8 @@
 
   inputs = {
     # NixPKG
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     nixos-apple-silicon = {
       url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,26 +15,16 @@
 
     # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-darwin = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-24.11";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
-
-    # nh
-    nh = {
-      url = "github:nix-community/nh/v4.0.3";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nh-darwin = {
-      url = "github:nix-community/nh/v4.0.3";
+      url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
@@ -48,14 +38,12 @@
       home-manager,
       home-manager-darwin,
       treefmt-nix,
-      nh,
-      nh-darwin,
       ...
     }:
     let
       lib = nixpkgs.lib;
-      linuxOverlays = [ nh.overlays.default ];
-      darwinOverlays = [ nh-darwin.overlays.default ];
+      linuxOverlays = [ ];
+      darwinOverlays = [ ];
       moduleModifier' =
         overlays: systemFunc: systemAttrs:
         systemFunc (

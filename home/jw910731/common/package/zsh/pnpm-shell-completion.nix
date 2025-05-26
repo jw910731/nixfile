@@ -10,7 +10,7 @@ pkgs.rustPlatform.buildRustPackage rec {
     hash = "sha256-bc2ZVHQF+lSAmhy/fvdiVfg9uzPPcXYrtiNChjkjHtA=";
   };
 
-  cargoHash = "sha256-FwkBvopm47wJKFFFnQKvN2qzIDCjvWGFFaMAo9UnT4E=";
+  cargoHash = "sha256-JL9bWVHmdSktOEF70WMOmZKdZwO/gNDp0GPDMYteR1E=";
 
   postInstall = ''
     cp ./pnpm-shell-completion.plugin.zsh $out/

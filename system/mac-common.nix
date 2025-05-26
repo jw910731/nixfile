@@ -94,8 +94,6 @@
     zsh
   ];
 
-  nix.configureBuildUsers = true;
-
   nix.settings = {
     # https://github.com/NixOS/nix/issues/7273
     auto-optimise-store = false;
@@ -116,7 +114,10 @@
   };
   nix.package = pkgs.lix;
 
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    watchIdAuth = true;
+  };
 
   # Load nix-darwin in /etc/zshrc.
   programs.zsh = {
@@ -132,7 +133,4 @@
       fpath+=/opt/homebrew/share/zsh/site-functions
     '';
   };
-
-  # Auto upgrade nix package and the daemon service.
-  services.nix-daemon.enable = true;
 }

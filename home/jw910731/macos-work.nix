@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   imports = [
     ./common
@@ -7,7 +12,7 @@
   ];
   home.username = "jw910731";
   home.homeDirectory = lib.mkForce "/Users/jw910731";
-  
+
   # Auto managed by internal tool
   programs.git = {
     # Sign

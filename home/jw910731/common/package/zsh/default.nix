@@ -20,37 +20,39 @@ in
     '';
     shellAliases = { };
     autocd = true;
-    initExtra = ''
-      path=(
-        $HOME/.local/bin
-        $HOME/dev/bin
-        $HOME/.krew/bin
-        $GOBIN
-        $path
-      )
+    initContent = lib.mkMerge [
+      (lib.mkOrder 550 ''
+        setopt extendedglob
+        zstyle ':completion:*' use-cache on
+        zstyle ':completion:*' cache-path ~/.zsh/cache
 
-      source "${homeDir}/.shell/export.zsh"
-      source "${homeDir}/.shell/alias.zsh"
-      source "${homeDir}/.shell/external.zsh"
-      source "${homeDir}/.shell/keybind.zsh"
-    '';
-    initExtraBeforeCompInit = ''
-      setopt extendedglob
-      zstyle ':completion:*' use-cache on
-      zstyle ':completion:*' cache-path ~/.zsh/cache
+        # zcompile the completion cache; siginificant speedup.
+        for file in ''${HOME}/.zcomp^(*.zwc)(.); do
+          zcompare ''${file}
+        done
+      '')
+      (''
+        path=(
+          $HOME/.local/bin
+          $HOME/dev/bin
+          $HOME/.krew/bin
+          $GOBIN
+          $path
+        )
 
-      # zcompile the completion cache; siginificant speedup.
-      for file in ''${HOME}/.zcomp^(*.zwc)(.); do
-        zcompare ''${file}
-      done
-    '';
-    initExtraFirst = ''
-      zcompare() {
-        if [[ -s ''${1} && ( ! -s ''${1}.zwc || ''${1} -nt ''${1}.zwc) ]]; then
-          zcompile ''${1}
-        fi
-      }
-    '';
+        source "${homeDir}/.shell/export.zsh"
+        source "${homeDir}/.shell/alias.zsh"
+        source "${homeDir}/.shell/external.zsh"
+        source "${homeDir}/.shell/keybind.zsh"
+      '')
+      (lib.mkBefore ''
+        zcompare() {
+          if [[ -s ''${1} && ( ! -s ''${1}.zwc || ''${1} -nt ''${1}.zwc) ]]; then
+            zcompile ''${1}
+          fi
+        }
+      '')
+    ];
 
     plugins = [
       {

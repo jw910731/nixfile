@@ -4,7 +4,7 @@
     enable = true;
     font = {
       name = "Hack Nerd Font";
-      package = (pkgs.nerdfonts.override { fonts = [ "Hack" ]; });
+      package = pkgs.nerd-fonts.hack;
       size = 14.0;
     };
     themeFile = "Japanesque";
