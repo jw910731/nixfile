@@ -27,7 +27,6 @@
           "appcleaner"
           "bartender"
           "kitty"
-          "logi-options+"
           "meetingbar"
           "openinterminal"
           "raycast"
