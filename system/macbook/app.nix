@@ -45,7 +45,6 @@
           "kekaexternalhelper"
           "keycastr"
           "kitty"
-          "logi-options+"
           "microsoft-auto-update"
           "moonlight"
           "obs"
