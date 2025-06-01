@@ -1,6 +1,8 @@
 { pkgs, ... }:
 
 {
+  security.pki.installCACerts = false;
+
   environment.systemPackages = with pkgs; [
     bashInteractive
     cmake
