@@ -2,7 +2,8 @@
 let
   hostname = "jw910731-MacBook-Air";
   computerName = "jw910731's Macbook Air";
-in {
+in
+{
   imports = [
     ./system-package.nix
     ./app.nix
