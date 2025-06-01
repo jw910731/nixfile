@@ -1,13 +1,10 @@
 { pkgs, lib, ... }:
-let
-  hostname = "jerrywu-macbook";
-in
-{
+let hostname = "jerrywu-macbook";
+in {
   imports = [
     ./system-package.nix
     ./app.nix
     ../mac-common.nix
-    # ../garnix.nix
   ];
 
   # Hostname

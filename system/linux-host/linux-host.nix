@@ -1,8 +1,6 @@
-{ config, pkgs, ... }:
-{
+{ config, pkgs, ... }: {
   imports = [
     ./linux-host-network.nix
-    ../garnix.nix
   ];
 
   # Bootloader
@@ -33,9 +31,7 @@
   time.timeZone = "Asia/Taipei";
 
   # RKE2
-  environment.systemPackages = with pkgs; [
-    openiscsi
-  ];
+  environment.systemPackages = with pkgs; [ openiscsi ];
 
   services.openiscsi = {
     enable = true;

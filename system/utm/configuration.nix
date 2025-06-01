@@ -12,8 +12,6 @@
     ./hardware-configuration.nix
     # User settings
     ./user.nix
-
-    ../garnix.nix
   ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -40,10 +38,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  i18n.supportedLocales = [
-    "en_US.UTF-8/UTF-8"
-    "zh_TW.UTF-8/UTF-8"
-  ];
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_TW.UTF-8/UTF-8" ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -55,10 +50,7 @@
   nixpkgs.config.allowUnfree = true;
 
   # Enable nix command and flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

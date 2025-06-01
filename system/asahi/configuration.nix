@@ -2,12 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
@@ -16,7 +11,6 @@
     ./asahi-hack.nix
     ./user.nix
     ./asahi.nix
-    ../garnix.nix
   ];
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
@@ -34,7 +28,8 @@
     enable = true;
     settings.General.EnableNetworkConfiguration = true;
   };
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable =
+    true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
@@ -58,10 +53,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  i18n.supportedLocales = [
-    "en_US.UTF-8/UTF-8"
-    "zh_TW.UTF-8/UTF-8"
-  ];
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_TW.UTF-8/UTF-8" ];
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
