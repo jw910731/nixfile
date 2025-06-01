@@ -10,7 +10,7 @@
 
   home.packages = with pkgs; [
     fira-code
-    (nerdfonts.override { fonts = [ "Hack" ]; })
+    nerd-fonts.hack
     _1password-cli
     gnupg
     just

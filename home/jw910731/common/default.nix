@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  nixpkgs.config.allowUnfree = true;
   imports = [
     ./package
   ];
