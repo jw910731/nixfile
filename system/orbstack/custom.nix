@@ -42,6 +42,9 @@
     "nix-command"
     "flakes"
   ];
+  nix.settings.trusted-users = [
+    "@wheel"
+  ];
   nix.package = pkgs.lix;
 
   # Enable zsh
