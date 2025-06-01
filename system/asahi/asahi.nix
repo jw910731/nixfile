@@ -2,16 +2,7 @@
 {
   nix = {
     buildMachines = [
-      {
-        systems = [
-          "x86_64-linux"
-          "aarch64-linux"
-        ];
-        hostName = "ssh.jw910731.dev";
-        protocol = "ssh-ng";
-        maxJobs = 16;
-        supportedFeatures = [ "big-parallel" ];
-      }
+      (import ../nixbuild.nix)
     ];
     distributedBuilds = true;
     # Enable nix command and flakes

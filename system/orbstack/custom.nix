@@ -46,6 +46,9 @@
     "@wheel"
   ];
   nix.package = pkgs.lix;
+  nix.buildMachines = [
+    (import ../nixbuild.nix)
+  ];
 
   # Enable zsh
   programs.zsh.enable = true;

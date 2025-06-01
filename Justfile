@@ -6,21 +6,29 @@
 #
 ############################################################################
 
+[macos]
 switch host:
-  if [ {{os()}} = "macos" ]; then \
-  nh darwin switch -H {{host}} '.'; \
-  fi
-  if [ {{os()}} = "linux" ]; then \
-  nh os switch -H {{host}} '.'; \
-  fi
+  nh darwin switch -H {{host}} '.'
 
+[linux]
+switch host:
+  nh os switch -H {{host}} '.'
+
+[macos]
+rswitch host:
+  nh darwin switch -H {{host}} '.' -- --builders '@/etc/nix/machines' --max-jobs 0
+
+[linux]
+rswitch host:
+  nh os switch -H {{host}} '.' -- --builders '@/etc/nix/machines' --max-jobs 0
+
+[macos]
 lswitch host:
-  if [ {{os()}} = "macos" ]; then \
-  darwin-rebuild switch --flake .#{{host}}; \
-  fi
-  if [ {{os()}} = "linux" ]; then \
-  nixos-rebuild switch --flake .#{{host}}; \
-  fi
+  darwin-rebuild switch --flake .#{{host}}
+
+[linux]
+lswitch host:
+  nixos-rebuild switch --flake .#{{host}}
 
 up:
   nix flake update
