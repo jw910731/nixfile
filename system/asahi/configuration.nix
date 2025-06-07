@@ -18,7 +18,7 @@
   ];
   hardware.asahi = {
     peripheralFirmwareDirectory = ./firmware;
-    extractPeripheralFirmware = false;
+    extractPeripheralFirmware = true;
   };
 
   # Use the systemd-boot EFI boot loader.
@@ -32,7 +32,17 @@
     enable = true;
     settings.General.EnableNetworkConfiguration = true;
   };
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  networking.networkmanager = {
+    enable = true;
+    wifi = {
+      backend = "iwd";
+    };
+  }; # Easiest to use and most distros use this by default.
+
+  # Bluetooth
+  services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
