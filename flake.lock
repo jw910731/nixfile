@@ -147,6 +147,26 @@
         "type": "github"
       }
     },
+    "numlockfixd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-darwin"
+        ]
+      },
+      "locked": {
+        "lastModified": 1749921611,
+        "narHash": "sha256-CgO0utIOkqpYrzjAjx4zQdSI9hZAP72grLV10S5KesM=",
+        "owner": "jw910731",
+        "repo": "numlockfixd",
+        "rev": "a32bf7b90f43e82a459cdc82d37c9520dae2de49",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jw910731",
+        "repo": "numlockfixd",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "darwin": "darwin",
@@ -155,6 +175,7 @@
         "nixos-apple-silicon": "nixos-apple-silicon",
         "nixpkgs": "nixpkgs",
         "nixpkgs-darwin": "nixpkgs-darwin",
+        "numlockfixd": "numlockfixd",
         "treefmt-nix": "treefmt-nix"
       }
     },

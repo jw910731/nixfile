@@ -27,6 +27,11 @@
       url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    numlockfixd = {
+      url = "github:jw910731/numlockfixd";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
   };
 
   outputs =
@@ -38,12 +43,16 @@
       home-manager,
       home-manager-darwin,
       treefmt-nix,
+      numlockfixd,
       ...
     }:
     let
       lib = nixpkgs.lib;
       linuxOverlays = [ ];
-      darwinOverlays = [ ];
+      darwinOverlays = [ (prev: final: let 
+      in {
+        numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
+      }) ];
       moduleModifier' =
         overlays: systemFunc: systemAttrs:
         systemFunc (
