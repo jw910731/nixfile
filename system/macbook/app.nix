@@ -40,7 +40,6 @@
           "hhkb"
           "iina"
           "jetbrains-toolbox"
-          "karabiner-elements"
           "keka"
           "kekaexternalhelper"
           "keycastr"
