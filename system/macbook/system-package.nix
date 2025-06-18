@@ -15,7 +15,7 @@
     package = pkgs.emacs-nox;
   };
 
-  launchd.user.agents.numlockfixd = {
+  launchd.agents.numlockfixd = {
     path = [ config.environment.systemPath ];
     serviceConfig = {
       ProgramArguments = [ "${pkgs.numlockfixd}/bin/numlockfixd" ];
