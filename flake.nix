@@ -49,10 +49,25 @@
     let
       lib = nixpkgs.lib;
       linuxOverlays = [ ];
-      darwinOverlays = [ (prev: final: let 
-      in {
-        numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
-      }) ];
+      darwinOverlays = [
+        (
+          prev: final:
+          let
+          in
+          {
+            numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
+          }
+        )
+      ];
+      darwinHostSetup = (
+        { hostName, computerName }:
+        {
+          networking.computerName = "${computerName}";
+          networking.hostName = "${hostName}";
+          system.defaults.smb.NetBIOSName = "${hostName}";
+        }
+      );
+
       moduleModifier' =
         overlays: systemFunc: systemAttrs:
         systemFunc (
@@ -191,6 +206,11 @@
                     jw910731 = import ./home/jw910731/macos.nix;
                   };
                 }
+                darwinHostSetup
+                {
+                  hostName = "jw910731-MacBook-Air";
+                  computerName = "jw910731's Macbook Air";
+                }
               ];
             };
           "macbook-work" =
@@ -209,6 +229,11 @@
                   home-manager.users = {
                     "jw910731" = import ./home/jw910731/macos-work.nix;
                   };
+                }
+                darwinHostSetup
+                {
+                  hostName = "jerrywu-macbook";
+                  computerName = "jerrywu's Macbook";
                 }
               ];
             };
