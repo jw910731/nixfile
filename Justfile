@@ -24,11 +24,11 @@ rswitch host:
 
 [macos]
 lswitch host:
-  darwin-rebuild switch --flake .#{{host}}
+  sudo darwin-rebuild switch --flake .#{{host}}
 
 [linux]
 lswitch host:
-  nixos-rebuild switch --flake .#{{host}}
+  sudo nixos-rebuild switch --flake .#{{host}}
 
 up:
   nix flake update
