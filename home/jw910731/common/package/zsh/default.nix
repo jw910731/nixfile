@@ -96,10 +96,6 @@ in
           name = "zsh-users/zsh-history-substring-search";
           tags = [ "as:plugin" ];
         }
-        {
-          name = "plugins/git";
-          tags = [ "from:oh-my-zsh" ];
-        }
         { name = "MichaelAquilina/zsh-you-should-use"; }
         { name = "wfxr/forgit"; }
         { name = "Aloxaf/fzf-tab"; }
