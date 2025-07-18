@@ -96,8 +96,12 @@ in
           name = "zsh-users/zsh-history-substring-search";
           tags = [ "as:plugin" ];
         }
-        { name = "MichaelAquilina/zsh-you-should-use"; }
         { name = "wfxr/forgit"; }
+        {
+          name = "plugins/git";
+          tags = [ "from:oh-my-zsh" ];
+        }
+        { name = "MichaelAquilina/zsh-you-should-use"; }
         { name = "Aloxaf/fzf-tab"; }
         {
           name = "zsh-users/zsh-syntax-highlighting";

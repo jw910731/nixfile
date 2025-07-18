@@ -39,7 +39,7 @@
     # Alias
     aliases = {
       # add
-      a = "add";
+      a = "forgit add";
 
       # branch
       recent-branches = "!git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'";
@@ -50,14 +50,14 @@
       amend = "commit --amend";
 
       # checkout
-      ck = "checkout";
+      ck = "forgit checkout_branch";
       nbr = "checkout -b";
 
       # switch
       sw = "switch";
 
       # diff
-      d = "diff";
+      d = "forgit diff";
       dc = "diff --cached";
       last = "diff HEAD^";
 
@@ -81,9 +81,9 @@
       mt = "mergetool -g";
 
       # stash
-      spush = "stash push";
+      spush = "forgit stash_push";
       spop = "stash pop";
-      sl = "stash list";
+      sl = "forgit tash_show";
 
       # status
       s = "status";

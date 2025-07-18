@@ -30,15 +30,14 @@
     kustomize
     jq
     krew
-    nixpkgs-fmt
     zsh-completions
     zsh-fast-syntax-highlighting
+    zsh-forgit
     curl
     htop
     tcping-go
     k9s
     yq-go
-    poetry
     devenv
     nil
     nixd
