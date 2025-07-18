@@ -27,13 +27,11 @@
           "1password"
           "1password-cli"
           "aldente"
-          "altserver"
           "android-platform-tools"
           "balenaetcher"
           "bartender"
           "betterdisplay"
           "brave-browser"
-          "cap"
           "discord"
           "element"
           "firefox"
@@ -47,11 +45,9 @@
           "kitty"
           "logi-options+"
           "microsoft-auto-update"
-          "moonlight"
           "obs"
           "openinterminal"
           "orbstack"
-          "orion"
           "osu"
           "rapidapi"
           "raycast"
@@ -59,9 +55,7 @@
           "stats"
           "steam"
           "telegram"
-          "utm"
           "visual-studio-code"
-          "wireshark"
           "xquartz"
           "zed"
         ];
@@ -78,7 +72,6 @@
       "Numbers" = 409203825;
       "Pages" = 409201541;
       "Portal" = 1436994560;
-      "Slack" = 803453959;
       "Yoink" = 457622435;
     };
   };
