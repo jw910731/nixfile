@@ -1,78 +1,41 @@
+{ mylib, ... }:
+let
+  brew-common = (import ../../template/home-darwin/brew.nix);
+  mapCask = brew-common.mapCask;
+  commonOptions = brew-common.options;
+in
 {
-  # Homebrew has to be installed first.
-  # This installs system-wide packages and Mac App Store apps.
-  homebrew = {
-    enable = true;
-    onActivation = {
-      cleanup = "uninstall";
-    };
+  homebrew = (
+    mylib.recursiveMerge commonOptions {
+      brews = [ ];
 
-    brews = [
-      "pinentry"
-      "pinentry-mac"
-      "pkg-config"
-      "python@3.12"
-    ];
+      casks = [
+        "android-platform-tools"
+        "balenaetcher"
+        "element"
+        "font-latin-modern"
+        "hhkb"
+        "jetbrains-toolbox"
+        "keycastr"
+        "kitty"
+        "logi-options+"
+        "microsoft-auto-update"
+        "orbstack"
+        "osu"
+        "rapidapi"
+        "readmoreading"
+        "stats"
+        "steam"
+        "telegram"
+      ];
 
-    casks =
-      map
-        (x: {
-          name = x;
-          greedy = true;
-          args = {
-            no_quarantine = true;
-          };
-        })
-        [
-          "1password"
-          "1password-cli"
-          "aldente"
-          "android-platform-tools"
-          "balenaetcher"
-          "bartender"
-          "betterdisplay"
-          "brave-browser"
-          "discord"
-          "element"
-          "firefox"
-          "font-latin-modern"
-          "hhkb"
-          "iina"
-          "jetbrains-toolbox"
-          "keka"
-          "kekaexternalhelper"
-          "keycastr"
-          "kitty"
-          "logi-options+"
-          "microsoft-auto-update"
-          "obs"
-          "openinterminal"
-          "orbstack"
-          "osu"
-          "rapidapi"
-          "raycast"
-          "readmoreading"
-          "stats"
-          "steam"
-          "telegram"
-          "visual-studio-code"
-          "xquartz"
-          "zed"
-        ];
+      taps = [ ];
 
-    taps = [
-      "homebrew/cask-versions"
-    ];
-
-    masApps = {
-      "Craft" = 1487937127;
-      "Keynote" = 409183694;
-      "LINE" = 539883307;
-      "Messenger" = 1480068668;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
-      "Portal" = 1436994560;
-      "Yoink" = 457622435;
-    };
-  };
+      masApps = {
+        "Craft" = 1487937127;
+        "LINE" = 539883307;
+        "Messenger" = 1480068668;
+      };
+    }
+  );
 }

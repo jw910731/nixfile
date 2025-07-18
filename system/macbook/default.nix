@@ -1,9 +1,9 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./system-package.nix
+    ../../template/home-darwin/system-package.nix
     ./app.nix
-    ../mac-common.nix
+    ../../template/home-darwin/mac-common.nix
   ];
   system.primaryUser = "jw910731";
 }

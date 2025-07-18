@@ -1,45 +1,23 @@
+{ mylib, ... }:
+let
+  brew-common = (import ../../template/home-darwin/brew.nix);
+  mapCask = brew-common.mapCask;
+  commonOptions = brew-common.options;
+in
 {
-  # Homebrew has to be installed first.
-  # This installs system-wide packages and Mac App Store apps.
-  homebrew = {
-    enable = true;
-    onActivation = {
-      cleanup = "uninstall";
-    };
+  homebrew = (
+    mylib.recursiveMerge commonOptions {
+      brews = [ ];
 
-    brews = [
-      "pinentry"
-      "pinentry-mac"
-      "pkg-config"
-      "python@3.12"
-    ];
+      casks = [
+        "meetingbar"
+      ];
 
-    casks =
-      map
-        (x: {
-          name = x;
-          greedy = true;
-          args = {
-            no_quarantine = true;
-          };
-        })
-        [
-          "kitty"
-          "meetingbar"
-          "raycast"
-          "sourcetree"
-          "stats"
-          "visual-studio-code"
-          "zed"
-        ];
+      taps = [ ];
 
-    taps = [
-    ];
-
-    masApps = {
-      "Portal" = 1436994560;
-      "Slack" = 803453959;
-      "Yoink" = 457622435;
-    };
-  };
+      masApps = {
+        "Slack" = 803453959;
+      };
+    }
+  );
 }

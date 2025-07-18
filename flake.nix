@@ -206,11 +206,10 @@
                     jw910731 = import ./home/jw910731/macos.nix;
                   };
                 }
-                darwinHostSetup
-                {
+                (darwinHostSetup {
                   hostName = "jw910731-MacBook-Air";
                   computerName = "jw910731's Macbook Air";
-                }
+                })
               ];
             };
           "macbook-work" =
@@ -230,11 +229,10 @@
                     "jw910731" = import ./home/jw910731/macos-work.nix;
                   };
                 }
-                darwinHostSetup
-                {
+                (darwinHostSetup {
                   hostName = "jerrywu-macbook";
                   computerName = "jerrywu's Macbook";
-                }
+                })
               ];
             };
         };
