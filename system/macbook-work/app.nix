@@ -1,6 +1,6 @@
 { mylib, ... }:
 let
-  brew-common = (import ../../template/home-darwin/brew.nix);
+  brew-common = (import ../../template/darwin/brew.nix);
   mapCask = brew-common.mapCask;
   commonOptions = brew-common.options;
 in
