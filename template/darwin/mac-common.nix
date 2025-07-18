@@ -10,23 +10,6 @@
     };
 
     CustomUserPreferences = {
-      "com.kagi.kagimacOS" = {
-        "NSUserKeyEquivalents" =
-          let
-            up = builtins.fromJSON ''"\u2191" '';
-            down = builtins.fromJSON ''"\u2193" '';
-          in
-          {
-            "顯示前一個標籤頁" = "@$" + up;
-            "Show Previous Tab" = "@$" + up;
-            "顯示下一個標籤頁" = "@$" + down;
-            "Show Next Tab" = "@$" + down;
-            "前往上一個標籤頁群組" = "";
-            "Go to Previous Tab Group" = "";
-            "前往下一個標籤頁群組" = "";
-            "Go to Next Tab Group" = "";
-          };
-      };
     };
 
     dock = {
