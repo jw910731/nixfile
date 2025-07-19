@@ -12,6 +12,7 @@ in
       casks = [
         "android-platform-tools"
         "balenaetcher"
+        "container"
         "element"
         "font-latin-modern"
         "hhkb"
