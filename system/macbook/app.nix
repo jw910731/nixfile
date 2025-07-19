@@ -24,7 +24,6 @@ in
         "osu"
         "rapidapi"
         "readmoreading"
-        "stats"
         "steam"
         "telegram"
       ];
