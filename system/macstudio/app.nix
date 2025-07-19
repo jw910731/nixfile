@@ -21,6 +21,7 @@ in
         "logi-options+"
         "microsoft-auto-update"
         "osu"
+        "prismlauncher"
         "readmoreading"
         "steam"
         "telegram"
