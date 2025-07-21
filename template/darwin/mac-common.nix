@@ -94,6 +94,9 @@
     # Recommended when using `direnv` etc.
     keep-derivations = true;
     keep-outputs = true;
+    trusted-users = [
+      "@admin"
+    ];
   };
   nix.package = pkgs.lix;
 
