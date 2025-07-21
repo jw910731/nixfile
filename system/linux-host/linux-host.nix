@@ -59,17 +59,7 @@
 
   services.rke2 = {
     enable = true;
-    package = pkgs.rke2_1_32.override {
-      # Patch util-linux mount breaks k8s. See more in https://github.com/NixOS/nixpkgs/pull/405952.
-      util-linux = pkgs.util-linux.overrideAttrs (prev: {
-        patches = prev.patches ++ [
-          (builtins.fetchurl {
-            url = "https://github.com/util-linux/util-linux/pull/3479.patch";
-            sha256 = "1m5zxfaf30i5k0lxdxxwl2ksswmsnaj3vhqvklsvijycdhzyx9k0";
-          })
-        ];
-      });
-    };
+    package = pkgs.rke2_1_32;
   };
 
   # # Enable the X11 windowing system.
