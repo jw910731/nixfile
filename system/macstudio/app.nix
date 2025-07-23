@@ -23,6 +23,7 @@ in
         "logi-options+"
         "microsoft-auto-update"
         "obs"
+        "ollama-app"
         "osu"
         "prismlauncher"
         "readmoreading"
