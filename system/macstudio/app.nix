@@ -9,7 +9,7 @@ in
     mylib.recursiveMerge commonOptions {
       brews = [ ];
 
-      casks = [
+      casks = mapCask [
         "android-platform-tools"
         "balenaetcher"
         "container"
@@ -19,7 +19,6 @@ in
         "jetbrains-toolbox"
         "keycastr"
         "kitty"
-        "lm-studio"
         "logi-options+"
         "microsoft-auto-update"
         "obs"

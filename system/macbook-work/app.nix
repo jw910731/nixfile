@@ -9,7 +9,7 @@ in
     mylib.recursiveMerge commonOptions {
       brews = [ ];
 
-      casks = [
+      casks = mapCask [
         "meetingbar"
       ];
 
