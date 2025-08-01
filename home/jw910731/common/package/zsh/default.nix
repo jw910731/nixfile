@@ -71,10 +71,6 @@ in
           sha256 = "sha256-/RFblRzQFvXvL7f5fUftwl7x/8XJ+WSH1JxjISAM1+A=";
         };
       }
-      {
-        name = "pnpm-shell-completion";
-        src = (import ./pnpm-shell-completion.nix) { inherit lib pkgs; };
-      }
     ];
 
     zplug = {
