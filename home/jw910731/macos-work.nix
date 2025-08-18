@@ -13,19 +13,18 @@
   home.username = "jw910731";
   home.homeDirectory = lib.mkForce "/Users/jw910731";
 
-  # Auto managed by internal tool
   programs.git = {
     # Sign
     signing = {
       signByDefault = true;
-      key = null;
+      key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWoAtGxpKw/xK4SPDUNqeJQCR/foAP1oIAMI+ZFgCa/";
     };
     extraConfig.gpg = {
-      format = "x509";
-      x509.program = "/usr/local/bin/ac-sign";
+      format = "ssh";
+      ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     };
     userName = "Jerry Wu";
-    userEmail = "jerryw999768@apple.com";
+    userEmail = "jerry.wu@graidtech.com";
   };
 
   home.packages = with pkgs; [

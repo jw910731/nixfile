@@ -26,7 +26,6 @@
       "bartender"
       "betterdisplay"
       "brave-browser"
-      "discord"
       "firefox"
       "iina"
       "keka"

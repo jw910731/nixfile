@@ -11,12 +11,12 @@ in
 
       casks = mapCask [
         "meetingbar"
+        "microsoft-teams"
       ];
 
       taps = [ ];
 
       masApps = {
-        "Slack" = 803453959;
       };
     }
   );

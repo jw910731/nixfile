@@ -12,6 +12,7 @@ in
       casks = mapCask [
         "android-platform-tools"
         "balenaetcher"
+        "discord"
         "element"
         "font-latin-modern"
         "hhkb"

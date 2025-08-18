@@ -13,6 +13,7 @@ in
         "android-platform-tools"
         "balenaetcher"
         "container"
+        "discord"
         "element"
         "font-latin-modern"
         "hhkb"
