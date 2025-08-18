@@ -12,6 +12,7 @@ in
       casks = mapCask [
         "meetingbar"
         "microsoft-teams"
+        "tunnelblick"
       ];
 
       taps = [ ];
