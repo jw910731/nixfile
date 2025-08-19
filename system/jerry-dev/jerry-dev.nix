@@ -6,4 +6,6 @@
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_zen;
+
+  networking.hostName = "jerry-dev"; # Define your hostname.
 }
