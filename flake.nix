@@ -134,7 +134,11 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-		home-manager.users.jw910731 = (import ./home/jw910731/linux.nix);
+
+		            home-manager.users.jw910731 = nixpkgs.lib.mkMerge [
+                  (import ./home/jw910731/linux.nix)
+                  (import ./home/jw910731/yubi-sign.nix)
+                ];
               }
             ];
           };
