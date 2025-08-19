@@ -126,6 +126,18 @@
               }
             ];
           };
+          "jerry-dev" = moduleModifier nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            modules = [
+              ./system/jerry-dev/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+		home-manager.users.jw910731 = (import ./home/jw910731/linux.nix);
+              }
+            ];
+          };
           "utm" = moduleModifier nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             modules = [
