@@ -8,6 +8,8 @@
   imports = [
     ./common
 
+    ./1p-sign.nix
+
     ./darwin
   ];
   home.username = "jw910731";
