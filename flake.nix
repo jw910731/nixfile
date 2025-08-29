@@ -101,6 +101,19 @@
           system: formatter (import nixpkgs { inherit system; })
         ));
 
+      homeConfigurations."jw910731" = home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs { 
+          system = "x86_64-linux";
+          config = {
+            allowUnfree = true;
+          };
+        };
+        modules = [
+          (import ./home/jw910731/linux.nix)
+          (import ./home/jw910731/yubi-sign.nix)
+        ];
+      };
+
       # NixOS configs
       nixosConfigurations =
         let
