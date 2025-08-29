@@ -6,6 +6,9 @@
 #
 ############################################################################
 
+home:
+  nh home switch '.'
+
 [macos]
 switch host:
   nh darwin switch -H {{host}} '.'
