@@ -50,14 +50,9 @@
       lib = nixpkgs.lib;
       linuxOverlays = [ ];
       darwinOverlays = [
-        (
-          prev: final:
-          let
-          in
-          {
-            numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
-          }
-        )
+        (prev: final: {
+          numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
+        })
       ];
       darwinHostSetup = (
         { hostName, computerName }:
@@ -102,7 +97,7 @@
         ));
 
       homeConfigurations."jw910731" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs { 
+        pkgs = import nixpkgs {
           system = "x86_64-linux";
           config = {
             allowUnfree = true;
@@ -148,7 +143,7 @@
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
 
-		            home-manager.users.jw910731 = nixpkgs.lib.mkMerge [
+                home-manager.users.jw910731 = nixpkgs.lib.mkMerge [
                   (import ./home/jw910731/linux.nix)
                   (import ./home/jw910731/yubi-sign.nix)
                 ];
@@ -256,6 +251,7 @@
 
                   home-manager.users = {
                     jw910731 = import ./home/jw910731/macos.nix;
+                    "jerry.wu" = import ./home/jw910731/macos-work.nix;
                   };
                 }
                 (darwinHostSetup {

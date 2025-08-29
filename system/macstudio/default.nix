@@ -5,4 +5,5 @@
     ./app.nix
   ];
   system.primaryUser = "jw910731";
+  programs.zsh.enableGlobalCompInit = false;
 }
