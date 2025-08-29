@@ -9,27 +9,34 @@ in
     mylib.recursiveMerge commonOptions {
       brews = [ ];
 
-      casks = mapCask [
-        "android-platform-tools"
-        "balenaetcher"
-        "container"
-        "discord"
-        "element"
-        "font-latin-modern"
-        "hhkb"
-        "jetbrains-toolbox"
-        "keycastr"
-        "kitty"
-        "logi-options+"
-        "microsoft-auto-update"
-        "obs"
-        "ollama-app"
-        "osu"
-        "prismlauncher"
-        "readmoreading"
-        "steam"
-        "telegram"
-      ];
+      casks = mapCask (
+        [
+          "android-platform-tools"
+          "balenaetcher"
+          "container"
+          "discord"
+          "element"
+          "font-latin-modern"
+          "hhkb"
+          "jetbrains-toolbox"
+          "keycastr"
+          "kitty"
+          "logi-options+"
+          "microsoft-auto-update"
+          "obs"
+          "ollama-app"
+          "osu"
+          "prismlauncher"
+          "readmoreading"
+          "steam"
+          "telegram"
+        ]
+        ++ [
+          "meetingbar"
+          "microsoft-teams"
+          "openvpn-connect"
+        ]
+      );
 
       taps = [ ];
 
