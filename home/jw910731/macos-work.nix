@@ -10,8 +10,8 @@
 
     ./darwin
   ];
-  home.username = "jw910731";
-  home.homeDirectory = lib.mkForce "/Users/jw910731";
+  home.username = "jerry.wu";
+  home.homeDirectory = lib.mkForce "/Users/jerry.wu";
 
   programs.git = {
     # Sign
