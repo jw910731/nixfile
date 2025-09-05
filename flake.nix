@@ -245,15 +245,21 @@
               modules = [
                 ./system/macstudio
                 home-manager-darwin.darwinModules.home-manager
-                {
+                ({ lib, ... }: {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
 
                   home-manager.users = {
                     jw910731 = import ./home/jw910731/macos.nix;
-                    "jerry.wu" = import ./home/jw910731/macos-work.nix;
+                    "jerry.wu" = lib.mkMerge [
+                      (import ./home/jw910731/macos-work.nix)
+                      {
+                        home.username = "jerry.wu";
+                        home.homeDirectory = lib.mkForce "/Users/jerry.wu";
+                      }
+                    ];
                   };
-                }
+                })
                 (darwinHostSetup {
                   hostName = "jw910731-Mac-Studio";
                   computerName = "jw910731's Mac Studio";
@@ -269,14 +275,20 @@
               modules = [
                 ./system/macbook-work
                 home-manager-darwin.darwinModules.home-manager
-                {
+                ({ lib, ... }: {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
 
                   home-manager.users = {
-                    "jw910731" = import ./home/jw910731/macos-work.nix;
+                    "jw910731" = lib.mkMerge [
+                      (import ./home/jw910731/macos-work.nix)
+                      {
+                        home.username = "jw910731";
+                        home.homeDirectory = lib.mkForce "/Users/jw910731";
+                      }
+                    ];
                   };
-                }
+                })
                 (darwinHostSetup {
                   hostName = "jerrywu-macbook";
                   computerName = "jerrywu's Macbook";
