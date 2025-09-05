@@ -6,6 +6,7 @@
     ./emacs.nix
     ./kitty.nix
     ./halloy.nix
+    ./tmux.nix
   ];
 
   home.packages = with pkgs; [
