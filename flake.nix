@@ -106,6 +106,11 @@
         modules = [
           (import ./home/jw910731/linux.nix)
           (import ./home/jw910731/yubi-sign.nix)
+          {
+            programs.zsh.shellAliases = {
+              "ggg" = "sudo graidctl";
+            };
+          }
         ];
       };
 
