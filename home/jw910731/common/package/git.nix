@@ -9,31 +9,35 @@
 
     # Extra config
     extraConfig = {
+      # Editor
       core = {
         editor = "emacs";
         autocrlf = "input";
         excludesfile = "~/.gitignore_global";
       };
-      diff.tool = "vscode";
-      "difftool \"vscode\"".cmd = "code --wait --diff $LOCAL $REMOTE";
+
+      # Diff
+      diff.guitool = "vscode";
+      difftool.vscode.cmd = "code --wait --diff $LOCAL $REMOTE";
 
       color.ui = true;
-      "color \"diff-highlight\"" = {
+      color.diff-highlight = {
         oldNormal = "red bold";
         oldHighlight = "white bold 52";
         newNormal = "green bold";
         newHighlight = "white bold 22";
       };
 
-      pull.rebse = false;
+      pull.rebse = "merge";
 
       merge = {
         tool = "emacs";
         guitool = "vscode";
       };
-
-      "mergetool \"emacs\"".cmd = "emacs";
-      "mergetool \"vscode\"".cmd = "code --wait $MERGED";
+      mergetool = {
+        emacs.cmd = "emacs";
+        vscode.cmd = "code --wait $MERGED";  
+      };
     };
 
     # Alias
@@ -49,11 +53,9 @@
       c = "commit";
       amend = "commit --amend";
 
-      # checkout
+      # checkout & switch
       ck = "forgit checkout_branch";
-      nbr = "checkout -b";
-
-      # switch
+      nbr = "swithc -c";
       sw = "switch";
 
       # diff
@@ -83,7 +85,7 @@
       # stash
       spush = "forgit stash_push";
       spop = "stash pop";
-      sl = "forgit tash_show";
+      sls = "forgit stash_show";
 
       # status
       s = "status";
