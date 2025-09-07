@@ -27,6 +27,7 @@
       "betterdisplay"
       "brave-browser"
       "firefox"
+      "font-hack-nerd-font"
       "iina"
       "keka"
       "kekaexternalhelper"
