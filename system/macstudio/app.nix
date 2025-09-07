@@ -13,6 +13,7 @@ in
         [
           "android-platform-tools"
           "balenaetcher"
+          "bilibili"
           "container"
           "discord"
           "element"
@@ -24,7 +25,6 @@ in
           "logi-options+"
           "microsoft-auto-update"
           "obs"
-          "ollama-app"
           "osu"
           "prismlauncher"
           "readmoreading"
