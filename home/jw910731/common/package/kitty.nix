@@ -16,5 +16,10 @@
       "term" = "xterm-256color";
       "tab_bar_style" = "powerline";
     };
+    enableGitIntegration = true;
+    shellIntegration = {
+      enableZshIntegration = true;
+      mode = "no-rc no-complete";
+    };
   };
 }
