@@ -55,7 +55,7 @@
 
       # checkout & switch
       ck = "forgit checkout_branch";
-      nbr = "swithc -c";
+      nbr = "switch -c";
       sw = "switch";
 
       # diff
