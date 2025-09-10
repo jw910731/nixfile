@@ -8,6 +8,9 @@ let
   homeDir = config.home.homeDirectory;
 in
 {
+  imports = [
+    ./antidote.nix
+  ];
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -71,42 +74,12 @@ in
           sha256 = "sha256-/RFblRzQFvXvL7f5fUftwl7x/8XJ+WSH1JxjISAM1+A=";
         };
       }
+      {
+        name = "powerlevel10k";
+        file = "p10k.zsh";
+        src = ./p10k;
+      }
     ];
-
-    zplug = {
-      enable = true;
-      plugins = [
-        {
-          name = "~/.p10k";
-          tags = [ "from:local" ];
-        }
-        { name = "zsh-users/zsh-autosuggestions"; }
-        {
-          name = "romkatv/powerlevel10k";
-          tags = [
-            "as:theme"
-            "depth:1"
-          ];
-        }
-        {
-          name = "zsh-users/zsh-history-substring-search";
-          tags = [ "as:plugin" ];
-        }
-        { name = "wfxr/forgit"; }
-        {
-          name = "plugins/git";
-          tags = [ "from:oh-my-zsh" ];
-        }
-        { name = "MichaelAquilina/zsh-you-should-use"; }
-        { name = "Aloxaf/fzf-tab"; }
-        {
-          name = "zsh-users/zsh-syntax-highlighting";
-          tags = [ "defer:2" ];
-        }
-        { name = "greymd/docker-zsh-completion"; }
-        { name = "sunlei/zsh-ssh"; }
-      ];
-    };
 
     history = {
       extended = true;
@@ -140,6 +113,5 @@ in
     };
   };
 
-  home.file.".p10k".source = ./p10k;
   home.file.".shell".source = ./shell;
 }
