@@ -1,3 +1,4 @@
+# Modified from https://github.com/nix-community/home-manager/blob/release-25.05/modules/programs/antidote.nix
 { pkgs, lib, ... }:
 let
   cfg = {
