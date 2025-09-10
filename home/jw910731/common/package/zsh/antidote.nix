@@ -14,7 +14,9 @@ let
       "greymd/docker-zsh-completion"
       "sunlei/zsh-ssh"
     ];
+    useFriendlyNames = false;
   };
+
   zPluginStr = (
     pluginNames:
     lib.optionalString (pluginNames != [ ])
@@ -24,7 +26,6 @@ let
         '') pluginNames
       )}"
   );
-
   parseHashId = path: lib.elemAt (builtins.match "${builtins.storeDir}/([a-zA-Z0-9]+)-.*" path) 0;
 in
 {
@@ -43,7 +44,7 @@ in
 
       bundlefile=${configFiles}
       zstyle ':antidote:bundle' file $bundlefile
-      staticfile=/tmp/tmp_hm_zsh_plugins.zsh-${hashId}
+      staticfile=''$(antidote home)/tmp_hm_zsh_plugins.zsh-${hashId}
       zstyle ':antidote:static' file $staticfile
 
       antidote load $bundlefile $staticfile

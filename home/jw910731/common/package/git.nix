@@ -36,7 +36,7 @@
       };
       mergetool = {
         emacs.cmd = "emacs";
-        vscode.cmd = "code --wait $MERGED";  
+        vscode.cmd = "code --wait $MERGED";
       };
     };
 
