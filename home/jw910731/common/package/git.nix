@@ -28,7 +28,7 @@
         newHighlight = "white bold 22";
       };
 
-      pull.rebse = "merge";
+      pull.rebase = false;
 
       merge = {
         tool = "emacs";
