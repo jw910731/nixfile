@@ -30,7 +30,7 @@ in
           "readmoreading"
           "steam"
           "telegram"
-          "utm"
+          "utm@beta"
         ]
         ++ [
           "meetingbar"
