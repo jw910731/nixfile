@@ -170,8 +170,8 @@
 
                 home-manager.users = {
                   jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux-gui.nix)
-                    (import ./home/jw910731/1p-sign.nix)
+                    (import ./home/jw910731/linux.nix)
+                    (import ./home/jw910731/yubi-sign.nix)
                   ];
                 };
               }
