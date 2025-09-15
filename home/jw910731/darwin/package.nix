@@ -4,6 +4,10 @@
   programs.man.enable = false;
   home.extraOutputsToInstall = [ "man" ];
 
+  programs.ghostty = {
+    package = null;
+  };
+
   programs.kitty = {
     keybindings = {
       "ctrl+shift+minus" = "no_op";

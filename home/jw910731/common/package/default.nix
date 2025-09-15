@@ -4,7 +4,7 @@
     ./zsh
     ./git.nix
     ./emacs.nix
-    ./kitty.nix
+    ./ghostty.nix
     ./halloy.nix
     ./tmux.nix
   ];

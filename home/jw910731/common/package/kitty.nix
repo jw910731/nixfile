@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   programs.kitty = {
-    enable = true;
+    enable = false;
     font = {
       name = ''family="Hack Nerd Font"'';
       package = pkgs.nerd-fonts.hack;
