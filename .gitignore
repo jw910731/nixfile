@@ -1,3 +1,5 @@
 result
 .devenv
 .direnv
+
+.DS_Store
