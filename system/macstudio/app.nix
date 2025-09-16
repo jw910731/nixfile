@@ -7,7 +7,9 @@ in
 {
   homebrew = (
     mylib.recursiveMerge commonOptions {
-      brews = [ ];
+      brews = [
+        "blacktop/tap/ipsw"
+      ];
 
       casks = mapCask (
         [
