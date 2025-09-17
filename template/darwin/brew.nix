@@ -29,7 +29,7 @@
       "font-hack-nerd-font"
       "ghostty"
       "iina"
-      "jordanbaird-ice"
+      "jordanbaird-ice@beta"
       "keka"
       "kekaexternalhelper"
       "raycast"
