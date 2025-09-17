@@ -23,7 +23,6 @@ in
           "hhkb"
           "jetbrains-toolbox"
           "keycastr"
-          "kitty"
           "logi-options+"
           "microsoft-auto-update"
           "obs"

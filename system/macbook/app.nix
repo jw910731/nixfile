@@ -19,7 +19,6 @@ in
         "hhkb"
         "jetbrains-toolbox"
         "keycastr"
-        "kitty"
         "microsoft-auto-update"
         "orbstack"
         "osu"
