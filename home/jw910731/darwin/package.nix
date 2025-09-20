@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # Fix macOS man page
   programs.man.enable = false;
@@ -6,6 +6,9 @@
 
   programs.ghostty = {
     package = null;
+    settings = {
+      font-family = [".AppleSystemUIFontMonospaced"];
+    };
   };
 
   programs.kitty = {

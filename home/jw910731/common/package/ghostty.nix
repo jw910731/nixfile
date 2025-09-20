@@ -7,7 +7,7 @@
     settings = {
       theme = "Atom One Dark";
       background-opacity = 0.95;
-      font-family = "Hack Nerd Font Mono";
+      font-family = ["Hack Nerd Font Mono"];
       font-size = 14;
       font-thicken = true;
       faint-opacity = 0.75;
