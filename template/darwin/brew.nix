@@ -17,7 +17,6 @@
       "pinentry-mac"
       "pkg-config"
       "python@3.12"
-      "pipx"
     ];
 
     casks = [
