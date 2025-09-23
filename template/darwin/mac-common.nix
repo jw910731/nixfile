@@ -90,10 +90,6 @@
 
     hitoolbox.AppleFnUsageType = "Change Input Source";
 
-    keyboard = {
-      remapCapsLockToControl = true;
-    };
-
   };
 
   environment.shells = with pkgs; [
