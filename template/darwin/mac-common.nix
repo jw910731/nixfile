@@ -16,7 +16,7 @@
         DSDontWriteNetworkStores = 1;
       };
       "com.apple.Music" = {
-        userWantsPlaybackNotifications = 1;
+        userWantsPlaybackNotifications = 0;
         losslessEnabled = 1;
         optimizeSongVolume = 0;
         preferredDownloadAudioQuality = 15;
