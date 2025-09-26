@@ -6,6 +6,4 @@
     ../../template/darwin/mac-common.nix
   ];
   system.primaryUser = "jw910731";
-
-  system.defaults.dock.orientation = lib.mkForce "right";
 }
