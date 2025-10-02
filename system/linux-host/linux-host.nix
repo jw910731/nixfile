@@ -31,37 +31,6 @@
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
 
-  # RKE2
-  environment.systemPackages = with pkgs; [ openiscsi ];
-
-  services.openiscsi = {
-    enable = true;
-    name = "iqn.2016-04.com.open-iscsi:f471e56c1026";
-  };
-
-  environment.etc = {
-    "rancher/rke2/config.yaml" = {
-      text = ''
-        kubelet-arg:
-          - "max-pods=256"
-        kube-apiserver-arg:
-          - "oidc-issuer-url=https://auth.h.jw910731.dev/realms/master"
-          - "oidc-client-id=kubernetes"
-          - "oidc-username-claim=preferred_username"
-          - "oidc-username-prefix=-"
-          - "oidc-groups-claim=groups"
-          - "oidc-groups-prefix="
-        tls-san:
-          - "home.jw910731.dev"
-      '';
-    };
-  };
-
-  services.rke2 = {
-    enable = true;
-    package = pkgs.rke2_1_32;
-  };
-
   # # Enable the X11 windowing system.
   # services.xserver = {
   #   enable = true;

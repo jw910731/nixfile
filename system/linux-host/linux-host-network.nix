@@ -14,10 +14,6 @@
     enable = true;
     trustedInterfaces = [ "wlp5s0" ];
     allowedTCPPorts = [
-      9345
-      6443
-      80
-      443
       22
     ];
     extraCommands = ''
@@ -30,10 +26,5 @@
       addr = "0.0.0.0";
       port = 10022;
     }
-  ];
-
-  networking.networkmanager.unmanaged = [
-    "cali*"
-    "flannel*"
   ];
 }
