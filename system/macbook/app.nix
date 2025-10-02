@@ -12,18 +12,16 @@ in
       casks = mapCask [
         "android-platform-tools"
         "balenaetcher"
+        "bilibili"
+        "container"
         "discord"
         "element"
         "font-latin-modern"
         "hhkb"
         "jetbrains-toolbox"
         "keycastr"
-        "kitty"
-        "logi-options+"
         "microsoft-auto-update"
-        "orbstack"
         "osu"
-        "rapidapi"
         "readmoreading"
         "steam"
         "telegram"
@@ -32,7 +30,6 @@ in
       taps = [ ];
 
       masApps = {
-        "Craft" = 1487937127;
         "LINE" = 539883307;
         "Messenger" = 1480068668;
       };

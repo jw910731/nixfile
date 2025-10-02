@@ -4,7 +4,7 @@
     ./zsh
     ./git.nix
     ./emacs.nix
-    ./kitty.nix
+    ./ghostty.nix
     ./halloy.nix
     ./tmux.nix
   ];
@@ -26,9 +26,7 @@
     dig
     docker-compose
     kubectl
-    kubectx
     kubernetes-helm
-    kustomize
     jq
     krew
     zsh-completions
@@ -45,6 +43,7 @@
     nixfmt
     nix-output-monitor
     imagemagick
+    claude-code
   ];
 
   programs.go = {

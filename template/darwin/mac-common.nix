@@ -10,6 +10,18 @@
     };
 
     CustomUserPreferences = {
+      "com.apple.desktopservices" = {
+        # No .DS_Store
+        DSDontWriteUSBStores = 1;
+        DSDontWriteNetworkStores = 1;
+      };
+      "com.apple.Music" = {
+        userWantsPlaybackNotifications = 0;
+        losslessEnabled = 1;
+        optimizeSongVolume = 0;
+        preferredDownloadAudioQuality = 15;
+        preferredStreamPlaybackAudioQuality = 20;
+      };
     };
 
     dock = {
@@ -30,11 +42,15 @@
       wvous-bl-corner = 1;
       wvous-tr-corner = 1;
       wvous-br-corner = 1;
+
+      mru-spaces = false;
+
+      # persistent-apps = [];
     };
 
     screencapture = {
       disable-shadow = true;
-      target = "clipboard";
+      target = "preview";
     };
 
     trackpad = {
@@ -42,6 +58,7 @@
       Dragging = true;
       FirstClickThreshold = 0;
       SecondClickThreshold = 1;
+      TrackpadRightClick = true;
     };
 
     loginwindow = {
@@ -70,6 +87,9 @@
       # Use list view in all Finder windows by default
       "FXPreferredViewStyle" = "Nlsv";
     };
+
+    hitoolbox.AppleFnUsageType = "Change Input Source";
+
   };
 
   environment.shells = with pkgs; [
