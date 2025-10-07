@@ -34,6 +34,7 @@
       "keka"
       "kekaexternalhelper"
       "raycast"
+      "spotify"
       "stats"
       "visual-studio-code"
       "xquartz"
