@@ -77,6 +77,8 @@
     package = pkgs.emacs-nox;
   };
 
+  environment.systemPackages = [ pkgs.cifs-utils ];
+
   # Enable sound with pipewire.
   # sound.enable = true;
   # hardware.pulseaudio.enable = false;
