@@ -30,7 +30,6 @@ in
           "prismlauncher"
           "readmoreading"
           "steam"
-          "telegram"
           "utm"
         ]
         ++ [
@@ -45,6 +44,7 @@ in
       masApps = {
         "LINE" = 539883307;
         "Messenger" = 1480068668;
+        "Telegram" = 747648890;
       };
     }
   );
