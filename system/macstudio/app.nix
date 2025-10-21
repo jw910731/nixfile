@@ -31,11 +31,7 @@ in
           "readmoreading"
           "steam"
           "utm"
-        ]
-        ++ [
-          "meetingbar"
-          "microsoft-teams"
-          "openvpn-connect"
+          "cloudflare-warp"
         ]
       );
 
