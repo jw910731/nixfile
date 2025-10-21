@@ -262,13 +262,6 @@
 
                     home-manager.users = {
                       jw910731 = import ./home/jw910731/macos.nix;
-                      "jerry.wu" = lib.mkMerge [
-                        (import ./home/jw910731/macos-work.nix)
-                        {
-                          home.username = "jerry.wu";
-                          home.homeDirectory = lib.mkForce "/Users/jerry.wu";
-                        }
-                      ];
                     };
                   }
                 )
