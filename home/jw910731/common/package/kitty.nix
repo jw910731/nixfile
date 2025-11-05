@@ -1,9 +1,9 @@
 { pkgs, ... }:
 {
   programs.kitty = {
-    enable = true;
+    enable = false;
     font = {
-      name = "Hack Nerd Font";
+      name = ''family="Hack Nerd Font"'';
       package = pkgs.nerd-fonts.hack;
       size = 14.0;
     };
@@ -12,10 +12,14 @@
       "background_opacity" = "0.95";
       "scrollback_lines" = 2000;
       "allow_remote_control" = true;
-      "macos_option_as_alt" = "both";
       "editor" = ".";
       "term" = "xterm-256color";
       "tab_bar_style" = "powerline";
+    };
+    enableGitIntegration = true;
+    shellIntegration = {
+      enableZshIntegration = true;
+      mode = "no-rc no-complete";
     };
   };
 }

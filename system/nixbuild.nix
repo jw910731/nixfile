@@ -5,7 +5,7 @@
   ];
   hostName = "eu.nixbuild.net";
   protocol = "ssh-ng";
-  maxJobs = 16;
+  maxJobs = 100;
   supportedFeatures = [
     "big-parallel"
     "benchmark"

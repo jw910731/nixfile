@@ -1,7 +1,0 @@
-#!/bin/bash
-
-dirlist=$(find $@ \( -type d -name ".devenv" -o -type d -name ".direnv" \) -prune -o -type d -name "(.devenv)|(.direnv)")
-rm -r $dirlist
-
-echo "Use this to delete related nix store entry"
-echo "nix store gc --debug"

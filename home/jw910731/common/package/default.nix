@@ -4,8 +4,9 @@
     ./zsh
     ./git.nix
     ./emacs.nix
-    ./kitty.nix
+    ./ghostty.nix
     ./halloy.nix
+    ./tmux.nix
   ];
 
   home.packages = with pkgs; [
@@ -25,26 +26,24 @@
     dig
     docker-compose
     kubectl
-    kubectx
     kubernetes-helm
-    kustomize
     jq
     krew
-    nixpkgs-fmt
     zsh-completions
     zsh-fast-syntax-highlighting
+    zsh-forgit
     curl
     htop
     tcping-go
     k9s
     yq-go
-    poetry
     devenv
     nil
     nixd
     nixfmt
     nix-output-monitor
     imagemagick
+    claude-code
   ];
 
   programs.go = {

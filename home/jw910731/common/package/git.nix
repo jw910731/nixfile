@@ -9,37 +9,41 @@
 
     # Extra config
     extraConfig = {
+      # Editor
       core = {
         editor = "emacs";
         autocrlf = "input";
         excludesfile = "~/.gitignore_global";
       };
-      diff.tool = "vscode";
-      "difftool \"vscode\"".cmd = "code --wait --diff $LOCAL $REMOTE";
+
+      # Diff
+      diff.guitool = "vscode";
+      difftool.vscode.cmd = "code --wait --diff $LOCAL $REMOTE";
 
       color.ui = true;
-      "color \"diff-highlight\"" = {
+      color.diff-highlight = {
         oldNormal = "red bold";
         oldHighlight = "white bold 52";
         newNormal = "green bold";
         newHighlight = "white bold 22";
       };
 
-      pull.rebse = false;
+      pull.rebase = false;
 
       merge = {
         tool = "emacs";
         guitool = "vscode";
       };
-
-      "mergetool \"emacs\"".cmd = "emacs";
-      "mergetool \"vscode\"".cmd = "code --wait $MERGED";
+      mergetool = {
+        emacs.cmd = "emacs";
+        vscode.cmd = "code --wait $MERGED";
+      };
     };
 
     # Alias
     aliases = {
       # add
-      a = "add";
+      a = "forgit add";
 
       # branch
       recent-branches = "!git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='%(refname:short)'";
@@ -49,15 +53,13 @@
       c = "commit";
       amend = "commit --amend";
 
-      # checkout
-      ck = "checkout";
-      nbr = "checkout -b";
-
-      # switch
+      # checkout & switch
+      ck = "forgit checkout_branch";
+      nbr = "switch -c";
       sw = "switch";
 
       # diff
-      d = "diff";
+      d = "forgit diff";
       dc = "diff --cached";
       last = "diff HEAD^";
 
@@ -81,9 +83,9 @@
       mt = "mergetool -g";
 
       # stash
-      spush = "stash push";
+      spush = "forgit stash_push";
       spop = "stash pop";
-      sl = "stash list";
+      sls = "forgit stash_show";
 
       # status
       s = "status";

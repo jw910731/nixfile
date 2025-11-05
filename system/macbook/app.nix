@@ -1,84 +1,38 @@
+{ mylib, ... }:
+let
+  brew-common = (import ../../template/darwin/brew.nix);
+  mapCask = brew-common.mapCask;
+  commonOptions = brew-common.options;
+in
 {
-  # Homebrew has to be installed first.
-  # This installs system-wide packages and Mac App Store apps.
-  homebrew = {
-    enable = true;
-    onActivation = {
-      cleanup = "uninstall";
-    };
+  homebrew = (
+    mylib.recursiveMerge commonOptions {
+      brews = [ ];
 
-    brews = [
-      "pinentry"
-      "pinentry-mac"
-      "pkg-config"
-      "python@3.12"
-    ];
+      casks = mapCask [
+        "android-platform-tools"
+        "balenaetcher"
+        "bilibili"
+        "container"
+        "discord"
+        "element"
+        "font-latin-modern"
+        "hhkb"
+        "jetbrains-toolbox"
+        "keycastr"
+        "microsoft-auto-update"
+        "osu"
+        "readmoreading"
+        "steam"
+        "telegram"
+      ];
 
-    casks =
-      map
-        (x: {
-          name = x;
-          greedy = true;
-          args = {
-            no_quarantine = true;
-          };
-        })
-        [
-          "1password"
-          "1password-cli"
-          "aldente"
-          "android-platform-tools"
-          "balenaetcher"
-          "bartender"
-          "betterdisplay"
-          "brave-browser"
-          "cap"
-          "discord"
-          "element"
-          "firefox"
-          "font-latin-modern"
-          "hhkb"
-          "iina"
-          "jetbrains-toolbox"
-          "karabiner-elements"
-          "keka"
-          "kekaexternalhelper"
-          "keycastr"
-          "kitty"
-          "microsoft-auto-update"
-          "moonlight"
-          "obs"
-          "openinterminal"
-          "orbstack"
-          "orion"
-          "osu"
-          "rapidapi"
-          "raycast"
-          "readmoreading"
-          "stats"
-          "steam"
-          "telegram"
-          "utm"
-          "visual-studio-code"
-          "wireshark"
-          "xquartz"
-          "zed"
-        ];
+      taps = [ ];
 
-    taps = [
-      "homebrew/cask-versions"
-    ];
-
-    masApps = {
-      "Craft" = 1487937127;
-      "Keynote" = 409183694;
-      "LINE" = 539883307;
-      "Messenger" = 1480068668;
-      "Numbers" = 409203825;
-      "Pages" = 409201541;
-      "Portal" = 1436994560;
-      "Slack" = 803453959;
-      "Yoink" = 457622435;
-    };
-  };
+      masApps = {
+        "LINE" = 539883307;
+        "Messenger" = 1480068668;
+      };
+    }
+  );
 }

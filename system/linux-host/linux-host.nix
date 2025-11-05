@@ -31,47 +31,6 @@
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
 
-  # RKE2
-  environment.systemPackages = with pkgs; [ openiscsi ];
-
-  services.openiscsi = {
-    enable = true;
-    name = "iqn.2016-04.com.open-iscsi:f471e56c1026";
-  };
-
-  environment.etc = {
-    "rancher/rke2/config.yaml" = {
-      text = ''
-        kubelet-arg:
-          - "max-pods=256"
-        kube-apiserver-arg:
-          - "oidc-issuer-url=https://auth.h.jw910731.dev/realms/master"
-          - "oidc-client-id=kubernetes"
-          - "oidc-username-claim=preferred_username"
-          - "oidc-username-prefix=-"
-          - "oidc-groups-claim=groups"
-          - "oidc-groups-prefix="
-        tls-san:
-          - "home.jw910731.dev"
-      '';
-    };
-  };
-
-  services.rke2 = {
-    enable = true;
-    package = pkgs.rke2_1_32.override {
-      # Patch util-linux mount breaks k8s. See more in https://github.com/NixOS/nixpkgs/pull/405952.
-      util-linux = pkgs.util-linux.overrideAttrs (prev: {
-        patches = prev.patches ++ [
-          (builtins.fetchurl {
-            url = "https://github.com/util-linux/util-linux/pull/3479.patch";
-            sha256 = "1m5zxfaf30i5k0lxdxxwl2ksswmsnaj3vhqvklsvijycdhzyx9k0";
-          })
-        ];
-      });
-    };
-  };
-
   # # Enable the X11 windowing system.
   # services.xserver = {
   #   enable = true;
@@ -117,6 +76,8 @@
     enable = true;
     package = pkgs.emacs-nox;
   };
+
+  environment.systemPackages = [ pkgs.cifs-utils ];
 
   # Enable sound with pipewire.
   # sound.enable = true;

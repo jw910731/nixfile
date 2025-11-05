@@ -10,22 +10,17 @@
     };
 
     CustomUserPreferences = {
-      "com.kagi.kagimacOS" = {
-        "NSUserKeyEquivalents" =
-          let
-            up = builtins.fromJSON ''"\u2191" '';
-            down = builtins.fromJSON ''"\u2193" '';
-          in
-          {
-            "顯示前一個標籤頁" = "@$" + up;
-            "Show Previous Tab" = "@$" + up;
-            "顯示下一個標籤頁" = "@$" + down;
-            "Show Next Tab" = "@$" + down;
-            "前往上一個標籤頁群組" = "";
-            "Go to Previous Tab Group" = "";
-            "前往下一個標籤頁群組" = "";
-            "Go to Next Tab Group" = "";
-          };
+      "com.apple.desktopservices" = {
+        # No .DS_Store
+        DSDontWriteUSBStores = 1;
+        DSDontWriteNetworkStores = 1;
+      };
+      "com.apple.Music" = {
+        userWantsPlaybackNotifications = 0;
+        losslessEnabled = 1;
+        optimizeSongVolume = 0;
+        preferredDownloadAudioQuality = 15;
+        preferredStreamPlaybackAudioQuality = 20;
       };
     };
 
@@ -47,11 +42,15 @@
       wvous-bl-corner = 1;
       wvous-tr-corner = 1;
       wvous-br-corner = 1;
+
+      mru-spaces = false;
+
+      # persistent-apps = [];
     };
 
     screencapture = {
       disable-shadow = true;
-      target = "clipboard";
+      target = "preview";
     };
 
     trackpad = {
@@ -59,6 +58,7 @@
       Dragging = true;
       FirstClickThreshold = 0;
       SecondClickThreshold = 1;
+      TrackpadRightClick = true;
     };
 
     loginwindow = {
@@ -87,6 +87,9 @@
       # Use list view in all Finder windows by default
       "FXPreferredViewStyle" = "Nlsv";
     };
+
+    hitoolbox.AppleFnUsageType = "Change Input Source";
+
   };
 
   environment.shells = with pkgs; [
@@ -111,6 +114,9 @@
     # Recommended when using `direnv` etc.
     keep-derivations = true;
     keep-outputs = true;
+    trusted-users = [
+      "@admin"
+    ];
   };
   nix.package = pkgs.lix;
 
