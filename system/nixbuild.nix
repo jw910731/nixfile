@@ -6,5 +6,10 @@
   hostName = "eu.nixbuild.net";
   protocol = "ssh-ng";
   maxJobs = 16;
-  supportedFeatures = [ "big-parallel" "benchmark" "kvm" "nixos-test" ];
+  supportedFeatures = [
+    "big-parallel"
+    "benchmark"
+    "kvm"
+    "nixos-test"
+  ];
 }
