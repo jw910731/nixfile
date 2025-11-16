@@ -4,7 +4,6 @@
     ../common
 
     ./package/podman
-    ./package/gpg.nix
   ];
 
   home.packages = with pkgs; [
@@ -28,5 +27,4 @@
     telephone = "en_US.utf-8";
     measurement = "en_US.utf-8";
   };
-
 }

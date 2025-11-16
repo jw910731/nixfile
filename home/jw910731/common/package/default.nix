@@ -7,13 +7,13 @@
     ./ghostty.nix
     ./halloy.nix
     ./tmux.nix
+    ./gpg.nix
   ];
 
   home.packages = with pkgs; [
     fira-code
     nerd-fonts.hack
     _1password-cli
-    gnupg
     just
     fzf
     lsd
