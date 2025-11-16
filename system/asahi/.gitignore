@@ -1,2 +1,2 @@
-firmware/**
+firmware/*
 !firmware/.gitkeep
