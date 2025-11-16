@@ -57,25 +57,15 @@
   #   desktopManager.gnome.enable = true;
   #   desktopManager.xterm.enable = false;
   # };
-  documentation.dev.enable = true;
-
-  programs.dconf.enable = true;
 
   # Disable CUPS for print documents.
   services.printing.enable = false;
 
   # # Enable flatpak
   # services.flatpak.enable = true;
-  fonts.fontDir.enable = true;
 
   # Enable docker
   virtualisation.docker.enable = true;
-
-  # Emacs Daemon
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs-nox;
-  };
 
   environment.systemPackages = [ pkgs.cifs-utils ];
 
@@ -98,13 +88,4 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
-
-  # nix config
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
-  };
-
-  nix.settings.auto-optimise-store = true;
 }

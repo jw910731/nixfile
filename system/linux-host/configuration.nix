@@ -12,6 +12,8 @@
     ./hardware-configuration.nix
     # User settings
     ./user.nix
+
+    ../../template/linux
   ];
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -22,62 +24,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  i18n.supportedLocales = [
-    "en_US.UTF-8/UTF-8"
-    "zh_TW.UTF-8/UTF-8"
-  ];
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
-  # Enable nix command and flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nix.package = pkgs.lix;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    joe
-    zsh
-    man-pages
-    man-pages-posix
-    strace
-    gcc
-    gnumake
-    tmux
-    killall
-  ];
-
-  programs.nix-ld.enable = true;
-
-  programs._1password.enable = true;
+  
   programs._1password-gui = {
     enable = true;
     # Certain features, including CLI integration and system authentication support,
@@ -97,11 +44,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh = {
-    enable = true;
     settings.PasswordAuthentication = false;
     settings.KbdInteractiveAuthentication = false;
-    settings.PermitRootLogin = "no";
-    settings.StreamLocalBindUnlink = "yes";
   };
 
   # Open ports in the firewall.
