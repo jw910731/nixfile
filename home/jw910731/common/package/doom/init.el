@@ -73,7 +73,7 @@
 
        ibuffer         ; interactive buffer management
        (undo +tree)              ; persistent, smarter undo for your inevitable mistakes
-       vc                ; version-control and Emacs, sitting in a tree
+       ;;vc                ; version-control and Emacs, sitting in a tree
 
        :term
        ;;eshell            ; the elisp shell that works everywhere

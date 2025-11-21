@@ -77,12 +77,6 @@
   programs.dconf.enable = true;
   fonts.fontDir.enable = true;
 
-  # Enable emacs service
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs-nox;
-  };
-
   # Make vscode server runnable
   programs.nix-ld.enable = true;
 
