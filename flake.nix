@@ -62,8 +62,11 @@
       linuxOverlays = [ nix-doom-emacs-unstraightened.overlays.default ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
-        (prev: final: {
+        (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
+        })
+        (final: prev: {
+          emacs-nox = prev.emacs-nox.override { withNativeCompilation = true; };
         })
       ];
       darwinHostSetup = (
