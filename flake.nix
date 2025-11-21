@@ -30,7 +30,6 @@
 
     numlockfixd = {
       url = "github:jw910731/numlockfixd";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     nix-doom-emacs-unstraightened = {
