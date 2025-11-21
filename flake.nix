@@ -196,24 +196,6 @@
               }
             ];
           };
-          "nixos-orbstack" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              ./system/orbstack/configuration.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.users = {
-                  jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux.nix)
-                    (import ./home/jw910731/1p-sign.nix)
-                  ];
-                };
-              }
-            ];
-          };
         };
 
       # Darwin configs
