@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    ../garnix.nix
+    ../nix-cache.nix
   ];
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
