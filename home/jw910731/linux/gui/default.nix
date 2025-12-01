@@ -6,4 +6,9 @@
     noto-fonts-cjk-sans
     vscode-fhs
   ];
+
+  services.gpg-agent = {
+    enable = true;
+    pinentry.program = "pinentry-qt";
+  };
 }

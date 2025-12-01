@@ -17,12 +17,15 @@
       signByDefault = true;
       key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPWoAtGxpKw/xK4SPDUNqeJQCR/foAP1oIAMI+ZFgCa/";
     };
-    extraConfig.gpg = {
+    settings.gpg = {
       format = "ssh";
       ssh.program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign";
     };
-    userName = "Jerry Wu";
-    userEmail = "jerry.wu@graidtech.com";
+
+    settings.user = {
+      name = "Jerry Wu";
+      email = "jerry.wu@graidtech.com";
+    };
   };
 
   programs.zsh.sessionVariables =

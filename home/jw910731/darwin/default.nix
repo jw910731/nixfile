@@ -25,4 +25,9 @@
   xdg.configFile = {
     "aerospace".source = ./aerospace;
   };
+
+  services.gpg-agent = {
+    pinentry.program = "pinentry-mac";
+    enable = true;
+  };
 }

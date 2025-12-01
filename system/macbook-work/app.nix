@@ -12,7 +12,7 @@ in
       casks = mapCask [
         "meetingbar"
         "microsoft-teams"
-        "tunnelblick"
+        "openvpn-connect"
       ];
 
       taps = [ ];

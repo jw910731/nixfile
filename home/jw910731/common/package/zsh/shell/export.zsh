@@ -14,9 +14,6 @@ if [[ "$OSTYPE" = darwin* ]]; then
   # Workaround for Ansible forking: https://github.com/ansible/ansible/issues/76322
   export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-  # GPG AGENT
-  # export SSH_AUTH_SOCK=$HOME/.gnupg/S.gpg-agent.ssh
-
   # Homebrew
   export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
   export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"

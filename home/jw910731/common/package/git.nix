@@ -8,7 +8,7 @@
     lfs.enable = true;
 
     # Extra config
-    extraConfig = {
+    settings = {
       # Editor
       core = {
         editor = "emacs";
@@ -41,7 +41,7 @@
     };
 
     # Alias
-    aliases = {
+    settings.alias = {
       # add
       a = "forgit add";
 

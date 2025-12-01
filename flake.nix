@@ -3,10 +3,10 @@
 
   inputs = {
     # NixPKG
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-25.11-darwin";
     nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon/release-25.05";
+      url = "github:tpwrules/nixos-apple-silicon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -20,21 +20,29 @@
 
     # Home Manager
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager-darwin = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-25.05";
+      url = "github:lnl7/nix-darwin/nix-darwin-25.11";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     numlockfixd = {
       url = "github:jw910731/numlockfixd";
+    };
+
+    nix-doom-emacs-unstraightened = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-doom-emacs-unstraightened-darwin = {
+      url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
@@ -49,15 +57,21 @@
       home-manager-darwin,
       treefmt-nix,
       numlockfixd,
+      nix-doom-emacs-unstraightened,
+      nix-doom-emacs-unstraightened-darwin,
       nixos-muvm-fex,
       ...
     }:
     let
       lib = nixpkgs.lib;
-      linuxOverlays = [ ];
+      linuxOverlays = [ nix-doom-emacs-unstraightened.overlays.default ];
       darwinOverlays = [
-        (prev: final: {
+        nix-doom-emacs-unstraightened-darwin.overlays.default
+        (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
+        })
+        (final: prev: {
+          emacs-nox = prev.emacs-nox.override { withNativeCompilation = true; };
         })
       ];
       darwinHostSetup = (
@@ -110,6 +124,7 @@
           };
         };
         modules = [
+          nix-doom-emacs-unstraightened.homeModule
           (import ./home/jw910731/linux.nix)
           (import ./home/jw910731/yubi-sign.nix)
           {
@@ -139,6 +154,9 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.sharedModules = [
+                  nix-doom-emacs-unstraightened.homeModule
+                ];
 
                 home-manager.users = {
                   jw910731 = nixpkgs.lib.mkMerge [
@@ -157,6 +175,9 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.sharedModules = [
+                  nix-doom-emacs-unstraightened.homeModule
+                ];
 
                 home-manager.users.jw910731 = nixpkgs.lib.mkMerge [
                   (import ./home/jw910731/linux.nix)
@@ -173,6 +194,9 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.sharedModules = [
+                  nix-doom-emacs-unstraightened.homeModule
+                ];
 
                 home-manager.users = {
                   jw910731 = nixpkgs.lib.mkMerge [
@@ -195,28 +219,13 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.sharedModules = [
+                  nix-doom-emacs-unstraightened.homeModule
+                ];
 
                 home-manager.users = {
                   jw910731 = nixpkgs.lib.mkMerge [
                     (import ./home/jw910731/linux-gui.nix)
-                    (import ./home/jw910731/1p-sign.nix)
-                  ];
-                };
-              }
-            ];
-          };
-          "nixos-orbstack" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              ./system/orbstack/configuration.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.users = {
-                  jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux.nix)
                     (import ./home/jw910731/1p-sign.nix)
                   ];
                 };
@@ -243,6 +252,9 @@
                 {
                   home-manager.useGlobalPkgs = true;
                   home-manager.useUserPackages = true;
+                  home-manager.sharedModules = [
+                    nix-doom-emacs-unstraightened-darwin.homeModule
+                  ];
 
                   home-manager.users = {
                     jw910731 = import ./home/jw910731/macos.nix;
@@ -268,6 +280,9 @@
                   {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
+                    home-manager.sharedModules = [
+                      nix-doom-emacs-unstraightened-darwin.homeModule
+                    ];
 
                     home-manager.users = {
                       jw910731 = import ./home/jw910731/macos.nix;
@@ -294,6 +309,9 @@
                   {
                     home-manager.useGlobalPkgs = true;
                     home-manager.useUserPackages = true;
+                    home-manager.sharedModules = [
+                      nix-doom-emacs-unstraightened-darwin.homeModule
+                    ];
 
                     home-manager.users = {
                       "jw910731" = lib.mkMerge [

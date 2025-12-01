@@ -9,12 +9,7 @@
     zsh
     wget
   ];
-
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs-nox;
-  };
-
+  
   launchd.agents.numlockfixd = {
     path = [ config.environment.systemPath ];
     serviceConfig = {
