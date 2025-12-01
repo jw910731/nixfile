@@ -8,5 +8,5 @@
   ];
   home.username = "jw910731";
   home.homeDirectory = "/home/jw910731";
-  programs.git.extraConfig.gpg.ssh.program = "op-ssh-sign";
+  programs.git.settings.gpg.ssh.program = "op-ssh-sign";
 }

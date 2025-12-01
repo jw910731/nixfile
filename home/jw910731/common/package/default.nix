@@ -48,7 +48,7 @@
 
   programs.go = {
     enable = true;
-    goPath = "./dev/go";
+    env.GOPATH = "./dev/go";
   };
 
   programs.direnv = {
