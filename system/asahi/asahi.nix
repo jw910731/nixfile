@@ -88,4 +88,8 @@
 
   # Enable flatpak
   services.flatpak.enable = true;
+
+  environment.systemPackages = [
+    pkgs.muvm
+  ];
 }
