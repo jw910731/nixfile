@@ -42,8 +42,7 @@
     nixd
     nixfmt
     nix-output-monitor
-    imagemagick
-    claude-code
+    gemini-cli
   ];
 
   programs.go = {
