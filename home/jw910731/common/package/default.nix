@@ -21,12 +21,7 @@
     python3
     zip
     unzip
-    llvm
-    cmake
     dig
-    docker-compose
-    kubectl
-    kubernetes-helm
     jq
     krew
     zsh-completions
@@ -35,15 +30,13 @@
     curl
     htop
     tcping-go
-    k9s
     yq-go
     devenv
     nil
     nixd
     nixfmt
     nix-output-monitor
-    imagemagick
-    claude-code
+    gemini-cli
   ];
 
   programs.go = {
