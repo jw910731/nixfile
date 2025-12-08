@@ -10,11 +10,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-muvm-fex = {
-        url = "github:nrabulinski/nixos-muvm-fex";
-        inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     # formatter
     treefmt-nix.url = "github:numtide/treefmt-nix";
 
@@ -59,7 +54,6 @@
       numlockfixd,
       nix-doom-emacs-unstraightened,
       nix-doom-emacs-unstraightened-darwin,
-      nixos-muvm-fex,
       ...
     }:
     let
@@ -210,9 +204,6 @@
           "asahi" = moduleModifier nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
-              {
-                nixpkgs.overlays = [ nixos-muvm-fex.overlays.default ];
-              }
               nixos-apple-silicon.nixosModules.default
               ./system/asahi/configuration.nix
               home-manager.nixosModules.home-manager
