@@ -5,6 +5,7 @@
     brave
     noto-fonts-cjk-sans
     vscode-fhs
+    zed-editor
   ];
 
   services.gpg-agent = {
