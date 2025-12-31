@@ -25,7 +25,6 @@
       "aldente"
       "betterdisplay"
       "brave-browser"
-      "claude"
       "firefox"
       "font-hack-nerd-font"
       "ghostty"
