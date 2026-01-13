@@ -67,7 +67,9 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
-  environment.systemPackages = [ pkgs.cifs-utils ];
+  environment.systemPackages = [ 
+    pkgs.cifs-utils
+  ];
 
   # Enable sound with pipewire.
   # sound.enable = true;
@@ -88,4 +90,6 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  hardware.tenstorrent.enable = true;
 }
