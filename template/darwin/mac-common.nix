@@ -23,6 +23,12 @@
         preferredStreamPlaybackAudioQuality = 20;
       };
     };
+    
+    CustomSystemPreferences = {
+      "com.apple.Safari" = {
+        AlwaysShowTabBar = 1;
+      };
+    };
 
     dock = {
       # Disable mission control animation
