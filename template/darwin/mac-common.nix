@@ -15,18 +15,18 @@
         DSDontWriteUSBStores = 1;
         DSDontWriteNetworkStores = 1;
       };
+    };
+    
+    CustomSystemPreferences = {
+      "com.apple.Safari" = {
+        AlwaysShowTabBar = 1;
+      };
       "com.apple.Music" = {
         userWantsPlaybackNotifications = 0;
         losslessEnabled = 1;
         optimizeSongVolume = 0;
         preferredDownloadAudioQuality = 15;
         preferredStreamPlaybackAudioQuality = 20;
-      };
-    };
-    
-    CustomSystemPreferences = {
-      "com.apple.Safari" = {
-        AlwaysShowTabBar = 1;
       };
     };
 
