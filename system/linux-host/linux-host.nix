@@ -16,6 +16,11 @@
     "fs.inotify.max_user_instances" = 2099999999;
     "fs.inotify.max_queued_events" = 2099999999;
   };
+  boot.kernelParams = [
+    "amd_iommu=on"
+    "iommu=pt"
+    "vfio-pci.ids==1e52:b140"
+  ];
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/ead80857-c6ff-4153-9d22-f5e54b9adab1";
@@ -92,4 +97,6 @@
   # services.xserver.libinput.enable = true;
 
   hardware.tenstorrent.enable = true;
+  
+  services.cloudflare-warp.enable = true;
 }
