@@ -15,6 +15,12 @@
         DSDontWriteUSBStores = 1;
         DSDontWriteNetworkStores = 1;
       };
+    };
+    
+    CustomSystemPreferences = {
+      "com.apple.Safari" = {
+        AlwaysShowTabBar = 1;
+      };
       "com.apple.Music" = {
         userWantsPlaybackNotifications = 0;
         losslessEnabled = 1;
