@@ -105,5 +105,17 @@
   # services.xserver.libinput.enable = true;
 
   hardware.tenstorrent.enable = true;
+
+  # Virtual Machines
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+
   services.cloudflare-warp.enable = true;
 }
