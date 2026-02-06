@@ -9,7 +9,15 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   # boot.extraModulePackages = with config.boot.kernelPackages; [ ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [
+    # VFIO
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+
+    # Graphics 
+    "amdgpu"
+  ];
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 2099999999;
@@ -97,6 +105,5 @@
   # services.xserver.libinput.enable = true;
 
   hardware.tenstorrent.enable = true;
-  
   services.cloudflare-warp.enable = true;
 }
