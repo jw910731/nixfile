@@ -7,6 +7,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "fuse"
     ];
     shell = pkgs.zsh;
   };

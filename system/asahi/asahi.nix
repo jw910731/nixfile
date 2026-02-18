@@ -90,6 +90,8 @@
   services.flatpak.enable = true;
 
   environment.systemPackages = with pkgs; [
-    pkgs.muvm
+    muvm
+    fex
+    squashfuse
   ];
 }
