@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./zsh
@@ -41,7 +41,7 @@
 
   programs.go = {
     enable = true;
-    env.GOPATH = "./dev/go";
+    env.GOPATH = "${config.home.homeDirectory}/dev/go";
   };
 
   programs.direnv = {

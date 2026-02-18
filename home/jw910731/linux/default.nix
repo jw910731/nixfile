@@ -3,11 +3,10 @@
   imports = [
     ../common
 
-    ./package/podman
+    ./package/podman.nix
   ];
 
   home.packages = with pkgs; [
-    podman
     podman-compose
     gdb
     lldb

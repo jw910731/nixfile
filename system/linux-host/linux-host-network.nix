@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   networking.hostName = "jw910731-nixos"; # Define your hostname.
-  networking.interfaces.enp6s0 = {
+  networking.interfaces.enp7s0 = {
     wakeOnLan = {
       enable = true;
       policy = [ "magic" ];
@@ -12,7 +12,7 @@
   # networking.nftables.enable = true;
   networking.firewall = {
     enable = true;
-    trustedInterfaces = [ "wlp5s0" ];
+    trustedInterfaces = [ "wlp6s0" ];
     allowedTCPPorts = [
       22
     ];

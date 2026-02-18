@@ -9,13 +9,26 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   # boot.extraModulePackages = with config.boot.kernelPackages; [ ];
-  boot.initrd.kernelModules = [ "amdgpu" ];
+  boot.initrd.kernelModules = [
+    # VFIO
+    "vfio_pci"
+    "vfio"
+    "vfio_iommu_type1"
+
+    # Graphics 
+    "amdgpu"
+  ];
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 2099999999;
     "fs.inotify.max_user_instances" = 2099999999;
     "fs.inotify.max_queued_events" = 2099999999;
   };
+  boot.kernelParams = [
+    "amd_iommu=on"
+    "iommu=pt"
+    "vfio-pci.ids==1e52:b140"
+  ];
 
   fileSystems."/data" = {
     device = "/dev/disk/by-uuid/ead80857-c6ff-4153-9d22-f5e54b9adab1";
@@ -67,7 +80,9 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
-  environment.systemPackages = [ pkgs.cifs-utils ];
+  environment.systemPackages = [ 
+    pkgs.cifs-utils
+  ];
 
   # Enable sound with pipewire.
   # sound.enable = true;
@@ -88,4 +103,19 @@
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
+
+  hardware.tenstorrent.enable = true;
+
+  # Virtual Machines
+  virtualisation.spiceUSBRedirection.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+
+  services.cloudflare-warp.enable = true;
 }
