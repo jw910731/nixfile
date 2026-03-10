@@ -9,6 +9,7 @@ in
     mylib.recursiveMerge commonOptions {
       brews = [
         "blacktop/tap/ipsw"
+        "container"
       ];
 
       casks = mapCask (
@@ -16,7 +17,6 @@ in
           "android-platform-tools"
           "balenaetcher"
           "bilibili"
-          "container"
           "discord"
           "element"
           "font-latin-modern"
