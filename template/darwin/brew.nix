@@ -32,6 +32,7 @@
       "jordanbaird-ice@beta"
       "keka"
       "kekaexternalhelper"
+      "orion"
       "raycast"
       "spotify"
       "stats"
