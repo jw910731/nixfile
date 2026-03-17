@@ -161,27 +161,6 @@
               }
             ];
           };
-          "utm" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            modules = [
-              ./system/utm/configuration.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.sharedModules = [
-                  nix-doom-emacs-unstraightened.homeModule
-                ];
-
-                home-manager.users = {
-                  jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux.nix)
-                    (import ./home/jw910731/yubi-sign.nix)
-                  ];
-                };
-              }
-            ];
-          };
           "asahi" = moduleModifier nixpkgs.lib.nixosSystem {
             system = "aarch64-linux";
             modules = [
