@@ -91,24 +91,54 @@
             }
           ] (systemAttrs // { specialArgs = { }; })
         );
+
+      pkgs' =
+        (lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
+          system: (import nixpkgs-darwin { inherit system; })
+        ))
+        // (lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (system: (import nixpkgs { inherit system; })));
+      formatter =
+        pkgs:
+        (treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs.nixfmt.enable = true;
+        }).config.build.wrapper;
     in
     {
       # Formatter settings
-      formatter =
+      formatter = (lib.mapAttrs (_: pkgs: formatter pkgs) pkgs');
+
+      # Minimal shell for boostraping everything
+      devShells =
         let
-          formatter =
-            pkgs:
-            (treefmt-nix.lib.evalModule pkgs {
-              projectRootFile = "flake.nix";
-              programs.nixfmt.enable = true;
-            }).config.build.wrapper;
+          supportedSystems = [
+            "x86_64-linux"
+            "aarch64-linux"
+            "x86_64-darwin"
+            "aarch64-darwin"
+          ];
+          forEachSupportedSystem =
+            f:
+            nixpkgs.lib.genAttrs supportedSystems (
+              system:
+              f {
+                pkgs = pkgs'."${system}";
+              }
+            );
         in
-        (lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
-          system: formatter (import nixpkgs-darwin { inherit system; })
-        ))
-        // (lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (
-          system: formatter (import nixpkgs { inherit system; })
-        ));
+        forEachSupportedSystem (
+          { pkgs }:
+          {
+            default = pkgs.mkShellNoCC {
+              packages = [
+                pkgs.nixd
+                (formatter pkgs)
+                pkgs.just
+                pkgs.nh
+              ];
+            };
+          }
+        );
 
       homeConfigurations."jw910731" = home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
