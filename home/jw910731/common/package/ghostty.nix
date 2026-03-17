@@ -7,13 +7,13 @@
     settings = {
       theme = "Atom One Dark";
       background-opacity = 0.95;
-      font-family = ["Hack Nerd Font Mono"];
+      font-family = [ "Hack Nerd Font Mono" ];
       font-size = 14;
       font-thicken = true;
       faint-opacity = 0.75;
       scrollback-limit = 104857600;
       shell-integration-features = "no-cursor,sudo,title,ssh-env";
-      app-notifications =  "no-clipboard-copy";
+      app-notifications = "no-clipboard-copy";
       cursor-style = "block";
       cursor-opacity = 0.65;
 

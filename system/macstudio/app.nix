@@ -12,29 +12,27 @@ in
         "container"
       ];
 
-      casks = mapCask (
-        [
-          "android-platform-tools"
-          "balenaetcher"
-          "bilibili"
-          "discord"
-          "element"
-          "font-latin-modern"
-          "hhkb"
-          "jetbrains-toolbox"
-          "keycastr"
-          "logi-options+"
-          "microsoft-auto-update"
-          "obs"
-          "osu"
-          "prismlauncher"
-          "readmoreading"
-          "steam"
-          "telegram"
-          "utm"
-          "cloudflare-warp"
-        ]
-      );
+      casks = mapCask ([
+        "android-platform-tools"
+        "balenaetcher"
+        "bilibili"
+        "discord"
+        "element"
+        "font-latin-modern"
+        "hhkb"
+        "jetbrains-toolbox"
+        "keycastr"
+        "logi-options+"
+        "microsoft-auto-update"
+        "obs"
+        "osu"
+        "prismlauncher"
+        "readmoreading"
+        "steam"
+        "telegram"
+        "utm"
+        "cloudflare-warp"
+      ]);
 
       taps = [ ];
 

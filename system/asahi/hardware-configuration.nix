@@ -14,7 +14,10 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  boot.initrd.availableKernelModules = [ "usb_storage" "uas" ];
+  boot.initrd.availableKernelModules = [
+    "usb_storage"
+    "uas"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];

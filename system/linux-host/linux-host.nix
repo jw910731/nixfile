@@ -15,7 +15,7 @@
     "vfio"
     "vfio_iommu_type1"
 
-    # Graphics 
+    # Graphics
     "amdgpu"
   ];
   boot.loader.systemd-boot.configurationLimit = 10;
@@ -80,7 +80,7 @@
   # Enable docker
   virtualisation.docker.enable = true;
 
-  environment.systemPackages = [ 
+  environment.systemPackages = [
     pkgs.cifs-utils
   ];
 

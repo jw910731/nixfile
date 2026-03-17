@@ -9,7 +9,7 @@
     zsh
     wget
   ];
-  
+
   launchd.agents.numlockfixd = {
     path = [ config.environment.systemPath ];
     serviceConfig = {

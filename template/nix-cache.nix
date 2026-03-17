@@ -3,7 +3,8 @@ let
     "https://cache.garnix.io"
     "https://nixos-apple-silicon.cachix.org"
   ];
-in {
+in
+{
   nix.settings = {
     substituters = caches;
     trusted-substituters = caches;

@@ -16,7 +16,7 @@
         DSDontWriteNetworkStores = 1;
       };
     };
-    
+
     CustomSystemPreferences = {
       "com.apple.Safari" = {
         AlwaysShowTabBar = 1;

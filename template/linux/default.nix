@@ -68,7 +68,7 @@
     killall
   ];
 
-  # basic open ssh 
+  # basic open ssh
   services.openssh = {
     enable = true;
     settings.PermitRootLogin = "no";
