@@ -10,7 +10,7 @@
     wget
   ];
 
-  launchd.agents.numlockfixd = {
+  launchd.user.agents.numlockfixd = {
     path = [ config.environment.systemPath ];
     serviceConfig = {
       ProgramArguments = [ "${pkgs.numlockfixd}/bin/numlockfixd" ];
