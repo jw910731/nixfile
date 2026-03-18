@@ -49,6 +49,7 @@
       "Numbers" = 361304891;
       "Pages" = 361309726;
       "Portal" = 1436994560;
+      "reMarkable desktop" = 1276493162;
       "Yoink" = 457622435;
     };
   };
