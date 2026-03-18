@@ -6,7 +6,6 @@
         ForwardAgent yes
         ControlMaster auto
         ControlPath ~/.ssh/ssh_mux_%h_%p_%r
-        ControlPersist 1m
         Compression yes
   '';
 }
