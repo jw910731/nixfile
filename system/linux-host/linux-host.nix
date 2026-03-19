@@ -28,6 +28,8 @@
     "amd_iommu=on"
     "iommu=pt"
     "vfio-pci.ids==1e52:b140"
+    "hugepagesz=1G"
+    "hugepages=4"
   ];
 
   fileSystems."/data" = {
@@ -105,6 +107,22 @@
   # services.xserver.libinput.enable = true;
 
   hardware.tenstorrent.enable = true;
+  systemd.mounts = [
+    {
+      description = "Mount hugepages at /dev/hugepages-1G for Tenstorrent ASICs";
+      what = "hugetlbfs";
+      where = "/dev/hugepages-1G";
+      type = "hugetlbfs";
+      options = "pagesize=1G,mode=0777,nosuid,nodev";
+      before = [ "sysinit.target" ];
+      wantedBy = [ "sysinit.target" ];
+      unitConfig = {
+        DefaultDependencies = false;
+        ConditionPathExists = "/sys/kernel/mm/hugepages/hugepages-1048576kB";
+        ConditionCapability = "CAP_SYS_ADMIN";
+      };
+    }
+  ];
 
   # Virtual Machines
   virtualisation.spiceUSBRedirection.enable = true;
