@@ -155,9 +155,9 @@
             programs.zsh.shellAliases = {
               "ggg" = "sudo graidctl";
             };
-            programs.git = {
-              userName = lib.mkForce "Jerry Wu";
-              userEmail = lib.mkForce "jerry.wu@graidtech.com";
+            programs.git.settings.user = {
+              name = lib.mkForce "Jerry Wu";
+              email = lib.mkForce "jerry.wu@graidtech.com";
             };
           }
         ];
