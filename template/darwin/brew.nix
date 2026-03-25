@@ -22,7 +22,6 @@
     casks = [
       "1password"
       "1password-cli"
-      "aldente"
       "betterdisplay"
       "brave-browser"
       "firefox"
