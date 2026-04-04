@@ -17,6 +17,10 @@
       cursor-style = "block";
       cursor-opacity = 0.65;
 
+      # Notification
+      notify-on-command-finish-action = "no-bell,notify";
+      notify-on-command-finish = "unfocused";
+
       # Mac OS Config
       macos-titlebar-style = "native";
       macos-option-as-alt = true;
