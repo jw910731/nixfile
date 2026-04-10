@@ -2,9 +2,6 @@
   mapCask = map (x: {
     name = x;
     greedy = true;
-    args = {
-      no_quarantine = true;
-    };
   });
   options = {
     enable = true;
