@@ -21,6 +21,7 @@
       "1password-cli"
       "betterdisplay"
       "brave-browser"
+      "claude-code"
       "firefox"
       "font-hack-nerd-font"
       "ghostty"
