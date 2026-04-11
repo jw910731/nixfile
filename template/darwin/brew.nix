@@ -21,6 +21,7 @@
       "1password-cli"
       "betterdisplay"
       "brave-browser"
+      "dockdoor"
       "firefox"
       "font-hack-nerd-font"
       "ghostty"
