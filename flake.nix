@@ -40,6 +40,15 @@
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    claude-code-darwin = {
+      url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
   };
 
   outputs =
@@ -54,13 +63,19 @@
       numlockfixd,
       nix-doom-emacs-unstraightened,
       nix-doom-emacs-unstraightened-darwin,
+      claude-code,
+      claude-code-darwin,
       ...
     }:
     let
       lib = nixpkgs.lib;
-      linuxOverlays = [ nix-doom-emacs-unstraightened.overlays.default ];
+      linuxOverlays = [ 
+        nix-doom-emacs-unstraightened.overlays.default
+        claude-code.overlays.default
+      ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
+        claude-code-darwin.overlays.default
         (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })

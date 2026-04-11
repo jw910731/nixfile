@@ -8,6 +8,7 @@
     ./halloy.nix
     ./tmux.nix
     ./gpg.nix
+    ./claude
   ];
 
   home.packages = with pkgs; [
