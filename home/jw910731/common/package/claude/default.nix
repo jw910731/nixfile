@@ -21,11 +21,13 @@
         ];
       in lib.genAttrs plugins (s: true);
       extraKnownMarketplaces = {
-        starship-claude = {
-          source = {
-            source = "github";
-            repo = "martinemde/starship-claude";
-          };
+        starship-claude.source = {
+          source = "github";
+          repo = "martinemde/starship-claude";
+        };
+        claude-plugins-official.source = {
+          source = "github";
+          repo = "anthropics/claude-plugins-official";
         };
       };
       statusLine = {
