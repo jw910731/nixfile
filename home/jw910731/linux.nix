@@ -2,6 +2,7 @@
   imports = [
     ./common
     ./common/git-identity.nix
+    ./common/git-sendmail.nix
 
     ./linux
   ];
