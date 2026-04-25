@@ -38,6 +38,7 @@
     nixfmt
     nix-output-monitor
     gemini-cli
+    nodejs_24
   ];
 
   programs.go = {
