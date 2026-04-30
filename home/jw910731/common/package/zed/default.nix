@@ -6,7 +6,6 @@
     lsp = import ./lsp.nix;
     settings = import ./settings.nix;
   in {
-    enable = true;
     extensions = extentions;
     userSettings =
       settings

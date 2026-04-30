@@ -5,8 +5,9 @@
     brave
     noto-fonts-cjk-sans
     vscode-fhs
-    zed-editor
   ];
+
+  package.zed-editor.enable = true;
 
   services.gpg-agent = {
     enable = true;
