@@ -9,6 +9,7 @@
     ./tmux.nix
     ./gpg.nix
     ./claude
+    ./zed
   ];
 
   home.packages = with pkgs; [
