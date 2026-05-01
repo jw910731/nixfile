@@ -9,6 +9,7 @@
     ./tmux.nix
     ./gpg.nix
     ./claude
+    ./opencode
     ./zed
   ];
 
