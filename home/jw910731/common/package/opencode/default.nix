@@ -3,8 +3,16 @@
   programs.opencode = {
     enable = true;
     settings = {
-      model = "zai-coding-plan/glm-5";
+      model = "zai-coding-plan/glm-5.1";
       small_model = "zai-coding-plan/glm-4.7-flash";
+      provider.zai-coding-plan.options.apiKey = "{file:~/.config/opencode/zai-key}";
+      mcp = {
+        web-search-prime = {
+          type = "remote";
+          url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
+          headers.Authorization = "{file:~/.config/opencode/zai-key}";
+        };
+      };
       permission = {
         "*" = "ask";
         bash = {
