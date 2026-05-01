@@ -54,6 +54,7 @@
         grep = "allow";
         webfetch = "allow";
         websearch = "allow";
+        web-search-prime_web_search_prime = "allow";
         codesearch = "allow";
         todoread = "allow";
         todowrite = "allow";
