@@ -4,6 +4,11 @@
   programs.man.enable = false;
   home.extraOutputsToInstall = [ "man" ];
 
+  programs.zed-editor = {
+    enable = true;
+    package = null;
+  };
+
   programs.ghostty = {
     package = null;
     settings = {

@@ -2,15 +2,14 @@
   mapCask = map (x: {
     name = x;
     greedy = true;
-    args = {
-      no_quarantine = true;
-    };
   });
   options = {
     enable = true;
     onActivation = {
       cleanup = "uninstall";
+      extraFlags = [ "--force-cleanup" ];
     };
+    
 
     brews = [
       "pinentry"
@@ -24,6 +23,8 @@
       "1password-cli"
       "betterdisplay"
       "brave-browser"
+      "claude"
+      "dockdoor"
       "firefox"
       "font-hack-nerd-font"
       "ghostty"

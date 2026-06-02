@@ -8,6 +8,9 @@
     ./halloy.nix
     ./tmux.nix
     ./gpg.nix
+    ./claude
+    ./opencode
+    ./zed
   ];
 
   home.packages = with pkgs; [
@@ -37,6 +40,7 @@
     nixfmt
     nix-output-monitor
     gemini-cli
+    nodejs_24
   ];
 
   programs.go = {

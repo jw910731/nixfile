@@ -10,6 +10,7 @@ in
       brews = [
         "blacktop/tap/ipsw"
         "container"
+        "virt-manager"
       ];
 
       casks = mapCask ([
@@ -25,6 +26,7 @@ in
         "logi-options+"
         "microsoft-auto-update"
         "obs"
+        "ollama-app"
         "osu"
         "prismlauncher"
         "readmoreading"

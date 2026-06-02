@@ -3,6 +3,7 @@
   imports = [
     ./common
     ./common/git-identity.nix
+    ./common/git-sendmail.nix
 
     ./darwin
     ./1p-sign.nix

@@ -16,6 +16,8 @@
       app-notifications = "no-clipboard-copy";
       cursor-style = "block";
       cursor-opacity = 0.65;
+      working-directory = "home";
+      window-inherit-working-directory = false;
 
       # Notification
       notify-on-command-finish-action = "no-bell,notify";
