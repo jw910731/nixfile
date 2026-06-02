@@ -7,7 +7,9 @@
     enable = true;
     onActivation = {
       cleanup = "uninstall";
+      extraFlags = [ "--force-cleanup" ];
     };
+    
 
     brews = [
       "pinentry"
