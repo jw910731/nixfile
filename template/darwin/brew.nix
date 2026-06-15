@@ -39,6 +39,8 @@
       "visual-studio-code"
       "xquartz"
       "zed"
+
+      "nikitabobko/tap/aerospace"
     ];
 
     taps = [

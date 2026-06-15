@@ -17,7 +17,7 @@ after-startup-command = [
 ]
 
 # Start AeroSpace at login
-start-at-login = false
+start-at-login = true
 
 # Normalizations. See: https://nikitabobko.github.io/AeroSpace/guide#normalization
 enable-normalization-flatten-containers = false
@@ -62,8 +62,6 @@ outer.right =      5
 ctrl-enter = "mode activate"
 
 [mode.activate.binding]
-ctrl-shift-t = ['''exec-and-forget kitten @ launch --type os-window''', 'mode main']
-
 ctrl-a = ['focus left', 'mode main']
 ctrl-s = ['focus down', 'mode main']
 ctrl-w = ['focus up', 'mode main']
@@ -104,6 +102,16 @@ ctrl-7 = ['workspace 7', 'mode main']
 ctrl-8 = ['workspace 8', 'mode main']
 ctrl-9 = ['workspace 9', 'mode main']
 ctrl-0 = ['workspace 10', 'mode main']
+ctrl-alt-1 = ['workspace 11', 'mode main']
+ctrl-alt-2 = ['workspace 12', 'mode main']
+ctrl-alt-3 = ['workspace 13', 'mode main']
+ctrl-alt-4 = ['workspace 14', 'mode main']
+ctrl-alt-5 = ['workspace 15', 'mode main']
+ctrl-alt-6 = ['workspace 16', 'mode main']
+ctrl-alt-7 = ['workspace 17', 'mode main']
+ctrl-alt-8 = ['workspace 18', 'mode main']
+ctrl-alt-9 = ['workspace 19', 'mode main']
+ctrl-alt-0 = ['workspace 20', 'mode main']
 
 ctrl-shift-1 = ['move-node-to-workspace 1', 'mode main']
 ctrl-shift-2 = ['move-node-to-workspace 2', 'mode main']
@@ -115,6 +123,16 @@ ctrl-shift-7 = ['move-node-to-workspace 7', 'mode main']
 ctrl-shift-8 = ['move-node-to-workspace 8', 'mode main']
 ctrl-shift-9 = ['move-node-to-workspace 9', 'mode main']
 ctrl-shift-0 = ['move-node-to-workspace 10', 'mode main']
+ctrl-alt-shift-1 = ['move-node-to-workspace 11', 'mode main']
+ctrl-alt-shift-2 = ['move-node-to-workspace 12', 'mode main']
+ctrl-alt-shift-3 = ['move-node-to-workspace 13', 'mode main']
+ctrl-alt-shift-4 = ['move-node-to-workspace 14', 'mode main']
+ctrl-alt-shift-5 = ['move-node-to-workspace 15', 'mode main']
+ctrl-alt-shift-6 = ['move-node-to-workspace 16', 'mode main']
+ctrl-alt-shift-7 = ['move-node-to-workspace 17', 'mode main']
+ctrl-alt-shift-8 = ['move-node-to-workspace 18', 'mode main']
+ctrl-alt-shift-9 = ['move-node-to-workspace 19', 'mode main']
+ctrl-alt-shift-0 = ['move-node-to-workspace 20', 'mode main']
 
 # ctrl-r = 'mode resize'
 
@@ -125,3 +143,25 @@ ctrl-shift-0 = ['move-node-to-workspace 10', 'mode main']
 # right = 'resize width +50'
 # enter = 'mode main'
 # esc = 'mode main'
+
+[workspace-to-monitor-force-assignment]
+1 = "main"
+2 = "main"
+3 = "main"
+4 = "main"
+5 = "main"
+6 = "main"
+7 = "main"
+8 = "main"
+9 = "main"
+10 = "main"
+11 = ["secondary", "main"]
+12 = ["secondary", "main"]
+13 = ["secondary", "main"]
+14 = ["secondary", "main"]
+15 = ["secondary", "main"]
+16 = ["secondary", "main"]
+17 = ["secondary", "main"]
+18 = ["secondary", "main"]
+19 = ["secondary", "main"]
+20 = ["secondary", "main"]
