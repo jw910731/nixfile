@@ -39,7 +39,7 @@
     nixd
     nixfmt
     nix-output-monitor
-    gemini-cli
+    llm-agents.gemini-cli
     nodejs_24
   ];
 

@@ -42,12 +42,12 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
-    claude-code = {
-      url = "github:sadjow/claude-code-nix";
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code-darwin = {
-      url = "github:sadjow/claude-code-nix";
+    llm-agents-darwin = {
+      url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
   };
@@ -64,19 +64,19 @@
       numlockfixd,
       nix-doom-emacs-unstraightened,
       nix-doom-emacs-unstraightened-darwin,
-      claude-code,
-      claude-code-darwin,
+      llm-agents,
+      llm-agents-darwin,
       ...
     }:
     let
       lib = nixpkgs.lib;
       linuxOverlays = [ 
         nix-doom-emacs-unstraightened.overlays.default
-        claude-code.overlays.default
+        llm-agents.overlays.default
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
-        claude-code-darwin.overlays.default
+        llm-agents-darwin.overlays.default
         (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })

@@ -2,7 +2,7 @@
 {
   programs.claude-code = {
     enable = true;
-    package = pkgs.claude-code;
+    package = pkgs.llm-agents.claude-code;
     settings = {
       hooks = {
         Notification = [{
@@ -18,6 +18,7 @@
           "clangd-lsp@claude-plugins-official"
           "rust-analyzer-lsp@claude-plugins-official"
           "starship-claude@starship-claude"
+          "ida-pro-mcp@mrexodia"
         ];
       in lib.genAttrs plugins (s: true);
       extraKnownMarketplaces = {
