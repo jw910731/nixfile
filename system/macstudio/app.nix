@@ -8,7 +8,6 @@ in
   homebrew = (
     mylib.recursiveMerge commonOptions {
       brews = [
-        "blacktop/tap/ipsw"
         "container"
         "virt-manager"
       ];
@@ -36,7 +35,8 @@ in
         "cloudflare-warp"
       ]);
 
-      taps = [ ];
+      taps = [
+      ];
 
       masApps = {
         "LINE" = 539883307;
