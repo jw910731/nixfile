@@ -165,3 +165,10 @@ ctrl-alt-shift-0 = ['move-node-to-workspace 20', 'mode main']
 18 = ["secondary", "main"]
 19 = ["secondary", "main"]
 20 = ["secondary", "main"]
+
+# Workaround for ghostty's macos native tab
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+run= [
+  "layout tiling",
+]
