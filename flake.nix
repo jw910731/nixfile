@@ -292,6 +292,35 @@
                 })
               ];
             };
+          "macmini" =
+              let
+                system = "aarch64-darwin";
+              in
+              moduleModifier darwin.lib.darwinSystem {
+                inherit system;
+                modules = [
+                  ./system/macmini
+                  home-manager-darwin.darwinModules.home-manager
+                  (
+                    { lib, ... }:
+                    {
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.sharedModules = [
+                        nix-doom-emacs-unstraightened-darwin.homeModule
+                      ];
+  
+                      home-manager.users = {
+                        jw910731 = import ./home/jw910731/macos.nix;
+                      };
+                    }
+                  )
+                  (darwinHostSetup {
+                    hostName = "MacMini";
+                    computerName = "MacMini";
+                  })
+                ];
+              };
           "macbook-work" =
             let
               system = "aarch64-darwin";
