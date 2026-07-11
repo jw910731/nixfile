@@ -8,6 +8,8 @@ in
   homebrew = (
     mylib.recursiveMerge commonOptions {
       brews = [
+        "openjdk@17"
+        "openjdk@21"
       ];
 
       casks = mapCask [
