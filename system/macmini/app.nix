@@ -13,6 +13,7 @@ in
       ];
 
       casks = mapCask [
+        "graalvm-jdk@21"
       ];
 
       taps = [
