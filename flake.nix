@@ -167,6 +167,7 @@
           nix-doom-emacs-unstraightened.homeModule
           (import ./home/jw910731/linux.nix)
           (import ./home/jw910731/yubi-sign.nix)
+          { nixpkgs.overlays = linuxOverlays; }
           {
             programs.zsh.shellAliases = {
               "ggg" = "sudo graidctl";
