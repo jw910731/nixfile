@@ -70,7 +70,7 @@
     }:
     let
       lib = nixpkgs.lib;
-      linuxOverlays = [ 
+      linuxOverlays = [
         nix-doom-emacs-unstraightened.overlays.default
         llm-agents.overlays.default
       ];
@@ -172,6 +172,7 @@
             programs.zsh.shellAliases = {
               "ggg" = "sudo graidctl";
             };
+            targets.genericLinux.enable = true;
             programs.git.settings.user = {
               name = lib.mkForce "Jerry Wu";
               email = lib.mkForce "jerry.wu@graidtech.com";
@@ -310,7 +311,7 @@
                       home-manager.sharedModules = [
                         nix-doom-emacs-unstraightened-darwin.homeModule
                       ];
-  
+
                       home-manager.users = {
                         jw910731 = import ./home/jw910731/macos.nix;
                       };
