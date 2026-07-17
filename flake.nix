@@ -239,32 +239,6 @@
           moduleModifier = moduleModifier' darwinOverlays;
         in
         {
-          "macbook" =
-            let
-              system = "aarch64-darwin";
-            in
-            moduleModifier darwin.lib.darwinSystem {
-              inherit system;
-              modules = [
-                ./system/macbook
-                home-manager-darwin.darwinModules.home-manager
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.sharedModules = [
-                    nix-doom-emacs-unstraightened-darwin.homeModule
-                  ];
-
-                  home-manager.users = {
-                    jw910731 = import ./home/jw910731/macos.nix;
-                  };
-                }
-                (darwinHostSetup {
-                  hostName = "jw910731-MacBook-Air";
-                  computerName = "jw910731's Macbook Air";
-                })
-              ];
-            };
           "macstudio" =
             let
               system = "aarch64-darwin";
