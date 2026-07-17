@@ -72,11 +72,11 @@
       lib = nixpkgs.lib;
       linuxOverlays = [
         nix-doom-emacs-unstraightened.overlays.default
-        llm-agents.overlays.default
+        llm-agents.overlays.shared-nixpkgs
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
-        llm-agents-darwin.overlays.default
+        llm-agents-darwin.overlays.shared-nixpkgs
         (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })
