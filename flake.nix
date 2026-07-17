@@ -70,13 +70,13 @@
     }:
     let
       lib = nixpkgs.lib;
-      linuxOverlays = [ 
+      linuxOverlays = [
         nix-doom-emacs-unstraightened.overlays.default
-        llm-agents.overlays.default
+        llm-agents.overlays.shared-nixpkgs
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
-        llm-agents-darwin.overlays.default
+        llm-agents-darwin.overlays.shared-nixpkgs
         (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })
@@ -167,10 +167,12 @@
           nix-doom-emacs-unstraightened.homeModule
           (import ./home/jw910731/linux.nix)
           (import ./home/jw910731/yubi-sign.nix)
+          { nixpkgs.overlays = linuxOverlays; }
           {
             programs.zsh.shellAliases = {
               "ggg" = "sudo graidctl";
             };
+            targets.genericLinux.enable = true;
             programs.git.settings.user = {
               name = lib.mkForce "Jerry Wu";
               email = lib.mkForce "jerry.wu@graidtech.com";
@@ -292,6 +294,35 @@
                 })
               ];
             };
+          "macmini" =
+              let
+                system = "aarch64-darwin";
+              in
+              moduleModifier darwin.lib.darwinSystem {
+                inherit system;
+                modules = [
+                  ./system/macmini
+                  home-manager-darwin.darwinModules.home-manager
+                  (
+                    { lib, ... }:
+                    {
+                      home-manager.useGlobalPkgs = true;
+                      home-manager.useUserPackages = true;
+                      home-manager.sharedModules = [
+                        nix-doom-emacs-unstraightened-darwin.homeModule
+                      ];
+
+                      home-manager.users = {
+                        jw910731 = import ./home/jw910731/macos.nix;
+                      };
+                    }
+                  )
+                  (darwinHostSetup {
+                    hostName = "MacMini";
+                    computerName = "MacMini";
+                  })
+                ];
+              };
           "macbook-work" =
             let
               system = "aarch64-darwin";

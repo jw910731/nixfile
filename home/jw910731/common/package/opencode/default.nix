@@ -15,7 +15,6 @@
           apiKey = "{file:~/.config/opencode/omniroute-key}";
           modelsDiscovery = {
             enabled = true;
-            endpoint = "/models";
           };
         };
       };

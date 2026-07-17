@@ -9,7 +9,7 @@
       cleanup = "uninstall";
       extraFlags = [ "--force-cleanup" ];
     };
-    
+
 
     brews = [
       "pinentry"
@@ -28,6 +28,7 @@
       "firefox"
       "font-hack-nerd-font"
       "ghostty"
+      "helium-browser"
       "iina"
       "jordanbaird-ice@beta"
       "keka"
