@@ -53,6 +53,12 @@
         todoread = "allow";
         todowrite = "allow";
       };
+      mcp = {
+        ida-pro-mcp = {
+          type = "remote";
+          url = "http://127.0.0.1:13337/mcp";
+        };
+      };
     };
   };
 }

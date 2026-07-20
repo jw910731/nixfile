@@ -17,7 +17,6 @@
         plugins = [
           "clangd-lsp@claude-plugins-official"
           "rust-analyzer-lsp@claude-plugins-official"
-          "starship-claude@starship-claude"
           "ida-pro-mcp@mrexodia"
         ];
       in lib.genAttrs plugins (s: true);
