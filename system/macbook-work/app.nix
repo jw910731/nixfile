@@ -10,7 +10,7 @@ in
       brews = [ ];
 
       casks = mapCask [
-        "logi-options+"
+        "openlogi"
         "meetingbar"
         "microsoft-teams"
         "openvpn-connect"

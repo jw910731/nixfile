@@ -22,7 +22,7 @@ in
         "font-latin-modern"
         "hhkb"
         "keycastr"
-        "logi-options+"
+        "openlogi"
         "obs"
         "osu"
         "prismlauncher"
