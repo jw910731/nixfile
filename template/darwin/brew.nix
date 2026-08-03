@@ -1,8 +1,15 @@
-{
+let
   mapCask = map (x: {
     name = x;
     greedy = true;
+    trusted = true;
   });
+  mapTap = map (x: {
+    name = x;
+    trusted = true;
+  });
+in {
+  inherit mapCask mapTap;
   options = {
     enable = true;
     onActivation = {
@@ -18,7 +25,7 @@
       "python@3.12"
     ];
 
-    casks = [
+    casks = mapCask [
       "1password"
       "1password-cli"
       "betterdisplay"
@@ -32,15 +39,16 @@
       "keka"
       "kekaexternalhelper"
       "orion"
-      "raycast"
       "spotify"
+      "supercmd"
       "stats"
       "visual-studio-code"
       "xquartz"
       "zed"
     ];
 
-    taps = [
+    taps = mapTap [
+      "shobhit99/tap"
     ];
 
     masApps = {
