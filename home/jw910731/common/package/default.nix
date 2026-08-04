@@ -40,6 +40,7 @@
     nixfmt
     nix-output-monitor
     nodejs_24
+    fd
   ];
 
   programs.go = {
