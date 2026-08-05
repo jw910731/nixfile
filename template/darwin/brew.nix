@@ -19,6 +19,7 @@ in {
 
 
     brews = [
+      "mole"
       "pinentry"
       "pinentry-mac"
       "pkg-config"
