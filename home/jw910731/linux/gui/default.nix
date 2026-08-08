@@ -7,7 +7,7 @@
     vscode-fhs
   ];
 
-  package.zed-editor.enable = true;
+  programs.zed-editor.enable = true;
 
   services.gpg-agent = {
     enable = true;
