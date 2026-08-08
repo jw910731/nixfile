@@ -5,6 +5,7 @@
     helium
     noto-fonts-cjk-sans
     vscode-fhs
+    spotify
   ];
 
   programs.zed-editor.enable = true;

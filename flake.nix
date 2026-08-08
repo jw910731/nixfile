@@ -55,6 +55,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxcl/nix-flake-helium-browser";
     };
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -72,6 +77,7 @@
       llm-agents,
       llm-agents-darwin,
       helium-flake,
+      nixos-hardware,
       ...
     }:
     let
@@ -221,6 +227,7 @@
 
             modules = [
               ./system/framework/configuration.nix
+              nixos-hardware.nixosModules.framework-intel-core-ultra-series3
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
@@ -298,34 +305,34 @@
               ];
             };
           "macmini" =
-              let
-                system = "aarch64-darwin";
-              in
-              moduleModifier darwin.lib.darwinSystem {
-                inherit system;
-                modules = [
-                  ./system/macmini
-                  home-manager-darwin.darwinModules.home-manager
-                  (
-                    { lib, ... }:
-                    {
-                      home-manager.useGlobalPkgs = true;
-                      home-manager.useUserPackages = true;
-                      home-manager.sharedModules = [
-                        nix-doom-emacs-unstraightened-darwin.homeModule
-                      ];
+            let
+              system = "aarch64-darwin";
+            in
+            moduleModifier darwin.lib.darwinSystem {
+              inherit system;
+              modules = [
+                ./system/macmini
+                home-manager-darwin.darwinModules.home-manager
+                (
+                  { lib, ... }:
+                  {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.sharedModules = [
+                      nix-doom-emacs-unstraightened-darwin.homeModule
+                    ];
 
-                      home-manager.users = {
-                        jw910731 = import ./home/jw910731/macos.nix;
-                      };
-                    }
-                  )
-                  (darwinHostSetup {
-                    hostName = "MacMini";
-                    computerName = "MacMini";
-                  })
-                ];
-              };
+                    home-manager.users = {
+                      jw910731 = import ./home/jw910731/macos.nix;
+                    };
+                  }
+                )
+                (darwinHostSetup {
+                  hostName = "MacMini";
+                  computerName = "MacMini";
+                })
+              ];
+            };
           "macbook-work" =
             let
               system = "aarch64-darwin";
