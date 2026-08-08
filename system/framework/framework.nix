@@ -11,7 +11,7 @@
   # boot.extraModulePackages = with config.boot.kernelPackages; [ ];
   boot.initrd.kernelModules = [ ];
   boot.loader.systemd-boot.configurationLimit = 10;
-  boot.kernel.sysctl = {};
+  boot.kernel.sysctl = { };
   boot.kernelParams = [ ];
 
   # Set your time zone.
@@ -49,10 +49,37 @@
 
   # Enable flatpak
   services.flatpak.enable = true;
+
+  # Graphic Interface
+  services.displayManager.sddm = {
+    enable = true;
+    wayland.enable = true;
+  };
+
+  services.desktopManager = {
+    plasma6.enable = true;
+  };
+
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true;
+    xwayland.enable = true;
+  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+  # Fingerprint sensor
+  services.fprintd.enable = true;
+
+  # Bluetooth
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = false;
+  };
+  services.blueman.enable = true;
 
   # Enable docker
   # virtualisation.docker.enable = true;
