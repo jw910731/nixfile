@@ -69,7 +69,6 @@
       nixpkgs,
       nixpkgs-darwin,
       darwin,
-      nixos-apple-silicon,
       home-manager,
       home-manager-darwin,
       treefmt-nix,
@@ -80,7 +79,6 @@
       llm-agents-darwin,
       helium-flake,
       nixos-hardware,
-      toshy,
       ...
     }:
     let
@@ -231,30 +229,6 @@
             modules = [
               ./system/framework/configuration.nix
               nixos-hardware.nixosModules.framework-intel-core-ultra-series3
-              toshy.nixosModules.toshy
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.sharedModules = [
-                  nix-doom-emacs-unstraightened.homeModule
-                  toshy.homeManagerModules.toshy
-                ];
-
-                home-manager.users = {
-                  jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux-gui.nix)
-                    (import ./home/jw910731/1p-sign.nix)
-                  ];
-                };
-              }
-            ];
-          };
-          "asahi" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
-            modules = [
-              nixos-apple-silicon.nixosModules.default
-              ./system/asahi/configuration.nix
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;

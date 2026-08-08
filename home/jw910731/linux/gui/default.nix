@@ -11,8 +11,6 @@
 
   programs.zed-editor.enable = true;
 
-  services.toshy.enable = true;
-
   services.gpg-agent = {
     enable = true;
     pinentry.program = "pinentry-qt";
