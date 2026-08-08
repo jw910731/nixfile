@@ -4,10 +4,14 @@
 
   i18n.inputMethod = {
     enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime
-      qt6Packages.fcitx5-configtool
-    ];
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [
+        rime-data
+        fcitx5-rime
+        qt6Packages.fcitx5-configtool
+      ];
+    };
   };
 
   xdg.configFile = {
