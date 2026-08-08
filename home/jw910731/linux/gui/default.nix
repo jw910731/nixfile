@@ -2,7 +2,7 @@
 {
   imports = [ ./fcitx5 ];
   home.packages = with pkgs; [
-    brave
+    helium
     noto-fonts-cjk-sans
     vscode-fhs
   ];

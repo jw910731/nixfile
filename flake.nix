@@ -50,6 +50,11 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
+
+    helium-flake = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:oxcl/nix-flake-helium-browser";
+    };
   };
 
   outputs =
@@ -66,6 +71,7 @@
       nix-doom-emacs-unstraightened-darwin,
       llm-agents,
       llm-agents-darwin,
+      helium-flake,
       ...
     }:
     let
@@ -73,6 +79,7 @@
       linuxOverlays = [
         nix-doom-emacs-unstraightened.overlays.default
         llm-agents.overlays.shared-nixpkgs
+        helium-flake.overlays.default
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
