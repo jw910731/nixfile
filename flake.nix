@@ -60,6 +60,8 @@
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    toshy.url = "github:RedBearAK/toshy/main";
   };
 
   outputs =
@@ -78,6 +80,7 @@
       llm-agents-darwin,
       helium-flake,
       nixos-hardware,
+      toshy,
       ...
     }:
     let
@@ -228,12 +231,14 @@
             modules = [
               ./system/framework/configuration.nix
               nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+              toshy.nixosModules.toshy
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.sharedModules = [
                   nix-doom-emacs-unstraightened.homeModule
+                  toshy.homeManagerModules.toshy
                 ];
 
                 home-manager.users = {

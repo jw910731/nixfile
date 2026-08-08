@@ -6,9 +6,12 @@
     noto-fonts-cjk-sans
     vscode-fhs
     spotify
+    discord
   ];
 
   programs.zed-editor.enable = true;
+
+  services.toshy.enable = true;
 
   services.gpg-agent = {
     enable = true;

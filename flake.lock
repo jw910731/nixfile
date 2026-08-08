@@ -487,6 +487,22 @@
     },
     "nixpkgs_2": {
       "locked": {
+        "lastModified": 1785967620,
+        "narHash": "sha256-IItrdb7Puk05RqOBWZYFC5X6Wl1sJmCfh5MWVHw5iMM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b7c2ada94fe99c15b0dbcf4d11fd7850b957a436",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_3": {
+      "locked": {
         "lastModified": 1770107345,
         "narHash": "sha256-tbS0Ebx2PiA1FRW8mt8oejR0qMXmziJmPaU1d4kYY9g=",
         "owner": "nixos",
@@ -536,6 +552,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-darwin": "nixpkgs-darwin",
         "numlockfixd": "numlockfixd",
+        "toshy": "toshy",
         "treefmt-nix": "treefmt-nix_3"
       }
     },
@@ -599,6 +616,25 @@
         "type": "github"
       }
     },
+    "toshy": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_2"
+      },
+      "locked": {
+        "lastModified": 1785985265,
+        "narHash": "sha256-mGg8tJXxuDWamgYnZ/1qwew/CAVLlU6w6CxQ0J67uN0=",
+        "owner": "RedBearAK",
+        "repo": "toshy",
+        "rev": "41119ab6fbfc910187d13748a3e71bfe922fe06a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "RedBearAK",
+        "ref": "main",
+        "repo": "toshy",
+        "type": "github"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -643,7 +679,7 @@
     },
     "treefmt-nix_3": {
       "inputs": {
-        "nixpkgs": "nixpkgs_2"
+        "nixpkgs": "nixpkgs_3"
       },
       "locked": {
         "lastModified": 1780220602,

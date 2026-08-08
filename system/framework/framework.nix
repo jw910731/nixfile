@@ -85,9 +85,16 @@
   # virtualisation.docker.enable = true;
 
   environment.systemPackages = [
+    pkgs.steam-devices-udev-rules
     pkgs.cifs-utils
   ];
 
+  # Toshy (mac-like key map mapper)
+  services.toshy = {
+    enable = true;
+    users  = [ "jw910731" ];
+  };
+  
   # Enable sound with pipewire.
   # sound.enable = true;
   # hardware.pulseaudio.enable = false;
