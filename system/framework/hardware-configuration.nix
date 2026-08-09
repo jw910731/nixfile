@@ -18,20 +18,20 @@
       fsType = "xfs";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DDFA-54E3";
-      fsType = "vfat";
-      options = [ "fmask=0077" "dmask=0077" ];
-    };
-
   fileSystems."/home" =
     { device = "/dev/mapper/pool-home";
       fsType = "xfs";
     };
 
-  swapDevices = [
-    { device = "/dev/mapper/pool-swap"; }
-  ];
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/8BBD-FA3F";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
+
+  swapDevices =
+    [ { device = "/dev/mapper/pool-swap"; }
+    ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.npu.enable = true;
