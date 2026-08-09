@@ -5,10 +5,6 @@
     # NixPKG
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
-    nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # formatter
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -61,7 +57,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    toshy.url = "github:RedBearAK/toshy/main";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -79,6 +78,7 @@
       llm-agents-darwin,
       helium-flake,
       nixos-hardware,
+      lanzaboote,
       ...
     }:
     let
@@ -229,6 +229,7 @@
             modules = [
               ./system/framework/configuration.nix
               nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+              lanzaboote.nixosModules.lanzaboote
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;

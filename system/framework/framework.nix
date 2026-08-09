@@ -4,13 +4,25 @@
     ./framework-network.nix
   ];
 
-  # Bootloader
-  boot.loader.systemd-boot.enable = true;
+  # Secure Boot & Bootloader
+  boot.loader.systemd-boot.enable = false;
+  boot.lanzaboote = {
+    enable = true;
+    pkiBundle = "/var/lib/sbctl";
+    measuredBoot = {
+      enable = true;
+      pcrs = [
+        0
+        4
+        7
+      ];
+    };
+  };
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
   # boot.extraModulePackages = with config.boot.kernelPackages; [ ];
   boot.initrd.kernelModules = [ ];
-  boot.loader.systemd-boot.configurationLimit = 10;
+  boot.loader.systemd-boot.configurationLimit = 8;
   boot.kernel.sysctl = { };
   boot.kernelParams = [ ];
 
@@ -87,6 +99,7 @@
   environment.systemPackages = [
     pkgs.steam-devices-udev-rules
     pkgs.cifs-utils
+    pkgs.sbctl
   ];
   
   # Enable sound with pipewire.
