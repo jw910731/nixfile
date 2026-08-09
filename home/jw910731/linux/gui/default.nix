@@ -1,12 +1,14 @@
 { pkgs, ... }:
 {
-  imports = [ ./fcitx5 ];
+  imports = [ 
+    ./fcitx5
+    ./flatpak.nix
+  ];
   home.packages = with pkgs; [
     helium
     noto-fonts-cjk-sans
     vscode-fhs
     spotify
-    discord
   ];
 
   programs.zed-editor.enable = true;

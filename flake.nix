@@ -19,6 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Darwin Only
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -29,6 +30,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Darwin & Linux 
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -47,6 +49,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Linux Only
     helium-flake = {
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:oxcl/nix-flake-helium-browser";
@@ -61,6 +64,8 @@
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
   };
 
   outputs =
@@ -79,6 +84,7 @@
       helium-flake,
       nixos-hardware,
       lanzaboote,
+      nix-flatpak,
       ...
     }:
     let
@@ -236,6 +242,7 @@
                 home-manager.useUserPackages = true;
                 home-manager.sharedModules = [
                   nix-doom-emacs-unstraightened.homeModule
+                  nix-flatpak.homeManagerModules.nix-flatpak
                 ];
 
                 home-manager.users = {
