@@ -93,6 +93,11 @@
   };
   services.blueman.enable = true;
 
+  # Graphics
+  hardware.intelgpu = {
+    driver = "xe";
+  };
+
   # Enable docker
   # virtualisation.docker.enable = true;
 
