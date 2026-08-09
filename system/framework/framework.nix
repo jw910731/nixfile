@@ -116,12 +116,56 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
 
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
+    # Bluetooth
+    wireplumber = {
+      enable = true;
+      extraConfig."10-bluez" = {
+        "monitor.bluez.properties" = {
+          "bluez5.enable-sbc-xq" = true;
+          "bluez5.enable-msbc" = true;
+          "bluez5.enable-hw-volume" = true;
+          "bluez5.roles" = [
+            "hsp_hs"
+            "hsp_ag"
+            "hfp_hf"
+            "hfp_ag"
+            "a2dp_sink"
+            "a2dp_source"
+            "bap_sink"
+            "bap_source"
+          ];
+          "bluez5.codecs" = [
+            "ldac"
+            "aptx"
+            "aptx_ll_duplex"
+            "aptx_ll"
+            "aptx_hd"
+            "opus_05_pro"
+            "opus_05_71"
+            "opus_05_51"
+            "opus_05"
+            "opus_05_duplex"
+            "aac"
+            "sbc_xq"
+          ];
+
+          "bluez5.hfphsp-backend" = "none";
+        };
+      };
+    };
+
+    # Airplay
+    raopOpenFirewall = true;
+    extraConfig.pipewire = {
+      "10-airplay" = {
+        "context.modules" = [
+          {
+            name = "libpipewire-module-raop-discover";
+          }
+        ];
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
