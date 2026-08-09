@@ -30,7 +30,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
-    # Darwin & Linux 
+    # Darwin & Linux
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,7 +64,7 @@
       url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
   };
 

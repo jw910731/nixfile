@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ 
+  imports = [
     ./fcitx5
     ./flatpak.nix
   ];

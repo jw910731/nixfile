@@ -5,21 +5,27 @@
     package = pkgs.llm-agents.claude-code;
     settings = {
       hooks = {
-        Notification = [{
-          matcher = "";
-          hooks = [{
-            type = "command";
-            command = ''jq -r '.message // "Needs attention"' | xargs -I{} bash -c 'printf "\033]9;{}\033\\" > /dev/tty''\''';
-          }];
-        }];
-      };
-      enabledPlugins = let 
-        plugins = [
-          "clangd-lsp@claude-plugins-official"
-          "rust-analyzer-lsp@claude-plugins-official"
-          "ida-pro-mcp@mrexodia"
+        Notification = [
+          {
+            matcher = "";
+            hooks = [
+              {
+                type = "command";
+                command = ''jq -r '.message // "Needs attention"' | xargs -I{} bash -c 'printf "\033]9;{}\033\\" > /dev/tty''\''';
+              }
+            ];
+          }
         ];
-      in lib.genAttrs plugins (s: true);
+      };
+      enabledPlugins =
+        let
+          plugins = [
+            "clangd-lsp@claude-plugins-official"
+            "rust-analyzer-lsp@claude-plugins-official"
+            "ida-pro-mcp@mrexodia"
+          ];
+        in
+        lib.genAttrs plugins (s: true);
       extraKnownMarketplaces = {
         starship-claude.source = {
           source = "github";
