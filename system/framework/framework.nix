@@ -127,15 +127,18 @@
   # virtualisation.docker.enable = true;
 
   environment.systemPackages = [
-    pkgs.steam-devices-udev-rules
     pkgs.cifs-utils
     pkgs.sbctl
+    pkgs.touchegg
   ];
 
+  # Steam
+  hardware.steam-hardware.enable = true;
+
+  # Touchpad
+  services.touchegg.enable = true;
+
   # Enable sound with pipewire.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = false;
-  # security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
