@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 {
   imports = [
     ./framework-network.nix
@@ -19,12 +24,19 @@
     };
   };
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxKernel.packages.linux_zen;
-  # boot.extraModulePackages = with config.boot.kernelPackages; [ ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = with config.boot.kernelPackages; [ ];
   boot.initrd.kernelModules = [ ];
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.kernel.sysctl = { };
   boot.kernelParams = [ ];
+
+  # Power Management
+  services.thermald.enable = true;
+  powerManagement = {
+    enable = true;
+    powertop.enable = true;
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
