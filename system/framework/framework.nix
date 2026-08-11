@@ -30,6 +30,9 @@
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.kernel.sysctl = { };
   boot.kernelParams = [ ];
+  boot.zswap = {
+    enable = true;
+  };
 
   # Power Management
   services.thermald.enable = true;
