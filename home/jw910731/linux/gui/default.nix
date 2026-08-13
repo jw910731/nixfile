@@ -9,6 +9,7 @@
     noto-fonts-cjk-sans
     vscode-fhs
     spotify
+    telegram-desktop
   ];
 
   programs.zed-editor.enable = true;

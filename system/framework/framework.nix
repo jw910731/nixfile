@@ -129,10 +129,13 @@
   # Enable docker
   # virtualisation.docker.enable = true;
 
-  environment.systemPackages = [
-    pkgs.cifs-utils
-    pkgs.sbctl
-    pkgs.touchegg
+  environment.systemPackages = with pkgs; [
+    cifs-utils
+    kdePackages.kio
+    kdePackages.kio-fuse
+    kdePackages.kio-extras
+    sbctl
+    touchegg
   ];
 
   # Steam
