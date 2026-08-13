@@ -91,7 +91,8 @@
   services.desktopManager = {
     plasma6.enable = true;
   };
-
+  security.pam.services.login.fprintAuth = false;
+  
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
