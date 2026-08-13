@@ -40,6 +40,11 @@
     enable = true;
     powertop.enable = true;
   };
+  services.intel-lpmd = {
+    enable = true;
+    config.pantherLake = true;
+    mode = "ON";
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";

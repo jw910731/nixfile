@@ -66,6 +66,11 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
+
+    intel-lpmd-flake = {
+      url = "github:dmfrpro/intel-lpmd-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -85,6 +90,7 @@
       nixos-hardware,
       lanzaboote,
       nix-flatpak,
+      intel-lpmd-flake,
       ...
     }:
     let
@@ -235,6 +241,7 @@
             modules = [
               ./system/framework/configuration.nix
               nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+              intel-lpmd-flake.nixosModules.default
               lanzaboote.nixosModules.lanzaboote
               home-manager.nixosModules.home-manager
               {
