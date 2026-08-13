@@ -103,8 +103,10 @@
   services.acpid = {
     enable = true;
     lidEventCommands =
-      let goodixVendor = "27c6";
-      in ''
+      let
+        goodixVendor = "27c6";
+      in
+      ''
         grep -q closed /proc/acpi/button/lid/LID0/state
         if [ $? = 0 ]; then
           ${pkgs.fd}/bin/fd "-" /sys/bus/usb/devices --exec /bin/sh -c '${pkgs.gnugrep}/bin/grep -qs ${goodixVendor} {}/idVendor && ${pkgs.coreutils}/bin/echo 0 > {}/authorized'
@@ -113,7 +115,7 @@
         fi
       '';
   };
-  
+
   # Bluetooth
   hardware.bluetooth = {
     enable = true;

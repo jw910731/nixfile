@@ -19,6 +19,7 @@
     "thunderbolt"
     "nvme"
     "usb_storage"
+    "usbhid"
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
@@ -36,7 +37,7 @@
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/AB84-1CB6";
+    device = "/dev/disk/by-uuid/9AD1-BE97";
     fsType = "vfat";
     options = [
       "fmask=0077"
