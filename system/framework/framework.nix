@@ -136,6 +136,7 @@
     kdePackages.kio
     kdePackages.kio-fuse
     kdePackages.kio-extras
+    iio-sensor-proxy
     sbctl
     touchegg
   ];
