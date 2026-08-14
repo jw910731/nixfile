@@ -256,6 +256,9 @@
                   jw910731 = nixpkgs.lib.mkMerge [
                     (import ./home/jw910731/linux-gui.nix)
                     (import ./home/jw910731/1p-sign.nix)
+                    {
+                      imports = [ ./home/jw910731/device/framework ];
+                    }
                   ];
                 };
               }
