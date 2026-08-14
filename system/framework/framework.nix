@@ -92,7 +92,7 @@
     plasma6.enable = true;
   };
   security.pam.services.login.fprintAuth = false;
-  
+
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
@@ -129,10 +129,11 @@
   };
   services.blueman.enable = true;
 
-  # Graphics
+  # Graphics & NPU & Micro-code
   hardware.intelgpu = {
     driver = "xe";
   };
+  hardware.enableAllFirmware = true;
 
   # Enable docker
   # virtualisation.docker.enable = true;
