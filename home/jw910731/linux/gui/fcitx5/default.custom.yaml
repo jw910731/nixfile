@@ -2,6 +2,10 @@ patch:
   schema_list:
     - schema: double_pinyin_flypy
     - schema: bopomofo_tw
+  # 忽略 Shift 鍵：不切換中／西文，按鍵繼續傳給應用程式
+  ascii_composer/switch_key:
+    Shift_L: noop
+    Shift_R: noop
   # 以 /+ 追加（__patch 清單中的 map 會被當成路徑補靪操作而非列表項目，無法用於此）
   key_binder/bindings/+:
     # 1. 選字選單中按 Enter 選中當前高亮的候選字（等同按空白鍵）
