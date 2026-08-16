@@ -11,6 +11,7 @@
     ./claude
     ./opencode
     ./zed
+    ./copilot
   ];
 
   home.packages = with pkgs; [
