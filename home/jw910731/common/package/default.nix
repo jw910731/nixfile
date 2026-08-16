@@ -1,17 +1,17 @@
 { pkgs, config, ... }:
 {
   imports = [
-    ./zsh
-    ./git.nix
+    ./claude
+    ./copilot
     ./emacs.nix
     ./ghostty.nix
-    ./halloy.nix
-    ./tmux.nix
+    ./git.nix
     ./gpg.nix
-    ./claude
+    ./halloy.nix
     ./opencode
+    ./tmux.nix
     ./zed
-    ./copilot
+    ./zsh
   ];
 
   home.packages = with pkgs; [
