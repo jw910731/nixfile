@@ -103,6 +103,7 @@
         helium-flake.overlays.default
         (final: prev: {
           zed-editor = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
+          zed-editor-fhs = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor-fhs;
         })
       ];
       darwinOverlays = [
