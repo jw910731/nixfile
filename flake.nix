@@ -4,6 +4,7 @@
   inputs = {
     # NixPKG
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
 
     # formatter
@@ -76,6 +77,7 @@
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       nixpkgs-darwin,
       darwin,
       home-manager,
@@ -99,6 +101,9 @@
         nix-doom-emacs-unstraightened.overlays.default
         llm-agents.overlays.shared-nixpkgs
         helium-flake.overlays.default
+        (final: prev: {
+          zed-editor = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
+        })
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
