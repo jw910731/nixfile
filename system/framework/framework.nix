@@ -136,7 +136,16 @@
   hardware.enableAllFirmware = true;
 
   # Local Send (Airdrop alternative)
-  programs.localsend.enable = true;
+  programs.localsend = {
+    enable = true;
+    package = derivation {
+      name = "empty";
+      builder = "${pkgs.uutils-coreutils-noprefix}/bin/mkdir";
+      args = [ "${builtins.placeholder "out"}" ];
+      system = pkgs.system;
+    };
+    openFirewall = true;
+  };
 
   # Enable docker
   # virtualisation.docker.enable = true;
