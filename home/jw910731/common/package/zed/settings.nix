@@ -19,4 +19,3 @@
     dark = "One Dark";
   };
 }
-

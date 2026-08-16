@@ -3,11 +3,16 @@
   home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
 
   i18n.inputMethod = {
-    enabled = "fcitx5";
-    fcitx5.addons = with pkgs; [
-      fcitx5-rime
-      qt6Packages.fcitx5-configtool
-    ];
+    enable = true;
+    type = "fcitx5";
+    fcitx5 = {
+      waylandFrontend = true;
+      addons = with pkgs; [
+        rime-data
+        fcitx5-rime
+        qt6Packages.fcitx5-configtool
+      ];
+    };
   };
 
   xdg.configFile = {
@@ -25,5 +30,12 @@
     };
     "fcitx5/conf/classicui.conf".source = ./classicui.conf;
   };
+
+  # nix store 檔案 mtime 恆為 epoch，librime 以 mtime 判斷 custom 檔是否變更，
+  # 會永遠認為沒變而不重新編譯；每次 switch 強制作廢編譯快取（重啟 fcitx5 後生效）
+  home.activation.rimeForceRecompile = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    $DRY_RUN_CMD rm -f "$HOME/.local/share/fcitx5/rime/build/default.yaml" \
+      "$HOME/.local/share/fcitx5/rime/build/"*.schema.yaml
+  '';
 
 }

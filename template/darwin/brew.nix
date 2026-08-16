@@ -8,7 +8,8 @@ let
     name = x;
     trusted = true;
   });
-in {
+in
+{
   inherit mapCask mapTap;
   options = {
     enable = true;
@@ -16,7 +17,6 @@ in {
       cleanup = "uninstall";
       extraFlags = [ "--force-cleanup" ];
     };
-
 
     brews = [
       "mole"

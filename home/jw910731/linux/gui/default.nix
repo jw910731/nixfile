@@ -1,13 +1,19 @@
 { pkgs, ... }:
 {
-  imports = [ ./fcitx5 ];
+  imports = [
+    ./fcitx5
+    ./flatpak.nix
+  ];
   home.packages = with pkgs; [
-    brave
+    helium
     noto-fonts-cjk-sans
     vscode-fhs
+    spotify
+    telegram-desktop
+    vlc
   ];
 
-  package.zed-editor.enable = true;
+  programs.zed-editor.enable = true;
 
   services.gpg-agent = {
     enable = true;
