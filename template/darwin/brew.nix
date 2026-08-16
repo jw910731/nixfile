@@ -40,8 +40,8 @@ in {
       "keka"
       "kekaexternalhelper"
       "orion"
+      "raycast"
       "spotify"
-      "supercmd"
       "stats"
       "visual-studio-code"
       "xquartz"
@@ -49,7 +49,6 @@ in {
     ];
 
     taps = mapTap [
-      "shobhit99/tap"
     ];
 
     masApps = {
