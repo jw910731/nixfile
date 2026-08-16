@@ -135,6 +135,9 @@
   };
   hardware.enableAllFirmware = true;
 
+  # Local Send (Airdrop alternative)
+  programs.localsend.enable = true;
+
   # Enable docker
   # virtualisation.docker.enable = true;
 
