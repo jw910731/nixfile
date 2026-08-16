@@ -5,6 +5,7 @@
     packages = [
       "com.discordapp.Discord"
       "com.valvesoftware.Steam"
+      "org.kde.keepsecret"
     ];
   };
 }
