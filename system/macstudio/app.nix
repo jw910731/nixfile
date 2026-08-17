@@ -2,6 +2,7 @@
 let
   brew-common = (import ../../template/darwin/brew.nix);
   mapCask = brew-common.mapCask;
+  mapTap = brew-common.mapTap;
   commonOptions = brew-common.options;
 in
 {
@@ -12,7 +13,7 @@ in
         "virt-manager"
       ];
 
-      casks = mapCask ([
+      casks = mapCask [
         "android-platform-tools"
         "balenaetcher"
         "bilibili"
@@ -22,7 +23,7 @@ in
         "font-latin-modern"
         "hhkb"
         "keycastr"
-        "logi-options+"
+        "openlogi"
         "obs"
         "osu"
         "prismlauncher"
@@ -30,13 +31,14 @@ in
         "steam"
         "telegram"
         "utm"
-      ]);
+      ];
 
-      taps = [
+      taps = mapTap [
       ];
 
       masApps = {
         "LINE" = 539883307;
+        "Xcode" = 497799835;
       };
     }
   );
