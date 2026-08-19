@@ -7,6 +7,7 @@
       plugin = [
         "oh-my-openagent@latest"
         "opencode-models-discovery@latest"
+        "opencode-add-dir@latest"
       ];
       permission = {
         "*" = "ask";
