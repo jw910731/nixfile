@@ -105,6 +105,9 @@
           zed-editor = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
           zed-editor-fhs = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor-fhs;
         })
+        (final: prev: {
+          fw-ectool = prev.callPackage ./system/framework/fw-ectool.nix {};
+        })
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
