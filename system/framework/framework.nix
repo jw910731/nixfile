@@ -211,17 +211,17 @@
       };
     };
 
-    # Airplay
-    raopOpenFirewall = true;
-    extraConfig.pipewire = {
-      "10-airplay" = {
-        "context.modules" = [
-          {
-            name = "libpipewire-module-raop-discover";
-          }
-        ];
-      };
-    };
+    # Airplay (Disabled for now)
+    raopOpenFirewall = false;
+    # extraConfig.pipewire = {
+    #   "10-airplay" = {
+    #     "context.modules" = [
+    #       {
+    #         name = "libpipewire-module-raop-discover";
+    #       }
+    #     ];
+    #   };
+    # };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
