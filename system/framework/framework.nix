@@ -162,7 +162,7 @@
 
   # Steam
   hardware.steam-hardware.enable = true;
-
+  
   # Touchpad
   services.touchegg.enable = true;
 
