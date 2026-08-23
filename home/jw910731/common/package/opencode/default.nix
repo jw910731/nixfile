@@ -5,7 +5,7 @@
     package = pkgs.llm-agents.opencode;
     settings = {
       plugin = [
-        "oh-my-openagent@latest"
+        "oh-my-openagent@beta"
         "opencode-models-discovery@latest"
         "opencode-add-dir@latest"
       ];
