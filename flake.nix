@@ -72,8 +72,13 @@
       url = "github:dmfrpro/intel-lpmd-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
     vicinae = {
       url = "github:vicinaehq/vicinae";
+    };
+    
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
     };
   };
 
@@ -97,8 +102,9 @@
       nix-flatpak,
       intel-lpmd-flake,
       vicinae,
+      vicinae-extensions,
       ...
-    }:
+    }@inputs:
     let
       lib = nixpkgs.lib;
       linuxOverlays = [
@@ -136,11 +142,14 @@
           lib.attrsets.updateManyAttrsByPath [
             {
               path = [ "modules" ];
-              update = modules: modules ++ [ { nixpkgs.overlays = overlays; } ];
+              update = modules: modules ++ [ 
+                { nixpkgs.overlays = overlays; }
+                { home-manager.extraSpecialArgs = { mylib = import ./lib lib; inherit inputs; }; }
+              ];
             }
             {
               path = [ "specialArgs" ];
-              update = specialArgs: specialArgs // { mylib = import ./lib lib; };
+              update = specialArgs: specialArgs // { mylib = import ./lib lib; inherit inputs; };
             }
           ] (systemAttrs // { specialArgs = { }; })
         );
@@ -269,9 +278,7 @@
                   jw910731 = nixpkgs.lib.mkMerge [
                     (import ./home/jw910731/linux-gui.nix)
                     (import ./home/jw910731/1p-sign.nix)
-                    {
-                      imports = [ ./home/jw910731/device/framework ];
-                    }
+                    { imports = [ ./home/jw910731/device/framework ]; }
                   ];
                 };
               }
