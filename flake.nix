@@ -72,6 +72,9 @@
       url = "github:dmfrpro/intel-lpmd-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+    };
   };
 
   outputs =
@@ -93,6 +96,7 @@
       lanzaboote,
       nix-flatpak,
       intel-lpmd-flake,
+      vicinae,
       ...
     }:
     let
@@ -101,6 +105,7 @@
         nix-doom-emacs-unstraightened.overlays.default
         llm-agents.overlays.shared-nixpkgs
         helium-flake.overlays.default
+
         (final: prev: {
           zed-editor = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
           zed-editor-fhs = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor-fhs;
@@ -248,6 +253,7 @@
               ./system/framework/configuration.nix
               nixos-hardware.nixosModules.framework-intel-core-ultra-series3
               intel-lpmd-flake.nixosModules.default
+              vicinae.nixosModules.default
               lanzaboote.nixosModules.lanzaboote
               home-manager.nixosModules.home-manager
               {
@@ -256,6 +262,7 @@
                 home-manager.sharedModules = [
                   nix-doom-emacs-unstraightened.homeModule
                   nix-flatpak.homeManagerModules.nix-flatpak
+                  vicinae.homeManagerModules.default
                 ];
 
                 home-manager.users = {
