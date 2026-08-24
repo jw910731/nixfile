@@ -102,7 +102,10 @@
     withUWSM = true;
     xwayland.enable = true;
   };
+  programs.uwsm.enable = true;
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.etc."xdg/menus/applications.menu".source = "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+  security.polkit.enable=true;
 
   # Fingerprint sensor
   services.fprintd.enable = true;
@@ -157,14 +160,11 @@
     kdePackages.kio-extras
     iio-sensor-proxy
     sbctl
-    touchegg
+    hyprpolkitagent
   ];
 
   # Steam
   hardware.steam-hardware.enable = true;
-  
-  # Touchpad
-  services.touchegg.enable = true;
 
   # Enable sound with pipewire.
   services.pipewire = {

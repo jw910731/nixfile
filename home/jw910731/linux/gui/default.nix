@@ -3,6 +3,7 @@
   imports = [
     ./fcitx5
     ./flatpak.nix
+    ./wayland
   ];
   home.packages = with pkgs; [
     noto-fonts-cjk-sans
@@ -14,6 +15,7 @@
   ];
 
   programs.zed-editor.enable = true;
+  programs.ghostty.settings.font-size = 12;
 
   services.gpg-agent = {
     enable = true;
@@ -31,7 +33,7 @@
     # Optional: user policies (best-effort, use NixOS module for critical policies)
     policies = {};
   };
-
+  
   programs.vicinae = {
     enable = true;
     systemd = {

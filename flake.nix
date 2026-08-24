@@ -72,13 +72,16 @@
       url = "github:dmfrpro/intel-lpmd-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     vicinae = {
       url = "github:vicinaehq/vicinae";
     };
-    
+
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
     };
   };
 
@@ -103,6 +106,7 @@
       intel-lpmd-flake,
       vicinae,
       vicinae-extensions,
+      noctalia,
       ...
     }@inputs:
     let
@@ -142,7 +146,7 @@
           lib.attrsets.updateManyAttrsByPath [
             {
               path = [ "modules" ];
-              update = modules: modules ++ [ 
+              update = modules: modules ++ [
                 { nixpkgs.overlays = overlays; }
                 { home-manager.extraSpecialArgs = { mylib = import ./lib lib; inherit inputs; }; }
               ];
@@ -272,6 +276,8 @@
                   nix-doom-emacs-unstraightened.homeModule
                   nix-flatpak.homeManagerModules.nix-flatpak
                   vicinae.homeManagerModules.default
+                  helium-flake.homeModules.default
+                  noctalia.homeModules.default
                 ];
 
                 home-manager.users = {

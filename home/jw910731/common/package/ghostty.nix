@@ -5,9 +5,10 @@
     enableZshIntegration = true;
     # installBatSyntax = true;
     settings = {
+      language = "zh_TW";
       theme = "Atom One Dark";
       background-opacity = 0.95;
-      font-family = [ "Hack Nerd Font Mono" ];
+      font-family = [ "Hack Nerd Font Mono" "Noto Sans Mono CJK TC" ];
       font-size = 14;
       font-thicken = true;
       faint-opacity = 0.75;
