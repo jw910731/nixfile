@@ -5,7 +5,6 @@
     ./flatpak.nix
   ];
   home.packages = with pkgs; [
-    helium
     noto-fonts-cjk-sans
     vscode-fhs
     spotify
@@ -19,6 +18,18 @@
   services.gpg-agent = {
     enable = true;
     pinentry.program = "pinentry-qt";
+  };
+
+  programs.helium = {
+    enable = true;
+    # Optional: override the package
+    # package = pkgs.helium;
+    # Flags - Command-line arguments always passed to Helium
+    flags = [
+      "--password-store=kwallet6"
+    ];
+    # Optional: user policies (best-effort, use NixOS module for critical policies)
+    policies = {};
   };
 
   programs.vicinae = {
