@@ -11,7 +11,6 @@
     spotify
     telegram-desktop
     vlc
-    pulseaudio
   ];
 
   programs.zed-editor.enable = true;

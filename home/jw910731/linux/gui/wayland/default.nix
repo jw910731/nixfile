@@ -70,11 +70,6 @@
     };
   };
 
-  home.packages = with pkgs; [
-    brightnessctl
-    playerctl
-  ];
-
   programs.noctalia = {
     enable = true;
     systemd.enable = true;
