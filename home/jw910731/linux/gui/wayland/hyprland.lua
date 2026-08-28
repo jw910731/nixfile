@@ -411,13 +411,14 @@ hl.bind("XF86AudioMute", hl.dsp.exec_cmd(ipc .. "volume-mute"))
 hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(ipc .. "brightness-up"))
 hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(ipc .. "brightness-down"))
 hl.bind("XF86AudioMicMute",     hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-
--- Requires playerctl
 hl.bind("XF86AudioNext",  hl.dsp.exec_cmd(ipc .. "media next"),       { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd(ipc .. "media previous"),   { locked = true })
 
+-- Screen capture
+hl.bind("Print", hl.dsp.exec_cmd(grim .. ' -g "$(' .. slurp .. ')" - | ' .. swappy .. ' -f -'))
+hl.bind("SUPER + Print", hl.dsp.exec_cmd(grim .. ' -g "$(' .. slurp .. ' -d)" - | '.. wl_copy))
 
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----

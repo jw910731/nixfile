@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
+  home.packages = with pkgs; [
+    wl-clipboard
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
@@ -13,6 +16,18 @@
     settings = {
       pam_init = {
         _var = "${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init";
+      };
+      grim = {
+        _var = "${lib.getBin pkgs.grim}/bin/grim";
+      };
+      swappy = {
+        _var = "${lib.getBin pkgs.swappy}/bin/swappy";
+      };
+      slurp = {
+        _var = "${lib.getBin pkgs.slurp}/bin/slurp";
+      };
+      wl_copy = {
+        _var = "${lib.getBin pkgs.wl-clipboard}/bin/wl-copy";
       };
     };
     extraConfig = builtins.readFile ./hyprland.lua;
