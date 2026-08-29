@@ -47,7 +47,7 @@
     config.pantherLake = true;
     mode = "ON";
   };
-  services.logind.powerKey = "ignore";
+  services.logind.settings.Login.HandlePowerKey = "ignore";
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
