@@ -46,6 +46,8 @@
     export LC_PAPER="zh_TW.utf-8"
     export LC_TELEPHONE="zh_TW.utf-8"
     export LC_TIME="zh_TW.utf-8"
+
+    export GDK_SCALE="2"
   '';
 
   home.pointerCursor = {
