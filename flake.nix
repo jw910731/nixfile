@@ -4,11 +4,8 @@
   inputs = {
     # NixPKG
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
-    nixos-apple-silicon = {
-      url = "github:tpwrules/nixos-apple-silicon";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     # formatter
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -23,6 +20,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Darwin Only
     darwin = {
       url = "github:lnl7/nix-darwin/nix-darwin-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
@@ -33,6 +31,7 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Darwin & Linux
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,41 +41,89 @@
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
-    claude-code = {
-      url = "github:sadjow/claude-code-nix";
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    claude-code-darwin = {
-      url = "github:sadjow/claude-code-nix";
+    llm-agents-darwin = {
+      url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+
+    # Linux Only
+    helium-flake = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:oxcl/nix-flake-helium-browser";
+    };
+
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.1.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.7.0";
+
+    intel-lpmd-flake = {
+      url = "github:dmfrpro/intel-lpmd-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    vicinae = {
+      url = "github:vicinaehq/vicinae";
+    };
+
+    vicinae-extensions = {
+      url = "github:vicinaehq/extensions";
+    };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia/cachix";
     };
   };
 
   outputs =
     {
       nixpkgs,
+      nixpkgs-unstable,
       nixpkgs-darwin,
       darwin,
-      nixos-apple-silicon,
       home-manager,
       home-manager-darwin,
       treefmt-nix,
       numlockfixd,
       nix-doom-emacs-unstraightened,
       nix-doom-emacs-unstraightened-darwin,
-      claude-code,
-      claude-code-darwin,
+      llm-agents,
+      llm-agents-darwin,
+      helium-flake,
+      nixos-hardware,
+      lanzaboote,
+      nix-flatpak,
+      intel-lpmd-flake,
+      vicinae,
+      vicinae-extensions,
+      noctalia,
       ...
-    }:
+    }@inputs:
     let
       lib = nixpkgs.lib;
-      linuxOverlays = [ 
+      linuxOverlays = [
         nix-doom-emacs-unstraightened.overlays.default
-        claude-code.overlays.default
+        llm-agents.overlays.shared-nixpkgs
+        helium-flake.overlays.default
+
+        (final: prev: {
+          zed-editor = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
+          zed-editor-fhs = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor-fhs;
+        })
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
-        claude-code-darwin.overlays.default
+        llm-agents-darwin.overlays.shared-nixpkgs
         (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })
@@ -99,11 +146,14 @@
           lib.attrsets.updateManyAttrsByPath [
             {
               path = [ "modules" ];
-              update = modules: modules ++ [ { nixpkgs.overlays = overlays; } ];
+              update = modules: modules ++ [
+                { nixpkgs.overlays = overlays; }
+                { home-manager.extraSpecialArgs = { mylib = import ./lib lib; inherit inputs; }; }
+              ];
             }
             {
               path = [ "specialArgs" ];
-              update = specialArgs: specialArgs // { mylib = import ./lib lib; };
+              update = specialArgs: specialArgs // { mylib = import ./lib lib; inherit inputs; };
             }
           ] (systemAttrs // { specialArgs = { }; })
         );
@@ -167,10 +217,12 @@
           nix-doom-emacs-unstraightened.homeModule
           (import ./home/jw910731/linux.nix)
           (import ./home/jw910731/yubi-sign.nix)
+          { nixpkgs.overlays = linuxOverlays; }
           {
             programs.zsh.shellAliases = {
               "ggg" = "sudo graidctl";
             };
+            targets.genericLinux.enable = true;
             programs.git.settings.user = {
               name = lib.mkForce "Jerry Wu";
               email = lib.mkForce "jerry.wu@graidtech.com";
@@ -207,23 +259,32 @@
               }
             ];
           };
-          "asahi" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "aarch64-linux";
+          "framework" = moduleModifier nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+
             modules = [
-              nixos-apple-silicon.nixosModules.default
-              ./system/asahi/configuration.nix
+              ./system/framework/configuration.nix
+              nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+              intel-lpmd-flake.nixosModules.default
+              vicinae.nixosModules.default
+              lanzaboote.nixosModules.lanzaboote
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
                 home-manager.sharedModules = [
                   nix-doom-emacs-unstraightened.homeModule
+                  nix-flatpak.homeManagerModules.nix-flatpak
+                  vicinae.homeManagerModules.default
+                  helium-flake.homeModules.default
+                  noctalia.homeModules.default
                 ];
 
                 home-manager.users = {
                   jw910731 = nixpkgs.lib.mkMerge [
                     (import ./home/jw910731/linux-gui.nix)
                     (import ./home/jw910731/1p-sign.nix)
+                    { imports = [ ./home/jw910731/device/framework ]; }
                   ];
                 };
               }
@@ -237,32 +298,6 @@
           moduleModifier = moduleModifier' darwinOverlays;
         in
         {
-          "macbook" =
-            let
-              system = "aarch64-darwin";
-            in
-            moduleModifier darwin.lib.darwinSystem {
-              inherit system;
-              modules = [
-                ./system/macbook
-                home-manager-darwin.darwinModules.home-manager
-                {
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.sharedModules = [
-                    nix-doom-emacs-unstraightened-darwin.homeModule
-                  ];
-
-                  home-manager.users = {
-                    jw910731 = import ./home/jw910731/macos.nix;
-                  };
-                }
-                (darwinHostSetup {
-                  hostName = "jw910731-MacBook-Air";
-                  computerName = "jw910731's Macbook Air";
-                })
-              ];
-            };
           "macstudio" =
             let
               system = "aarch64-darwin";
@@ -289,6 +324,35 @@
                 (darwinHostSetup {
                   hostName = "jw910731-Mac-Studio";
                   computerName = "jw910731's Mac Studio";
+                })
+              ];
+            };
+          "macmini" =
+            let
+              system = "aarch64-darwin";
+            in
+            moduleModifier darwin.lib.darwinSystem {
+              inherit system;
+              modules = [
+                ./system/macmini
+                home-manager-darwin.darwinModules.home-manager
+                (
+                  { lib, ... }:
+                  {
+                    home-manager.useGlobalPkgs = true;
+                    home-manager.useUserPackages = true;
+                    home-manager.sharedModules = [
+                      nix-doom-emacs-unstraightened-darwin.homeModule
+                    ];
+
+                    home-manager.users = {
+                      jw910731 = import ./home/jw910731/macos.nix;
+                    };
+                  }
+                )
+                (darwinHostSetup {
+                  hostName = "MacMini";
+                  computerName = "MacMini";
                 })
               ];
             };

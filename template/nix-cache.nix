@@ -1,7 +1,10 @@
 let
   caches = [
-    "https://nixos-apple-silicon.cachix.org"
-    "https://claude-code.cachix.org"
+    "https://cache.nixos.org"
+    "https://cache.numtide.com"
+    "https://nix-community.cachix.org"
+    "https://vicinae.cachix.org"
+    "https://noctalia.cachix.org"
   ];
 in
 {
@@ -9,8 +12,10 @@ in
     substituters = caches;
     trusted-substituters = caches;
     trusted-public-keys = [
-      "nixos-apple-silicon.cachix.org-1:8psDu5SA5dAD7qA0zMy5UT292TxeEPzIz8VVEr2Js20="
-      "claude-code.cachix.org-1:YeXf2aNu7UTX8Vwrze0za1WEDS+4DuI2kVeWEE4fsRk="
+      "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+      "noctalia.cachix.org-1:pCOR47nnMEo5thcxNDtzWpOxNFQsBRglJzxWPp3dkU4="
     ];
   };
 }

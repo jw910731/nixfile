@@ -1,5 +1,11 @@
 [
   "html"
+  "git-firefly"
+  "toml"
   "make"
+  "material-icon-theme"
+  "svelte"
   "nix"
+  "neocmake"
+  "rst"
 ]

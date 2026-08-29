@@ -1,16 +1,17 @@
 { pkgs, config, ... }:
 {
   imports = [
-    ./zsh
-    ./git.nix
+    ./claude
+    ./copilot
     ./emacs.nix
     ./ghostty.nix
-    ./halloy.nix
-    ./tmux.nix
+    ./git.nix
     ./gpg.nix
-    ./claude
+    ./halloy.nix
     ./opencode
+    ./tmux.nix
     ./zed
+    ./zsh
   ];
 
   home.packages = with pkgs; [
@@ -39,8 +40,8 @@
     nixd
     nixfmt
     nix-output-monitor
-    gemini-cli
     nodejs_24
+    fd
   ];
 
   programs.go = {

@@ -8,16 +8,17 @@ in
 {
   homebrew = (
     mylib.recursiveMerge commonOptions {
-      brews = [ ];
-
-      casks = mapCask [
-        "openlogi"
-        "meetingbar"
-        "microsoft-teams"
-        "openvpn-connect"
+      brews = [
+        "openjdk@17"
+        "openjdk@21"
       ];
 
-      taps = mapTap [ ];
+      casks = mapCask [
+        "graalvm-jdk@21"
+      ];
+
+      taps = mapTap [
+      ];
 
       masApps = {
       };

@@ -2,44 +2,43 @@
 let
   brew-common = (import ../../template/darwin/brew.nix);
   mapCask = brew-common.mapCask;
+  mapTap = brew-common.mapTap;
   commonOptions = brew-common.options;
 in
 {
   homebrew = (
     mylib.recursiveMerge commonOptions {
       brews = [
-        "blacktop/tap/ipsw"
         "container"
         "virt-manager"
       ];
 
-      casks = mapCask ([
+      casks = mapCask [
         "android-platform-tools"
         "balenaetcher"
         "bilibili"
+        "cloudflare-warp"
         "discord"
         "element"
         "font-latin-modern"
         "hhkb"
-        "jetbrains-toolbox"
         "keycastr"
-        "logi-options+"
-        "microsoft-auto-update"
+        "openlogi"
         "obs"
-        "ollama-app"
         "osu"
         "prismlauncher"
         "readmoreading"
         "steam"
         "telegram"
         "utm"
-        "cloudflare-warp"
-      ]);
+      ];
 
-      taps = [ ];
+      taps = mapTap [
+      ];
 
       masApps = {
         "LINE" = 539883307;
+        "Xcode" = 497799835;
       };
     }
   );

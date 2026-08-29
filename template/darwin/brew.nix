@@ -1,35 +1,42 @@
-{
+let
   mapCask = map (x: {
     name = x;
     greedy = true;
+    trusted = true;
   });
+  mapTap = map (x: {
+    name = x;
+    trusted = true;
+  });
+in
+{
+  inherit mapCask mapTap;
   options = {
     enable = true;
     onActivation = {
       cleanup = "uninstall";
       extraFlags = [ "--force-cleanup" ];
     };
-    
 
     brews = [
+      "mole"
       "pinentry"
       "pinentry-mac"
       "pkg-config"
       "python@3.12"
     ];
 
-    casks = [
+    casks = mapCask [
       "1password"
       "1password-cli"
       "betterdisplay"
-      "brave-browser"
       "claude"
-      "dockdoor"
       "firefox"
       "font-hack-nerd-font"
       "ghostty"
+      "helium-browser"
+      "hiddenbar"
       "iina"
-      "jordanbaird-ice@beta"
       "keka"
       "kekaexternalhelper"
       "orion"
@@ -41,7 +48,7 @@
       "zed"
     ];
 
-    taps = [
+    taps = mapTap [
     ];
 
     masApps = {

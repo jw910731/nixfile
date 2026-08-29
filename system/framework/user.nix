@@ -7,10 +7,8 @@
       "networkmanager"
       "wheel"
       "docker"
-      "fuse"
+      "i2c"
     ];
     shell = pkgs.zsh;
   };
-
-  programs.zsh.enable = true;
 }

@@ -12,6 +12,7 @@ in
     ./antidote.nix
   ];
   programs.zsh = {
+    dotDir = "${config.xdg.configHome}/zsh";
     enable = true;
     enableCompletion = true;
     completionInit = ''
@@ -30,7 +31,7 @@ in
         zstyle ':completion:*' cache-path ~/.zsh/cache
 
         # zcompile the completion cache; siginificant speedup.
-        for file in ''${HOME}/.zcomp^(*.zwc)(.); do
+        for file in ''${HOME}/.zcomp^(*.zwc)(N.); do
           zcompare ''${file}
         done
       '')
