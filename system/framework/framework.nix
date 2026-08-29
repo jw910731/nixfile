@@ -45,6 +45,7 @@
     config.pantherLake = true;
     mode = "ON";
   };
+  services.logind.powerKey = "ignore";
 
   # Set your time zone.
   time.timeZone = "Asia/Taipei";
@@ -128,7 +129,7 @@
   # Bluetooth
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
+    powerOnBoot = true;
   };
   services.blueman.enable = true;
 

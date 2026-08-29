@@ -296,7 +296,6 @@ hl.device({
     kb_options = "ctrl:nocaps,altwin:swap_lalt_lwin",
 })
 
-
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -431,7 +430,7 @@ hl.bind("SUPER + Print", hl.dsp.exec_cmd(grim .. ' -g "$(' .. slurp .. ' -d)" - 
 -- and https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 
 -- For all monitor, the last workspace is scroll layout for dumping unused windows
-for i = 0, 9 do
+for i = 1, 10 do
     hl.workspace_rule({ workspace = tostring(i*10), layout = "scrolling" })
 end
 
