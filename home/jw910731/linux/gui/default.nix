@@ -18,7 +18,10 @@
 
   services.gpg-agent = {
     enable = true;
-    pinentry.program = "pinentry-qt";
+    pinentry = {
+      package = pkgs.pinentry-qt;
+      program = "pinentry-qt";
+    };
   };
 
   programs.helium = {
@@ -32,7 +35,7 @@
     # Optional: user policies (best-effort, use NixOS module for critical policies)
     policies = {};
   };
-  
+
   programs.vicinae = {
     enable = true;
     systemd = {
