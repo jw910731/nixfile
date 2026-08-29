@@ -7,6 +7,7 @@
       "networkmanager"
       "wheel"
       "docker"
+      "i2c"
     ];
     shell = pkgs.zsh;
   };

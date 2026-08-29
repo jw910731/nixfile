@@ -26,10 +26,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = with config.boot.kernelPackages; [ ];
+  boot.kernelModules = [ "i2c-dev" ];
   boot.initrd.kernelModules = [ ];
   boot.loader.systemd-boot.configurationLimit = 8;
   boot.kernel.sysctl = { };
   boot.kernelParams = [ ];
+  hardware.i2c.enable = true;
   boot.zswap = {
     enable = true;
   };
@@ -162,6 +164,7 @@
     iio-sensor-proxy
     sbctl
     hyprpolkitagent
+    ddcutil
   ];
 
   # Steam
