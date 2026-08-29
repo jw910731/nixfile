@@ -106,24 +106,6 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  hardware.tenstorrent.enable = true;
-  systemd.mounts = [
-    {
-      description = "Mount hugepages at /dev/hugepages-1G for Tenstorrent ASICs";
-      what = "hugetlbfs";
-      where = "/dev/hugepages-1G";
-      type = "hugetlbfs";
-      options = "pagesize=1G,mode=0777,nosuid,nodev";
-      before = [ "sysinit.target" ];
-      wantedBy = [ "sysinit.target" ];
-      unitConfig = {
-        DefaultDependencies = false;
-        ConditionPathExists = "/sys/kernel/mm/hugepages/hugepages-1048576kB";
-        ConditionCapability = "CAP_SYS_ADMIN";
-      };
-    }
-  ];
-
   # Virtual Machines
   virtualisation.spiceUSBRedirection.enable = true;
   virtualisation.libvirtd = {
