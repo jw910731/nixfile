@@ -91,16 +91,37 @@
     enable = true;
     systemd.enable = true;
     settings = {
-      theme = {
-        mode = "dark";
-        source = "community";
-        builtin = "One Dark Two";
-      };
-      wallpaper = {
-        enabled = true;
-      };
+      wallpaper.enabled = true;
       location = {
         auto_locate = true;
+      };
+      bar.default = {
+        start = ["session" "workspaces"];
+        center = [];
+        end = ["tray" "media" "cpu" "network" "volume" "brightness" "battery" "clock" "notifications" ];
+        margin_ends = 5;
+        radius = 10;
+        widget_spacing = 10;
+      };
+      brightness.enable_ddcutil = true;
+      theme = {
+        community_palette = "One Dark Two";
+        source = "community";
+        mode = "dark";
+      };
+      shell = {
+        polkit_agent = true;
+        screen_time_enabled = true;
+        animation = {
+          speed = 1.75;
+        };
+        panel = {
+          open_near_click_control_center = true;
+          open_near_click_session = true;
+        };
+      };
+      widget = {
+        cpu.show_glyph = false;
       };
     };
   };
