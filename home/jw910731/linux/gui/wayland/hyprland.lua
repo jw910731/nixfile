@@ -45,15 +45,37 @@ else
     })
 end
 
-function disableLaptopMonitor()
-    hl.monitor({
-        output = laptopMonitor.output,
-        disabled = true ,
-    })
+-- Any active monitor besides the builtin panel? (docked / clamshell mode)
+local function externalMonitorActive()
+    for _, m in ipairs(hl.get_monitors() or {}) do
+        if m.name ~= laptopMonitor.output then
+            return true
+        end
+    end
+    return false
 end
+
+function disableLaptopMonitor()
+    -- Clamshell mode only. Never disable the last active monitor: lid close
+    -- is followed by suspend ~1s later, and Noctalia locks the session on
+    -- PrepareForSleep — if eDP-1 is already gone at that moment, the lock
+    -- screen has no output to attach to and comes back blank after wake.
+    if externalMonitorActive() then
+        hl.monitor({
+            output = laptopMonitor.output,
+            disabled = true,
+        })
+    end
+end
+
 function enableLaptopMonitor()
     hl.monitor(laptopMonitor)
-    os.execute("hyprctl reload &")
+    if externalMonitorActive() then
+        -- Docked only: recompute the externals' auto-* positions around the
+        -- re-enabled panel. Skipped when undocked so the reload never churns
+        -- outputs while the session lock is up.
+        hl.exec_cmd("hyprctl reload")
+    end
 end
 hl.bind("switch:on:Lid Switch", disableLaptopMonitor, { locked = true })
 hl.bind("switch:off:Lid Switch", enableLaptopMonitor, { locked = true })
