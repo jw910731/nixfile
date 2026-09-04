@@ -2,7 +2,6 @@
 {
   imports = [
     ./claude
-    ./copilot
     ./emacs.nix
     ./ghostty.nix
     ./git.nix

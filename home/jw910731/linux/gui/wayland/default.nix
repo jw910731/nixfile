@@ -61,6 +61,7 @@
   gtk = {
     enable = true;
     gtk4.theme = config.gtk.theme;
+    gtk2.force = true;
     theme = {
       package = pkgs.flat-remix-gtk;
       name = "Flat-Remix-GTK-Blue-Dark";

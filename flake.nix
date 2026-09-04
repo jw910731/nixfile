@@ -76,10 +76,10 @@
     vicinae = {
       url = "github:vicinaehq/vicinae";
     };
-
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
     };
+    
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
     };
