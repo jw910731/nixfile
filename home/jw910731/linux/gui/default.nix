@@ -45,7 +45,6 @@
         USE_LAYER_SHELL = 1;
       };
     };
-    enableSoulver = true;
     settings = {
       close_on_focus_loss = true;
       consider_preedit = true;
