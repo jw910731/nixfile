@@ -11,7 +11,7 @@
     '';
     onChange = ''
       cat ~/.ssh/common.config_link > ~/.ssh/common.config
-      rm ~/.ssh/.ssh/common.config_link
+      rm ~/.ssh/common.config_link
       chmod 600 ~/.ssh/common.config
     '';
     force = true;
