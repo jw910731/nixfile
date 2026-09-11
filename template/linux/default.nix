@@ -109,9 +109,9 @@
       time.timeZone = "Asia/Taipei";
 
       users.users.jw910731 = {
-        isNormalUser = lib.mkDefault true;
-        description = lib.mkDefault "Jerry Wu";
-        shell = lib.mkDefault pkgs.zsh;
+        isNormalUser = true;
+        description = "Jerry Wu";
+        shell = pkgs.zsh;
         extraGroups = [
           "networkmanager"
           "wheel"

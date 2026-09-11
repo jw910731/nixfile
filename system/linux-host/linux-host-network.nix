@@ -11,7 +11,6 @@
 
   # networking.nftables.enable = true;
   networking.firewall = {
-    enable = true;
     trustedInterfaces = [ "wlp6s0" ];
     allowedTCPPorts = [
       22
