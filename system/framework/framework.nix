@@ -41,4 +41,6 @@
   environment.systemPackages = with pkgs; [ iio-sensor-proxy ];
 
   hardware.steam-hardware.enable = true;
+
+  services.cloudflare-warp.enable = true;
 }
