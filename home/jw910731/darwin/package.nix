@@ -4,6 +4,10 @@
   programs.man.enable = false;
   home.extraOutputsToInstall = [ "man" ];
 
+  home.packages = with pkgs; [
+    pkgs.llm-agents.codex
+  ];
+
   programs.zed-editor = {
     enable = true;
     package = null;
