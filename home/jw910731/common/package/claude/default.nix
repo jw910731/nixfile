@@ -1,8 +1,10 @@
-{ pkgs, lib, ... }:
-{
+{ pkgs, inputs, lib, ... }:
+let
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   programs.claude-code = {
     enable = true;
-    package = pkgs.llm-agents.claude-code;
+    package = llm-agents.claude-code;
     settings = {
       hooks = {
         Notification = [

@@ -1,5 +1,7 @@
-{ pkgs, config, ... }:
-{
+{ pkgs, inputs, config, ... }:
+let
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   imports = [
     ./claude
     ./emacs.nix
@@ -41,6 +43,7 @@
     nix-output-monitor
     nodejs_24
     fd
+    llm-agents.omo-ai
   ];
 
   programs.go = {

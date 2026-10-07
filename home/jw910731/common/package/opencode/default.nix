@@ -1,8 +1,10 @@
-{ pkgs, ... }:
-{
+{ pkgs, inputs, ... }:
+let
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   programs.opencode = {
     enable = true;
-    package = pkgs.llm-agents.opencode;
+    package = llm-agents.opencode;
     settings = {
       plugin = [
         "oh-my-openagent@beta"

@@ -43,11 +43,6 @@
 
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    llm-agents-darwin = {
-      url = "github:numtide/llm-agents.nix";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
     # Linux Only
@@ -98,7 +93,6 @@
       nix-doom-emacs-unstraightened,
       nix-doom-emacs-unstraightened-darwin,
       llm-agents,
-      llm-agents-darwin,
       helium-flake,
       nixos-hardware,
       lanzaboote,
@@ -113,7 +107,6 @@
       lib = nixpkgs.lib;
       linuxOverlays = [
         nix-doom-emacs-unstraightened.overlays.default
-        llm-agents.overlays.shared-nixpkgs
         helium-flake.overlays.default
 
         (final: prev: {
@@ -123,7 +116,6 @@
       ];
       darwinOverlays = [
         nix-doom-emacs-unstraightened-darwin.overlays.default
-        llm-agents-darwin.overlays.shared-nixpkgs
         (final: prev: {
           numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })

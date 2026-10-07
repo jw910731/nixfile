@@ -1,11 +1,13 @@
-{ pkgs, lib, ... }:
-{
+{ pkgs, inputs, lib, ... }:
+let
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+in {
   # Fix macOS man page
   programs.man.enable = false;
   home.extraOutputsToInstall = [ "man" ];
 
   home.packages = with pkgs; [
-    pkgs.llm-agents.codex
+    llm-agents.codex
   ];
 
   programs.zed-editor = {
