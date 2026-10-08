@@ -9,6 +9,7 @@ in {
     ./git.nix
     ./gpg.nix
     ./halloy.nix
+    ./herdr.nix
     ./opencode
     ./tmux.nix
     ./zed
