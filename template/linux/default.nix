@@ -135,6 +135,8 @@
 
       # Enable zsh
       programs.zsh.enable = true;
+      # compinit is run by home-manager; a second global one rebuilds the dump every shell
+      programs.zsh.enableGlobalCompInit = false;
       environment.pathsToLink = [ "/share/zsh" ];
     }
     {
