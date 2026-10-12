@@ -31,7 +31,6 @@
   services.intel-lpmd = {
     enable = true;
     config.pantherLake = true;
-    mode = "ON";
   };
 
   jw.fingerprint = true;
