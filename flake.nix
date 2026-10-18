@@ -78,6 +78,11 @@
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
     };
+
+    openlogi = {
+      url = "github:AprilNEA/OpenLogi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -101,6 +106,7 @@
       vicinae,
       vicinae-extensions,
       noctalia,
+      openlogi,
       ...
     }@inputs:
     let
@@ -260,6 +266,7 @@
               intel-lpmd-flake.nixosModules.default
               vicinae.nixosModules.default
               lanzaboote.nixosModules.lanzaboote
+              openlogi.nixosModules.default
               home-manager.nixosModules.home-manager
               {
                 home-manager.useGlobalPkgs = true;

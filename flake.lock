@@ -703,6 +703,27 @@
         "type": "github"
       }
     },
+    "openlogi": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay_2"
+      },
+      "locked": {
+        "lastModified": 1792327495,
+        "narHash": "sha256-HfLhr1ovS/qOMGHjK7d4otOFwdsAYMeHjwF8Dj9NHWY=",
+        "owner": "AprilNEA",
+        "repo": "OpenLogi",
+        "rev": "fbcd3c84bcac4755e531bb18eeb2d9220ac9a3d4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "AprilNEA",
+        "repo": "OpenLogi",
+        "type": "github"
+      }
+    },
     "pre-commit": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -744,6 +765,7 @@
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
         "numlockfixd": "numlockfixd",
+        "openlogi": "openlogi",
         "treefmt-nix": "treefmt-nix_2",
         "vicinae": "vicinae",
         "vicinae-extensions": "vicinae-extensions"
@@ -762,6 +784,27 @@
         "owner": "oxalica",
         "repo": "rust-overlay",
         "rev": "8534567325bd8a8d2928e6afd81e0a87d19efd3c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
+      }
+    },
+    "rust-overlay_2": {
+      "inputs": {
+        "nixpkgs": [
+          "openlogi",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790756160,
+        "narHash": "sha256-NPs4nNLxCpho3Ctj8O7t/bzmX0zR8r0zndKghAFEz5U=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "ed3a19fd0439ed618ec5fe1e12f0ba69a8be38b5",
         "type": "github"
       },
       "original": {
