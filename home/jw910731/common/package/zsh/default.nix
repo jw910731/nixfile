@@ -17,10 +17,14 @@ in
     enableCompletion = true;
     completionInit = ''
       autoload -Uz compinit
-      for dump in ~/.zcompdump(N.mh+24); do
-        compinit
-      done
-      compinit -C
+      _zcd=''${ZDOTDIR:-$HOME}/.zcompdump
+      _zcd_stale=( $_zcd(N.mh+24) )
+      if (( $#_zcd_stale )) || [[ ! -s $_zcd ]]; then
+        compinit -d $_zcd
+      else
+        compinit -C -d $_zcd
+      fi
+      unset _zcd _zcd_stale
     '';
     shellAliases = { };
     autocd = true;
@@ -31,7 +35,7 @@ in
         zstyle ':completion:*' cache-path ~/.zsh/cache
 
         # zcompile the completion cache; siginificant speedup.
-        for file in ''${HOME}/.zcomp^(*.zwc)(N.); do
+        for file in ''${ZDOTDIR:-$HOME}/.zcomp^(*.zwc)(N.); do
           zcompare ''${file}
         done
       '')

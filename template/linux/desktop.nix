@@ -34,6 +34,10 @@
       environment.etc."xdg/menus/applications.menu".source =
         "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
       security.polkit.enable = true;
+      programs.openlogi = {
+        enable = true;
+        launchAtLogin = true;
+      };
 
       services.thermald.enable = true;
       powerManagement = {

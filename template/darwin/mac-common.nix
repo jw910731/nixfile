@@ -134,6 +134,8 @@
   # Load nix-darwin in /etc/zshrc.
   programs.zsh = {
     enable = true;
+    # compinit is run by home-manager; a second global one rebuilds the dump every shell
+    enableGlobalCompInit = false;
     interactiveShellInit = ''
       # This config is very dangerous
       # Do not change order if you don't know what you are doing
