@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   imports = [
     ./linux-host-network.nix
@@ -12,10 +12,20 @@
     "vfio_pci"
     "vfio"
     "vfio_iommu_type1"
+    # GPU passthrough VM quirk
+    "vendor-reset"
 
     # Graphics
     "amdgpu"
   ];
+  
+  # More GPU Passthrough VM quirk
+  boot.extraModulePackages = [ config.boot.kernelPackages.vendor-reset ];
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:05:00.0", ATTR{reset_method}="device_specific"
+  '';
+  boot.extraModprobeConfig = "softdep amdgpu pre: vfio-pci";
+  
   boot.loader.systemd-boot.configurationLimit = 10;
   boot.kernel.sysctl = {
     "fs.inotify.max_user_watches" = 2099999999;
@@ -25,9 +35,8 @@
   boot.kernelParams = [
     "amd_iommu=on"
     "iommu=pt"
-    "vfio-pci.ids==1e52:b140"
-    "hugepagesz=1G"
-    "hugepages=4"
+    "vfio-pci.ids=1002:67df,1002:aaf0,1e52:b140"
+    "pci=noats"
   ];
 
   fileSystems."/data" = {
