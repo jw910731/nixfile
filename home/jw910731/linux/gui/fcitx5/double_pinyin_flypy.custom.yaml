@@ -1,0 +1,15 @@
+patch:
+  # 朙月拼音詞庫以 OpenCC 標準繁體收字，詞頻又偏向大陸用字（如「着」遠高於「著」），
+  # 仿照官方 luna_pinyin_tw，追加 t2tw 濾鏡把候選轉成臺灣正體字形，
+  # 轉換後重複的候選（着→著）由 uniquifier 合併。
+  switches/@next:
+    name: zh_tw
+    reset: 1
+    states: [ 傳統字形, 臺灣字形 ]
+  engine/filters:
+    - simplifier
+    - simplifier@zh_tw
+    - uniquifier
+  zh_tw:
+    opencc_config: t2tw.json
+    option_name: zh_tw

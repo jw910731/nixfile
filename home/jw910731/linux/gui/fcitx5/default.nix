@@ -1,6 +1,13 @@
 { config, pkgs, ... }:
 {
   home.file.".local/share/fcitx5/rime/default.custom.yaml".source = ./default.custom.yaml;
+  home.file.".local/share/fcitx5/rime/double_pinyin_flypy.custom.yaml".source =
+    ./double_pinyin_flypy.custom.yaml;
+  # rime-data 未附 OpenCC 臺灣字形表，librime 會先找使用者目錄下的 opencc/
+  home.file.".local/share/fcitx5/rime/opencc/t2tw.json".source =
+    "${pkgs.opencc}/share/opencc/t2tw.json";
+  home.file.".local/share/fcitx5/rime/opencc/TWVariants.ocd2".source =
+    "${pkgs.opencc}/share/opencc/TWVariants.ocd2";
 
   i18n.inputMethod = {
     enable = true;
