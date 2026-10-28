@@ -30,7 +30,10 @@
 
   services.intel-lpmd = {
     enable = true;
-    config.pantherLake = true;
+    config.custom = {
+      content = builtins.readFile ./intel_lpmd_config.xml;
+      filename = "intel_lpmd_config_F6_M204.xml";
+    };
   };
 
   jw.fingerprint = true;
