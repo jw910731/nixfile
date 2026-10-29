@@ -135,11 +135,20 @@
         widget_spacing = 10;
       };
       brightness.enable_ddcutil = true;
-      # Lock after 5 minutes idle and suspend right after locking.
+      # On battery only: lock after 5 minutes idle and suspend right after locking.
+      # Noctalia has no power-source condition, so a command checks for AC first.
       idle.behavior.lock = {
         enabled = true;
         timeout = 300;
-        action = "lock_and_suspend";
+        action = "command";
+        command = "${pkgs.writeShellScript "noctalia-idle-lock" ''
+          for ps in /sys/class/power_supply/*; do
+            if [ "$(cat "$ps/type" 2>/dev/null)" = Mains ] && [ "$(cat "$ps/online" 2>/dev/null)" = 1 ]; then
+              exit 0
+            fi
+          done
+          exec ${lib.getExe config.programs.noctalia.package} msg session lock-and-suspend
+        ''}";
       };
       theme = {
         community_palette = "One Dark Two";
