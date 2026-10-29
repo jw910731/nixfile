@@ -150,6 +150,37 @@
           exec ${lib.getExe config.programs.noctalia.package} msg session lock-and-suspend
         ''}";
       };
+      # Power profile: performance on AC, balanced on battery, power-saver below 20%.
+      # Sets the profile only when the target changes, so manual switches stick until
+      # the next transition. `started` forces the initial state (no hook fires for it).
+      hooks =
+        let
+          apply = pkgs.writeShellScript "noctalia-power-profile" ''
+            want=balanced
+            for ps in /sys/class/power_supply/*; do
+              if [ "$(cat "$ps/type" 2>/dev/null)" = Mains ] && [ "$(cat "$ps/online" 2>/dev/null)" = 1 ]; then
+                want=performance
+              fi
+            done
+            if [ "$want" = balanced ]; then
+              for bat in /sys/class/power_supply/BAT*; do
+                cap=$(cat "$bat/capacity" 2>/dev/null) || continue
+                if [ "$cap" -lt 20 ]; then want=power-saver; fi
+              done
+            fi
+            state="''${XDG_RUNTIME_DIR:-/tmp}/noctalia-power-profile"
+            if [ "$1" = --force ] || [ "$(cat "$state" 2>/dev/null)" != "$want" ]; then
+              ${lib.getExe config.programs.noctalia.package} msg power-set "$want" && echo "$want" > "$state"
+            fi
+          '';
+        in
+        {
+          started = "${apply} --force";
+          battery_charging = "${apply}";
+          battery_plugged = "${apply}";
+          battery_discharging = "${apply}";
+          battery_percentage_changed = "${apply}";
+        };
       theme = {
         community_palette = "One Dark Two";
         source = "community";
