@@ -10,7 +10,6 @@
     vscode-fhs
     spotify
     telegram-desktop
-    vlc
   ];
 
   programs.zed-editor.enable = true;

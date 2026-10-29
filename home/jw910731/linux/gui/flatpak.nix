@@ -7,6 +7,9 @@
       "com.valvesoftware.Steam"
       "org.kde.keepsecret"
       "org.localsend.localsend_app"
+      "io.bassi.Amberol"
+      "org.onlyoffice.desktopeditors"
+      "org.videolan.VLC"
     ];
   };
 }
