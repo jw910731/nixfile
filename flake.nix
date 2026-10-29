@@ -74,7 +74,7 @@
     vicinae-extensions = {
       url = "github:vicinaehq/extensions";
     };
-    
+
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
     };
@@ -144,14 +144,28 @@
           lib.attrsets.updateManyAttrsByPath [
             {
               path = [ "modules" ];
-              update = modules: modules ++ [
-                { nixpkgs.overlays = overlays; }
-                { home-manager.extraSpecialArgs = { mylib = import ./lib lib; inherit inputs; }; }
-              ];
+              update =
+                modules:
+                modules
+                ++ [
+                  { nixpkgs.overlays = overlays; }
+                  {
+                    home-manager.extraSpecialArgs = {
+                      mylib = import ./lib lib;
+                      inherit inputs;
+                    };
+                  }
+                ];
             }
             {
               path = [ "specialArgs" ];
-              update = specialArgs: specialArgs // { mylib = import ./lib lib; inherit inputs; };
+              update =
+                specialArgs:
+                specialArgs
+                // {
+                  mylib = import ./lib lib;
+                  inherit inputs;
+                };
             }
           ] (systemAttrs // { specialArgs = { }; })
         );

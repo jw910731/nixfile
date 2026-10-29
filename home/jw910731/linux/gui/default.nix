@@ -32,7 +32,7 @@
       "--password-store=kwallet6"
     ];
     # Optional: user policies (best-effort, use NixOS module for critical policies)
-    policies = {};
+    policies = { };
   };
 
   programs.vicinae = {

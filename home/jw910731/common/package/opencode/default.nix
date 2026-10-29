@@ -1,7 +1,8 @@
 { pkgs, inputs, ... }:
 let
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-in {
+in
+{
   programs.opencode = {
     enable = true;
     package = llm-agents.opencode;

@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   home.packages = with pkgs; [
     wl-clipboard
@@ -32,7 +37,8 @@
     };
     extraConfig = builtins.readFile ./hyprland.lua;
   };
-  xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+  xdg.configFile."uwsm/env".source =
+    "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
   xdg.configFile."uwsm/env-hyprland".text = ''
     export LANG="zh_TW.utf-8"
     export LC_ADDRESS="zh_TW.utf-8"
@@ -108,9 +114,22 @@
         auto_locate = true;
       };
       bar.default = {
-        start = ["session" "workspaces"];
-        center = [];
-        end = ["tray" "media" "cpu" "network" "volume" "brightness" "battery" "clock" "notifications" ];
+        start = [
+          "session"
+          "workspaces"
+        ];
+        center = [ ];
+        end = [
+          "tray"
+          "media"
+          "cpu"
+          "network"
+          "volume"
+          "brightness"
+          "battery"
+          "clock"
+          "notifications"
+        ];
         margin_ends = 5;
         radius = 10;
         widget_spacing = 10;

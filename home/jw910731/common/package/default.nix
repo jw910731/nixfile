@@ -1,7 +1,13 @@
-{ pkgs, inputs, config, ... }:
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
 let
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
-in {
+in
+{
   imports = [
     ./claude
     ./emacs.nix
