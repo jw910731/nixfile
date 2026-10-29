@@ -44,10 +44,10 @@ lswitch host:
 up:
   nix flake update
 
-# Update specific input
-# Usage: just upp nixpkgs
-upp input:
-  nix flake update {{input}}
+# Update one or more specific inputs
+# Usage: just upp nixpkgs home-manager
+upp +inputs:
+  nix flake update {{inputs}}
 
 history:
   nix profile history --profile /nix/var/nix/profiles/system
