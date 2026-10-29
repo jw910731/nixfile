@@ -6,6 +6,5 @@ in {
     llm-agents.claude-desktop
   ];
   services.flatpak.packages = [
-    "com.bitwig.BitwigStudio"
   ];
 }
