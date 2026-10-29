@@ -10,6 +10,14 @@ home:
   nh home switch '.'
 
 [macos]
+boot host:
+  echo 'macOS do not support boot subcommand'
+
+[linux]
+boot host:
+  nh os boot -H {{host}} '.'
+
+[macos]
 switch host:
   nh darwin switch -H {{host}} '.'
 
