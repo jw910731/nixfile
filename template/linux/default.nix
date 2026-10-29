@@ -120,7 +120,10 @@
       };
 
       boot.loader.efi.canTouchEfiVariables = lib.mkDefault true;
-      boot.crashDump.enable = lib.mkDefault true;
+      boot.crashDump = {
+        enable = lib.mkDefault true;
+        reservedMemory = lib.mkDefault "512M";
+      };
       boot.initrd.kernelModules = lib.mkDefault [ ];
       boot.loader.systemd-boot.enable = lib.mkDefault (!config.jw.secureBoot);
       # seen as mandatory config
