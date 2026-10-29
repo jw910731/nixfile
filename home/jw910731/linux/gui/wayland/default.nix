@@ -88,6 +88,17 @@
     };
   };
 
+  # Only run Noctalia in the UWSM-managed Hyprland session, never under Plasma.
+  systemd.user.services.noctalia =
+    let
+      target = "wayland-session@hyprland.desktop.target";
+    in
+    {
+      Unit.PartOf = lib.mkForce [ target ];
+      Unit.After = lib.mkForce [ target ];
+      Install.WantedBy = lib.mkForce [ target ];
+    };
+
   programs.noctalia = {
     enable = true;
     systemd.enable = true;
@@ -105,6 +116,12 @@
         widget_spacing = 10;
       };
       brightness.enable_ddcutil = true;
+      # Lock after 5 minutes idle and suspend right after locking.
+      idle.behavior.lock = {
+        enabled = true;
+        timeout = 300;
+        action = "lock_and_suspend";
+      };
       theme = {
         community_palette = "One Dark Two";
         source = "community";

@@ -438,6 +438,8 @@ hl.bind("XF86AudioNext",  hl.dsp.exec_cmd(ipc .. "media next"),       { locked =
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
 hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd(ipc .. "media toggle"), { locked = true })
 hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd(ipc .. "media previous"),   { locked = true })
+-- Power button: lock and suspend (logind ignores it outside a DE)
+hl.bind("XF86PowerOff", hl.dsp.exec_cmd(ipc .. "session lock-and-suspend"), { locked = true })
 
 -- Screen capture
 hl.bind("Print", hl.dsp.exec_cmd(grim .. ' -g "$(' .. slurp .. ')" - | ' .. swappy .. ' -f -'))
