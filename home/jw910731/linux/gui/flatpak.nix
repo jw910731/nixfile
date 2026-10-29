@@ -10,6 +10,7 @@
       "io.bassi.Amberol"
       "org.onlyoffice.desktopeditors"
       "org.videolan.VLC"
+      "org.mozilla.thunderbird"
     ];
     # Hyprland uses xwayland.force_zero_scaling, so apps that land on XWayland
     # render at 1x unless they scale themselves. GDK_SCALE only covers GTK.
