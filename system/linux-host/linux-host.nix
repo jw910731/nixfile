@@ -2,6 +2,7 @@
 {
   imports = [
     ./linux-host-network.nix
+    ./dcsd.nix
   ];
 
   # Bootloader
