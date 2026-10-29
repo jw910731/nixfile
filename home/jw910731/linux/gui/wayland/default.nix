@@ -34,7 +34,7 @@
   };
   xdg.configFile."uwsm/env".source = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
   xdg.configFile."uwsm/env-hyprland".text = ''
-    export LANG="zh_TW.utf-8"builtins.readFile ./hyprland.lua
+    export LANG="zh_TW.utf-8"
     export LC_ADDRESS="zh_TW.utf-8"
     export LC_COLLATE="zh_TW.utf-8"
     export LC_CTYPE="zh_TW.utf-8"
