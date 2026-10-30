@@ -88,13 +88,6 @@ hl.monitor({
     scale = 2,
     vrr = 2,
 })
--- Office monitor
-hl.monitor({
-    output   = "desc:BNQ BenQ RD280U 74S0032701Q",
-    mode   = "3840x2560",
-    position = "auto-center-right",
-    scale = 2,
-})
 -- Other monitor
 hl.monitor({ output = "", mode = "preferred", scale = "auto", position = "auto" })
 
