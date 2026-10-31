@@ -51,6 +51,7 @@ in
     nodejs_24
     fd
     llm-agents.omo-ai
+    gh
   ];
 
   programs.go = {
