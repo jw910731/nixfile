@@ -23,6 +23,12 @@
       working-directory = "home";
       window-inherit-working-directory = false;
 
+      keybind = [
+        # Don't toggle fullscreen on ctrl+enter
+        "ctrl+enter=unbind"
+        "global:super+backquote=toggle_quick_terminal"
+      ];
+
       # Notification
       notify-on-command-finish-action = "no-bell,notify";
       notify-on-command-finish = "unfocused";

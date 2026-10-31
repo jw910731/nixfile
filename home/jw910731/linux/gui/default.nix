@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  config,
+  ...
+}:
 {
   imports = [
     ./fcitx5
@@ -13,7 +18,14 @@
   ];
 
   programs.zed-editor.enable = true;
-  programs.ghostty.settings.font-size = 12;
+  programs.ghostty.settings = {
+    font-size = 12;
+    # Keep running in the background so the global quick terminal works with no windows
+    quit-after-last-window-closed = false;
+  };
+  # home-manager links Ghostty's unit but doesn't enable it; start it with the session
+  xdg.configFile."systemd/user/graphical-session.target.wants/app-com.mitchellh.ghostty.service".source =
+    "${config.programs.ghostty.package}/share/systemd/user/app-com.mitchellh.ghostty.service";
 
   services.gpg-agent = {
     enable = true;

@@ -97,7 +97,8 @@ hl.monitor({ output = "", mode = "preferred", scale = "auto", position = "auto" 
 ---------------------
 
 -- Set programs that you use
-local terminal    = "ghostty"
+-- Open windows via D-Bus so the background systemd instance (needed for the quick terminal) stays primary
+local terminal    = "ghostty +new-window"
 local fileManager = "dolphin"
 local menu        = "vicinae toggle"
 
@@ -340,6 +341,13 @@ end
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.exec_cmd(terminal))
+-- Ghostty registers its global keybind via the portal with the trigger as the shortcut id.
+-- The app id is "com.mitchellh.ghostty" under the systemd service and "ghostty" when
+-- launched directly; only one instance is alive, so dispatching both is safe.
+hl.bind(mainMod .. " + grave", function()
+    hl.dispatch(hl.dsp.global("com.mitchellh.ghostty:LOGO+grave"))
+    hl.dispatch(hl.dsp.global("ghostty:LOGO+grave"))
+end)
 local closeWindowBind = hl.bind(mainMod .. " + Q", hl.dsp.window.close())
 -- closeWindowBind:set_enabled(false)
 hl.bind(mainMod .. " + SHIFT + ALT + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))

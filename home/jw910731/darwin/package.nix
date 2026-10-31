@@ -25,7 +25,6 @@ in
     package = null;
     settings = {
       font-family = [ ".AppleSystemUIFontMonospaced" ];
-      keybind = [ "global:cmd+backquote=toggle_quick_terminal" ];
     };
   };
 
