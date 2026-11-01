@@ -7,6 +7,10 @@
 {
   services.flatpak = {
     uninstallUnmanaged = true;
+    remotes = lib.mkOptionDefault [{
+      name = "beeper";
+      location = "https://mark12870.github.io/beeper-flatpak/io.github.mark12870.beeper.flatpakrepo";
+    }];
     packages = [
       "com.discordapp.Discord"
       "com.valvesoftware.Steam"
@@ -16,6 +20,7 @@
       "org.onlyoffice.desktopeditors"
       "org.videolan.VLC"
       "org.mozilla.thunderbird"
+      { appId = "io.github.mark12870.beeper"; origin = "beeper";  }
     ];
     # Hyprland uses xwayland.force_zero_scaling, so apps that land on XWayland
     # render at 1x unless they scale themselves. GDK_SCALE only covers GTK.
