@@ -218,31 +218,6 @@
           }
         );
 
-      homeConfigurations."jw910731" = home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          system = "x86_64-linux";
-          config = {
-            allowUnfree = true;
-          };
-        };
-        modules = [
-          nix-doom-emacs-unstraightened.homeModule
-          (import ./home/jw910731/linux.nix)
-          (import ./home/jw910731/yubi-sign.nix)
-          { nixpkgs.overlays = linuxOverlays; }
-          {
-            programs.zsh.shellAliases = {
-              "ggg" = "sudo graidctl";
-            };
-            targets.genericLinux.enable = true;
-            programs.git.settings.user = {
-              name = lib.mkForce "Jerry Wu";
-              email = lib.mkForce "jerry.wu@graidtech.com";
-            };
-          }
-        ];
-      };
-
       # NixOS configs
       nixosConfigurations =
         let
