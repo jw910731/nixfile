@@ -80,7 +80,8 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, ... }:
+  outputs =
+    inputs@{ nixpkgs, ... }:
     let
       lib = nixpkgs.lib;
       linuxOverlays = [
@@ -134,7 +135,13 @@
         );
 
       hosts = import ./flake/hosts.nix {
-        inherit inputs lib linuxOverlays darwinOverlays moduleModifier';
+        inherit
+          inputs
+          lib
+          linuxOverlays
+          darwinOverlays
+          moduleModifier'
+          ;
       };
       inherit (hosts) mkNixos mkDarwin;
 

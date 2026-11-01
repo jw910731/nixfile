@@ -2,8 +2,14 @@
 { inputs, lib }:
 let
   systems = {
-    linux = [ "x86_64-linux" "aarch64-linux" ];
-    darwin = [ "aarch64-darwin" "x86_64-darwin" ];
+    linux = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    darwin = [
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
   };
   allSystems = systems.linux ++ systems.darwin;
   # Platform recognition lives here only: the table above decides the channel.
@@ -27,5 +33,12 @@ let
     }).config.build.wrapper;
 in
 {
-  inherit systems allSystems nixpkgsFor pkgsFor forAllSystems treefmtFor;
+  inherit
+    systems
+    allSystems
+    nixpkgsFor
+    pkgsFor
+    forAllSystems
+    treefmtFor
+    ;
 }
