@@ -83,6 +83,33 @@
   };
   xdg.configFile."gtk-4.0/gtk.css".force = true;
 
+  # kded6's gtkconfig module rewrites gtk.css, ~/.gtkrc-2.0, xsettingsd and dconf on
+  # startup, which crashes running GTK apps (blueman, xdg-desktop-portal-gtk, ...)
+  # inside their file-monitor callbacks. GTK theming is owned by home-manager here.
+  xdg.configFile."kded6rc".text = ''
+    [Module-gtkconfig]
+    autoload=false
+  '';
+
+  # KDE apps (e.g. ark) D-Bus-activate kded6 inside the Hyprland session. This
+  # user-level service file shadows the system one so activation only succeeds
+  # under Plasma, which starts kded6 itself via plasma-kded6.service anyway.
+  xdg.dataFile."dbus-1/services/org.kde.kded6.service".text =
+    let
+      kded6-plasma-only = pkgs.writeShellScript "kded6-plasma-only" ''
+        case ":''${XDG_CURRENT_DESKTOP:-}:" in
+          *:KDE:*) exec /run/current-system/sw/bin/kded6 "$@" ;;
+        esac
+        echo "refusing to D-Bus-activate kded6 outside Plasma (XDG_CURRENT_DESKTOP=''${XDG_CURRENT_DESKTOP:-})" >&2
+        exit 1
+      '';
+    in
+    ''
+      [D-BUS Service]
+      Name=org.kde.kded6
+      Exec=${kded6-plasma-only}
+    '';
+
   qt = {
     enable = true;
     style.name = "adwaita-dark";
