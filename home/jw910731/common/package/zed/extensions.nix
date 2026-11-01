@@ -8,4 +8,8 @@
   "nix"
   "neocmake"
   "rst"
+  "just"
+  "lua"
+  "neocmake"
+  "xml"
 ]
