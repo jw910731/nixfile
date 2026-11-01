@@ -298,11 +298,91 @@ hl.config({
     },
 })
 
-hl.gesture({
-    fingers = 3,
-    direction = "horizontal",
-    action = "workspace"
-})
+-- 3-finger horizontal swipe: the native workspace swipe everywhere, except on
+-- scrolling-layout workspaces, where each swipe steps one column and only
+-- switches workspace once the edge column is focused.
+-- Hyprland rejects overlapping gestures ("overshadowed"), so the two variants
+-- are swapped whenever the active workspace changes.
+local function active_workspace(monitor)
+    return hl.get_active_special_workspace(monitor) or hl.get_active_workspace(monitor)
+end
+
+-- Nearest existing workspace on the same monitor in direction `step`, like the
+-- native swipe's m+1 / m-1 (but without wrapping around).
+local function neighbour_workspace(ws, step)
+    if ws.special or not ws.monitor then
+        return nil
+    end
+    local best
+    for _, w in ipairs(hl.get_workspaces()) do
+        if not w.special and w.monitor and w.monitor.id == ws.monitor.id then
+            local d = (w.id - ws.id) * step
+            if d > 0 and (best == nil or d < (best.id - ws.id) * step) then
+                best = w
+            end
+        end
+    end
+    return best
+end
+
+-- step = 1: next column / workspace, step = -1: previous
+local function scrolling_swipe(step)
+    return function()
+        local ws = active_workspace()
+        if not ws then
+            return
+        end
+
+        local win = hl.get_active_window()
+        if win and not win.floating and win.workspace and win.workspace.id == ws.id then
+            -- Columns are laid out along x; any tiled window further in the
+            -- swipe direction means we are not at the edge yet.
+            local x = win.at.x
+            for _, w in ipairs(hl.get_workspace_windows(ws)) do
+                if not w.floating and (w.at.x - x) * step > 0 then
+                    hl.dispatch(hl.dsp.layout(step > 0 and "focus r" or "focus l"))
+                    return
+                end
+            end
+        end
+
+        local target = neighbour_workspace(ws, step)
+        if target then
+            hl.dispatch(hl.dsp.focus({ workspace = tostring(target.id) }))
+        end
+    end
+end
+
+-- gestures:workspace_swipe_invert (default on): fingers moving left go forward
+local swipeForward  = scrolling_swipe(1)
+local swipeBackward = scrolling_swipe(-1)
+local swipeMode = nil
+
+local function sync_swipe_gesture(ws)
+    local mode = (ws and ws.tiled_layout == "scrolling") and "scrolling" or "workspace"
+    if mode == swipeMode then
+        return
+    end
+
+    if swipeMode == "scrolling" then
+        hl.gesture({ fingers = 3, direction = "left",  action = "unset" })
+        hl.gesture({ fingers = 3, direction = "right", action = "unset" })
+    elseif swipeMode == "workspace" then
+        hl.gesture({ fingers = 3, direction = "horizontal", action = "unset" })
+    end
+
+    if mode == "scrolling" then
+        hl.gesture({ fingers = 3, direction = "left",  action = swipeForward })
+        hl.gesture({ fingers = 3, direction = "right", action = swipeBackward })
+    else
+        hl.gesture({ fingers = 3, direction = "horizontal", action = "workspace" })
+    end
+    swipeMode = mode
+end
+
+sync_swipe_gesture(active_workspace())
+hl.on("workspace.active", function() sync_swipe_gesture(active_workspace()) end)
+hl.on("monitor.focused", function(m) sync_swipe_gesture(active_workspace(m)) end)
 
 -- Example per-device config
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Devices/ for more
