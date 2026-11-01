@@ -2,15 +2,13 @@
   description = "jw910731's NixOS Flake";
 
   inputs = {
-    # NixPKG
+    # Core: nixpkgs channels
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-darwin.url = "github:NixOS/nixpkgs/nixpkgs-26.05-darwin";
+    # nixpkgs-unstable: only consumed by linuxOverlays (zed-editor)
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    # formatter
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-
-    # Home Manager
+    # Common: one per platform, each following its platform's nixpkgs
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,19 +17,6 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-
-    # Darwin Only
-    darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-26.05";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
-
-    numlockfixd = {
-      url = "github:jw910731/numlockfixd";
-      inputs.nixpkgs.follows = "nixpkgs-darwin";
-    };
-
-    # Darwin & Linux
     nix-doom-emacs-unstraightened = {
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,34 +25,49 @@
       url = "github:marienz/nix-doom-emacs-unstraightened";
       inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
-
+    # llm-agents: no follows on purpose (keeps upstream binary cache hits); used on both platforms
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
 
-    # Linux Only
-    helium-flake = {
-      inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:oxcl/nix-flake-helium-browser";
+    # Utility: formatter / devShell
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+
+    # Darwin only
+    darwin = {
+      url = "github:lnl7/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
+    numlockfixd = {
+      url = "github:jw910731/numlockfixd";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
     };
 
+    # Linux only
+    ## system modules
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.8.0";
-
     intel-lpmd-flake = {
       url = "github:dmfrpro/intel-lpmd-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    openlogi = {
+      url = "github:AprilNEA/OpenLogi?dir=packaging";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+    ## desktop home-manager
+    helium-flake = {
+      url = "github:oxcl/nix-flake-helium-browser";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.8.0";
     vicinae = {
       url = "github:vicinaehq/vicinae";
     };
@@ -77,11 +77,6 @@
 
     noctalia = {
       url = "github:noctalia-dev/noctalia/cachix";
-    };
-
-    openlogi = {
-      url = "github:AprilNEA/OpenLogi?dir=packaging";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
