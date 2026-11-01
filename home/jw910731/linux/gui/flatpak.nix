@@ -34,6 +34,14 @@
     };
   };
 
+  # The Beeper flatpak keeps its data in the host's ~/.config/BeeperTexts
+  # (filesystems=xdg-config/BeeperTexts), but flatpak only binds paths that
+  # already exist. Without the directory, beeper.sh's mkdir lands on the
+  # sandbox tmpfs and the whole profile (login included) is lost on exit.
+  home.activation.beeperDataDir = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run mkdir -p -m 700 "${config.xdg.configHome}/BeeperTexts"
+  '';
+
   # OnlyOffice disables Qt scaling and uses its own DPI checker, which only
   # honors `force-scale` in its (app-mutable) settings.xml, so patch it in place.
   home.activation.onlyofficeForceScale = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
