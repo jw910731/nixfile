@@ -23,7 +23,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.initrd.kernelModules = [ ];
-  boot.loader.systemd-boot.configurationLimit = 8;
+  boot.loader.systemd-boot.configurationLimit = 4;
   boot.zswap = {
     enable = true;
   };
