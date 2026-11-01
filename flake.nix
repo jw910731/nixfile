@@ -80,59 +80,27 @@
     };
   };
 
-  outputs =
-    {
-      nixpkgs,
-      nixpkgs-unstable,
-      nixpkgs-darwin,
-      darwin,
-      home-manager,
-      home-manager-darwin,
-      treefmt-nix,
-      numlockfixd,
-      nix-doom-emacs-unstraightened,
-      nix-doom-emacs-unstraightened-darwin,
-      llm-agents,
-      helium-flake,
-      nixos-hardware,
-      lanzaboote,
-      nix-flatpak,
-      intel-lpmd-flake,
-      vicinae,
-      vicinae-extensions,
-      noctalia,
-      openlogi,
-      ...
-    }@inputs:
+  outputs = inputs@{ nixpkgs, ... }:
     let
       lib = nixpkgs.lib;
       linuxOverlays = [
-        nix-doom-emacs-unstraightened.overlays.default
-        helium-flake.overlays.default
+        inputs.nix-doom-emacs-unstraightened.overlays.default
+        inputs.helium-flake.overlays.default
 
         (final: prev: {
-          zed-editor = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
-          zed-editor-fhs = nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor-fhs;
+          zed-editor = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor;
+          zed-editor-fhs = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.system}.zed-editor-fhs;
         })
       ];
       darwinOverlays = [
-        nix-doom-emacs-unstraightened-darwin.overlays.default
+        inputs.nix-doom-emacs-unstraightened-darwin.overlays.default
         (final: prev: {
-          numlockfixd = numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
+          numlockfixd = inputs.numlockfixd.packages.${prev.stdenv.system}.numlockfixd;
         })
         (final: prev: {
           emacs-nox = prev.emacs-nox.override { withNativeCompilation = true; };
         })
       ];
-      darwinHostSetup = (
-        { hostName, computerName }:
-        {
-          networking.computerName = "${computerName}";
-          networking.hostName = "${hostName}";
-          system.defaults.smb.NetBIOSName = "${hostName}";
-        }
-      );
-
       moduleModifier' =
         overlays: systemFunc: systemAttrs:
         systemFunc (
@@ -165,6 +133,11 @@
           ] (systemAttrs // { specialArgs = { }; })
         );
 
+      hosts = import ./flake/hosts.nix {
+        inherit inputs lib linuxOverlays darwinOverlays moduleModifier';
+      };
+      inherit (hosts) mkNixos mkDarwin;
+
       utils = import ./flake/utils.nix { inherit inputs lib; };
     in
     {
@@ -184,166 +157,56 @@
       });
 
       # NixOS configs
-      nixosConfigurations =
-        let
-          moduleModifier = moduleModifier' linuxOverlays;
-        in
-        {
-          "linux-host" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-
-            modules = [
-              ./system/linux-host/configuration.nix
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.sharedModules = [
-                  nix-doom-emacs-unstraightened.homeModule
-                ];
-
-                home-manager.users = {
-                  jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux.nix)
-                    (import ./home/jw910731/yubi-sign.nix)
-                  ];
-                };
-              }
-            ];
-          };
-          "framework" = moduleModifier nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-
-            modules = [
-              ./system/framework/configuration.nix
-              nixos-hardware.nixosModules.framework-intel-core-ultra-series3
-              intel-lpmd-flake.nixosModules.default
-              vicinae.nixosModules.default
-              lanzaboote.nixosModules.lanzaboote
-              openlogi.nixosModules.default
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.sharedModules = [
-                  nix-doom-emacs-unstraightened.homeModule
-                  nix-flatpak.homeManagerModules.nix-flatpak
-                  vicinae.homeManagerModules.default
-                  helium-flake.homeModules.default
-                  noctalia.homeModules.default
-                ];
-
-                home-manager.users = {
-                  jw910731 = nixpkgs.lib.mkMerge [
-                    (import ./home/jw910731/linux-gui.nix)
-                    (import ./home/jw910731/1p-sign.nix)
-                    { imports = [ ./home/jw910731/device/framework ]; }
-                  ];
-                };
-              }
-            ];
-          };
+      nixosConfigurations = {
+        "linux-host" = mkNixos {
+          system = "x86_64-linux";
+          role = "server";
+          modules = [ ./system/linux-host/configuration.nix ];
+          homeModules = [
+            ./home/jw910731/linux.nix
+            ./home/jw910731/yubi-sign.nix
+          ];
         };
+        "framework" = mkNixos {
+          system = "x86_64-linux";
+          role = "desktop";
+          modules = [
+            ./system/framework/configuration.nix
+            inputs.nixos-hardware.nixosModules.framework-intel-core-ultra-series3
+            inputs.intel-lpmd-flake.nixosModules.default
+            inputs.lanzaboote.nixosModules.lanzaboote
+          ];
+          homeModules = [
+            ./home/jw910731/linux-gui.nix
+            ./home/jw910731/1p-sign.nix
+            { imports = [ ./home/jw910731/device/framework ]; }
+          ];
+        };
+      };
 
       # Darwin configs
-      darwinConfigurations =
-        let
-          moduleModifier = moduleModifier' darwinOverlays;
-        in
-        {
-          "macstudio" =
-            let
-              system = "aarch64-darwin";
-            in
-            moduleModifier darwin.lib.darwinSystem {
-              inherit system;
-              modules = [
-                ./system/macstudio
-                home-manager-darwin.darwinModules.home-manager
-                (
-                  { lib, ... }:
-                  {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.sharedModules = [
-                      nix-doom-emacs-unstraightened-darwin.homeModule
-                    ];
-
-                    home-manager.users = {
-                      jw910731 = import ./home/jw910731/macos.nix;
-                    };
-                  }
-                )
-                (darwinHostSetup {
-                  hostName = "jw910731-Mac-Studio";
-                  computerName = "jw910731's Mac Studio";
-                })
-              ];
-            };
-          "macmini" =
-            let
-              system = "aarch64-darwin";
-            in
-            moduleModifier darwin.lib.darwinSystem {
-              inherit system;
-              modules = [
-                ./system/macmini
-                home-manager-darwin.darwinModules.home-manager
-                (
-                  { lib, ... }:
-                  {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.sharedModules = [
-                      nix-doom-emacs-unstraightened-darwin.homeModule
-                    ];
-
-                    home-manager.users = {
-                      jw910731 = import ./home/jw910731/macos.nix;
-                    };
-                  }
-                )
-                (darwinHostSetup {
-                  hostName = "MacMini";
-                  computerName = "MacMini";
-                })
-              ];
-            };
-          "macbook-work" =
-            let
-              system = "aarch64-darwin";
-            in
-            moduleModifier darwin.lib.darwinSystem {
-              inherit system;
-              modules = [
-                ./system/macbook-work
-                home-manager-darwin.darwinModules.home-manager
-                (
-                  { lib, ... }:
-                  {
-                    home-manager.useGlobalPkgs = true;
-                    home-manager.useUserPackages = true;
-                    home-manager.sharedModules = [
-                      nix-doom-emacs-unstraightened-darwin.homeModule
-                    ];
-
-                    home-manager.users = {
-                      "jw910731" = lib.mkMerge [
-                        (import ./home/jw910731/macos-work.nix)
-                        {
-                          home.username = "jw910731";
-                          home.homeDirectory = lib.mkForce "/Users/jw910731";
-                        }
-                      ];
-                    };
-                  }
-                )
-                (darwinHostSetup {
-                  hostName = "jerrywu-macbook";
-                  computerName = "jerrywu's Macbook";
-                })
-              ];
-            };
+      darwinConfigurations = {
+        "macstudio" = mkDarwin {
+          system = "aarch64-darwin";
+          hostName = "jw910731-Mac-Studio";
+          computerName = "jw910731's Mac Studio";
+          modules = [ ./system/macstudio ];
+          homeModules = [ ./home/jw910731/macos.nix ];
         };
+        "macmini" = mkDarwin {
+          system = "aarch64-darwin";
+          hostName = "MacMini";
+          computerName = "MacMini";
+          modules = [ ./system/macmini ];
+          homeModules = [ ./home/jw910731/macos.nix ];
+        };
+        "macbook-work" = mkDarwin {
+          system = "aarch64-darwin";
+          hostName = "jerrywu-macbook";
+          computerName = "jerrywu's Macbook";
+          modules = [ ./system/macbook-work ];
+          homeModules = [ ./home/jw910731/macos-work.nix ];
+        };
+      };
     };
 }
