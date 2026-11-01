@@ -16,6 +16,7 @@ in
       casks = mapCask [
         "android-platform-tools"
         "balenaetcher"
+        "beeper"
         "bilibili"
         "cloudflare-warp"
         "discord"
