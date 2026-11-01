@@ -165,53 +165,23 @@
           ] (systemAttrs // { specialArgs = { }; })
         );
 
-      pkgs' =
-        (lib.genAttrs [ "aarch64-darwin" "x86_64-darwin" ] (
-          system: (import nixpkgs-darwin { inherit system; })
-        ))
-        // (lib.genAttrs [ "x86_64-linux" "aarch64-linux" ] (system: (import nixpkgs { inherit system; })));
-      formatter =
-        pkgs:
-        (treefmt-nix.lib.evalModule pkgs {
-          projectRootFile = "flake.nix";
-          programs.nixfmt.enable = true;
-        }).config.build.wrapper;
+      utils = import ./flake/utils.nix { inherit inputs lib; };
     in
     {
       # Formatter settings
-      formatter = (lib.mapAttrs (_: pkgs: formatter pkgs) pkgs');
+      formatter = utils.forAllSystems utils.treefmtFor;
 
       # Minimal shell for boostraping everything
-      devShells =
-        let
-          supportedSystems = [
-            "x86_64-linux"
-            "aarch64-linux"
-            "x86_64-darwin"
-            "aarch64-darwin"
+      devShells = utils.forAllSystems (pkgs: {
+        default = pkgs.mkShellNoCC {
+          packages = [
+            pkgs.nixd
+            (utils.treefmtFor pkgs)
+            pkgs.just
+            pkgs.nh
           ];
-          forEachSupportedSystem =
-            f:
-            nixpkgs.lib.genAttrs supportedSystems (
-              system:
-              f {
-                pkgs = pkgs'."${system}";
-              }
-            );
-        in
-        forEachSupportedSystem (
-          { pkgs }:
-          {
-            default = pkgs.mkShellNoCC {
-              packages = [
-                pkgs.nixd
-                (formatter pkgs)
-                pkgs.just
-                pkgs.nh
-              ];
-            };
-          }
-        );
+        };
+      });
 
       # NixOS configs
       nixosConfigurations =
