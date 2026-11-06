@@ -1,8 +1,8 @@
-# Module builder for the buildaccel distccd compile server; reused by the NixOS
-# server module (nixos-server.nix) and the nix-darwin linux-builder VM (darwin-server.nix).
-# `enable` lets nixos-server.nix import it unconditionally and gate it lazily,
-# since
-# `imports` cannot depend on `config`.
+# Module builder for the buildaccel distccd compile server; reused by the
+# NixOS server module (nixos-server.nix) and the nix-darwin linux-builder VM
+# (darwin-server.nix). `enable` lets nixos-server.nix import it
+# unconditionally and gate it lazily, since `imports` cannot depend on
+# `config`.
 {
   jobs,
   allow,
