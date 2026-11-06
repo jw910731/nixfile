@@ -131,8 +131,8 @@ let
         clangRoot
       ];
     }
-    # Review gap A: clang's joined `-Xclang=<arg>` forwarding alias. This is
-    # the exact reviewer repro and must be refused with exit 111.
+    # clang's joined `-Xclang=<arg>` forwarding alias must be refused with
+    # exit 111.
     {
       name = "refuse-xclang-joined-load";
       compiler = clang;
@@ -144,8 +144,8 @@ let
       ];
       status = 111;
     }
-    # Review gap B: gcc's separate `-specs <file>` and long `--specs=`/
-    # `--specs <file>` spellings (gcc/common.opt aliases).
+    # gcc's separate `-specs <file>` and long `--specs=`/`--specs <file>`
+    # spellings (gcc/common.opt aliases) must be refused.
     {
       name = "refuse-specs-separate";
       args = [
@@ -256,18 +256,23 @@ let
       status = case.status or 0;
       argv = [ (case.compiler or gcc) ] ++ (case.args or [ ]);
       expectedArgv = argv ++ (case.appended or [ ]);
+      # Literal `$(...)` arguments are deliberate; scope SC2016 to the commands carrying them.
+      literalDollar = lib.any (a: lib.hasInfix "$(" a) argv;
+      allowLiteral = lib.optionalString literalDollar "# shellcheck disable=SC2016\n";
     in
     ''
       : > expected
       ${lib.optionalString (status == 0) ''
-        printf 'realise %q\n' ${lib.escapeShellArgs (case.roots or [ gccRoot ])} >> expected
-        printf 'cwd %q\n' ${if case ? cwd then lib.escapeShellArg case.cwd else ''"$PWD"''} >> expected
-        printf 'argv' >> expected
-        printf ' %q' ${lib.escapeShellArgs expectedArgv} >> expected
-        printf '\n' >> expected
+        {
+          printf 'realise %q\n' ${lib.escapeShellArgs (case.roots or [ gccRoot ])}
+          printf 'cwd %q\n' ${if case ? cwd then lib.escapeShellArg case.cwd else ''"$PWD"''}
+          printf 'argv'
+          ${allowLiteral}printf ' %q' ${lib.escapeShellArgs expectedArgv}
+          printf '\n'
+        } >> expected
       ''}
       status=0
-      BUILDACCEL_RESOLVER_DRYRUN=1 ${server.resolver}/bin/buildaccel-resolver \
+      ${allowLiteral}BUILDACCEL_RESOLVER_DRYRUN=1 ${server.resolver}/bin/buildaccel-resolver \
         ${lib.escapeShellArgs argv} > actual 2> errors || status=$?
       if [[ $status != ${toString status} ]] || ! cmp -s expected actual || [[ -s errors ]]; then
         printf 'FAIL %s: expected status %s, got %s\n' ${lib.escapeShellArg case.name} ${toString status} "$status"
@@ -287,6 +292,33 @@ pkgs.runCommand "buildaccel-resolver-check" { __darwinAllowLocalNetworking = tru
     printf '%s\n' a b c d e '# 1 "/build/source/build//"' > sixth.i
     ${lib.concatMapStringsSep "\n" runCase cases}
     test ! -e /tmp/pwned
+
+    # A refused compiler path with control characters must reach logger as a
+    # single line (no split or forged log entries). Not dry-run, so the
+    # resolver really calls logger; a stub logger on PATH records the message.
+    mkdir -p stub-bin
+    cat > stub-bin/logger <<'LOGGER'
+  #!${pkgs.runtimeShell}
+  printf '%s' "$3" > "$BUILDACCEL_LOGGER_RECORD"
+  LOGGER
+    chmod +x stub-bin/logger
+    log_status=0
+    BUILDACCEL_LOGGER_RECORD="$PWD/logger-msg" PATH="$PWD/stub-bin:$PATH" \
+      ${server.resolver}/bin/buildaccel-resolver \
+      $'/etc/evil\nbuildaccel-resolver: ok compiler=forged\r\033[2J' \
+      > /dev/null 2>&1 || log_status=$?
+    if [[ $log_status != 111 ]]; then
+      echo "FAIL log-single-line: expected status 111, got $log_status"
+      exit 1
+    fi
+    if [[ ! -f logger-msg ]] || [[ $(wc -l < logger-msg) != 0 ]] \
+      || [[ $(tr -d '[:print:]' < logger-msg | wc -c) != 0 ]] \
+      || ! grep -qxF 'refused reason=compiler compiler=/etc/evil?buildaccel-resolver: ok compiler=forged??[2J' logger-msg; then
+      echo 'FAIL log-single-line: logger message was not sanitized'
+      od -c logger-msg || true
+      exit 1
+    fi
+    echo 'PASS log-single-line'
 
     # End-to-end daemon test on loopback. Proves both patch hunks in one run:
     # daemon.c lets distccd start with DISTCC_NIX_RESOLVER set (skips the
@@ -318,7 +350,7 @@ pkgs.runCommand "buildaccel-resolver-check" { __darwinAllowLocalNetworking = tru
 
     started=0
     port=0
-    for attempt in 1 2 3 4 5; do
+    for _ in 1 2 3 4 5; do
       port=$(( (RANDOM % 20000) + 20000 ))
       BUILDACCEL_STUB_RECORD="$record" \
       DISTCC_NIX_RESOLVER="$PWD/stub.sh" \
@@ -329,7 +361,7 @@ pkgs.runCommand "buildaccel-resolver-check" { __darwinAllowLocalNetworking = tru
       daemon_pid=$!
       # Bounded readiness wait: ready only when the port accepts a connection.
       ready=0
-      for probe in $(seq 1 100); do
+      for _ in $(seq 1 100); do
         if ! kill -0 "$daemon_pid" 2>/dev/null; then break; fi
         if (exec 3<>/dev/tcp/127.0.0.1/"$port") 2>/dev/null; then
           exec 3>&- 3<&-
