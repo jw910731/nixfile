@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Compilers and arguments arrive from the LAN; never interpret them as shell.
 compiler=${1-}
 dryrun=${BUILDACCEL_RESOLVER_DRYRUN:-0}
