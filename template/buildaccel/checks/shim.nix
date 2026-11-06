@@ -123,7 +123,7 @@ pkgs.runCommand "buildaccel-check-shim" { nativeBuildInputs = [ pkgs.diffutils ]
   echo 1 > "$TMPDIR/on/enabled"
   ln -s "$TMPDIR/phys/work" "$TMPDIR/link"
   phys=$(cd "$TMPDIR/phys/work" && pwd -P)
-  cd "$TMPDIR/link"
+  cd "$TMPDIR/link" || exit 1
   assert "cwd-is-logical-symlink" test "$PWD" != "$phys"
   D=-fdebug-compilation-dir=$phys
 
@@ -185,11 +185,11 @@ pkgs.runCommand "buildaccel-check-shim" { nativeBuildInputs = [ pkgs.diffutils ]
   assert "lib-marker" test "$(cat ${shimGcc}/lib/marker)" = marker
   assert "top-entries" test "$(ls -A ${shimGcc})" = "$(ls -A ${fakeCc})"
   assert "bin-entries" test "$(ls -A ${shimGcc}/bin)" = "$(ls -A ${fakeCc}/bin)"
-  assert "top-entries-count" test "$(ls -A ${shimGcc} | wc -l)" -eq 3
+  assert "top-entries-count" test "$(find ${shimGcc} -mindepth 1 -maxdepth 1 | wc -l)" -eq 3
 
   if ((fail)); then
     echo "buildaccel shim check FAILED"
     exit 1
   fi
-  echo ok > $out
+  echo ok > "$out"
 ''
