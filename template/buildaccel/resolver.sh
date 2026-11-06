@@ -3,9 +3,15 @@ compiler=${1-}
 dryrun=${BUILDACCEL_RESOLVER_DRYRUN:-0}
 export LC_ALL=C
 
+# Untrusted values go into one-line log messages: replace control characters
+# (newline, CR, escapes) so they can never split or forge a log line.
+sanitize() {
+  printf '%s' "${1//[[:cntrl:]]/?}"
+}
+
 refuse() {
   if [[ $dryrun != 1 ]]; then
-    logger -t buildaccel-resolver "refused reason=$1 compiler=$compiler" >/dev/null 2>&1 || true
+    logger -t buildaccel-resolver "$(sanitize "refused reason=$1 compiler=$compiler")" >/dev/null 2>&1 || true
   fi
   exit 111
 }
@@ -23,10 +29,11 @@ basename=${compiler##*/}
 # following value argument). gcc's driver remaps a leading `--` to `-f`
 # (gcc/opts-common.cc option_map), so `--plugin=`, `--pass-plugin=`,
 # `--profile-use` and friends alias the `-f` options and must be rejected
-# too; `-specs`/`-specs=`/`specs`(->`-specs`) and the `--specs` long form
-# are gcc driver aliases (gcc/common.opt). clang forwards `-Xclang=<arg>`
-# and `-mllvm[=]<arg>` to cc1/LLVM (clang Driver/Options.td), which can load
-# pass/frontend plugins (e.g. `-Xclang -load`, `-mllvm -load=`).
+# too. The `-specs`, `-specs=...` and `--specs` spellings (the long form
+# maps to `-specs`) are gcc driver aliases (gcc/common.opt) and are rejected.
+# clang forwards `-Xclang=<arg>` and `-mllvm[=]<arg>` to cc1/LLVM (clang
+# Driver/Options.td), which can load pass/frontend plugins (e.g.
+# `-Xclang -load`, `-mllvm -load=`).
 #
 # -Xassembler/-Wa, are deliberately NOT rejected: during a `-c` compile of
 # preprocessed input these forward only to GNU as, which has no plugin or
@@ -115,6 +122,6 @@ else
   if ! mkdir -p -- "$cwd" >/dev/null 2>&1 || ! cd -- "$cwd" 2>/dev/null; then
     refuse cwd
   fi
-  logger -t buildaccel-resolver "ok compiler=$compiler cwd=$cwd" >/dev/null 2>&1 || true
+  logger -t buildaccel-resolver "$(sanitize "ok compiler=$compiler cwd=$cwd")" >/dev/null 2>&1 || true
   exec env -i PATH= HOME=/var/empty TMPDIR="$TMPDIR" "$@"
 fi

@@ -50,4 +50,4 @@ assert inv.forSystem "x86_64-linux" inv.servers == { };
 assert inv.byHostName "MacMini" inv.servers == "macmini";
 assert inv.byHostName "jw910731-Mac-Studio" inv.servers == "macstudio";
 assert inv.byHostName "unknown-mac" inv.servers == null;
-pkgs.runCommand "buildaccel-check-inventory" { } "echo ok > $out"
+pkgs.runCommand "buildaccel-check-inventory" { } "echo ok > \"$out\""
