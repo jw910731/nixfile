@@ -54,8 +54,11 @@ in
           }
         )
       );
-      default = inventory.forSystem pkgs.stdenv.hostPlatform.system inventory.servers;
-      description = "Compile servers from the inventory, with address and port overrides.";
+      description = ''
+        Inventory entries for the host's system are defined by default.
+        Set individual fields per entry to override them, for example address
+        or port. Replace the whole set with lib.mkForce { ... }.
+      '';
     };
     cacheSize = lib.mkOption {
       type = lib.types.str;
@@ -64,7 +67,12 @@ in
     };
   };
   config = lib.mkMerge [
-    { _module.args.buildAccel = (import ./lib.nix { inherit lib; }).forPkgs pkgs; }
+    {
+      _module.args.buildAccel = (import ./lib.nix { inherit lib; }).forPkgs pkgs;
+      jw.buildAccel.client.servers = lib.mapAttrs (_: lib.mapAttrs (_: lib.mkDefault)) (
+        inventory.forSystem pkgs.stdenv.hostPlatform.system inventory.servers
+      );
+    }
     (lib.mkIf cfg.enable {
       assertions =
         lib.mapAttrsToList (name: _: {

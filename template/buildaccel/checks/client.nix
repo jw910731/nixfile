@@ -29,6 +29,24 @@ let
     };
   on = mkSys true { };
   off = mkSys false { };
+  addressOnly = mkSys true {
+    jw.buildAccel.client.servers.macstudio.address = "10.0.2.2";
+  };
+  replaced = mkSys true {
+    jw.buildAccel.client.servers = lib.mkForce {
+      qa-a = {
+        hostName = "qa-a";
+        address = "10.0.2.2";
+        port = 13632;
+        systems = [ "aarch64-linux" ];
+        slots = 3;
+        vm = {
+          cores = 1;
+          memorySize = 1;
+        };
+      };
+    };
+  };
   overridden = mkSys true {
     jw.buildAccel.client.servers.macstudio = {
       address = "10.0.2.2";
@@ -132,6 +150,16 @@ pkgs.runCommand "buildaccel-check-client"
     )) ''["buildaccel-forward-macmini","buildaccel-forward-macstudio","buildaccel-health"]''}
     ${eq "enabled tmpfiles exact" (builtins.toJSON (rules on)) (builtins.toJSON expectedRules)}
     ${eq "enabled forward exact" (forward on) (expectedForward "jw910731-Mac-Studio.local" "3632")}
+    ${eq "address-only forward exact" (forward addressOnly) (expectedForward "10.0.2.2" "3632")}
+    ${eq "address-only units" (builtins.toJSON (
+      units addressOnly
+    )) ''["buildaccel-forward-macmini","buildaccel-forward-macstudio","buildaccel-health"]''}
+    ${eq "address-only servers file exact" (builtins.toJSON (
+      lib.filter (lib.hasPrefix "C+ /run/buildaccel/v1/servers ") (rules addressOnly)
+    )) (builtins.toJSON [ "C+ /run/buildaccel/v1/servers - - - - ${clean serverFile}" ])}
+    ${eq "forced replacement units" (builtins.toJSON (
+      units replaced
+    )) ''["buildaccel-forward-qa-a","buildaccel-health"]''}
     ${eq "override forward exact" (forward overridden) (expectedForward "10.0.2.2" "13632")}
     ${eq "timer boot" on.config.systemd.timers.buildaccel-health.timerConfig.OnBootSec "10s"}
     ${eq "timer interval" on.config.systemd.timers.buildaccel-health.timerConfig.OnUnitActiveSec "30s"}
