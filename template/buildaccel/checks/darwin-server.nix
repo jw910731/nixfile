@@ -55,12 +55,12 @@ assert
     (forward "0.0.0.0" 3632 3632)
     (forward "127.0.0.1" 3633 3633)
   ];
-assert vm.virtualisation.cores == 12;
+assert vm.virtualisation.cores == 8;
 assert vm.virtualisation.darwin-builder.memorySize == 12288;
 assert vm.virtualisation.memorySize == 12288;
 assert service.Nice == 5 && service.RunAtLoad && service.KeepAlive;
 assert lib.hasInfix ''"--allow" "10.0.2.2/32"'' command;
-assert lib.hasInfix ''"--jobs" "12"'' command;
+assert lib.hasInfix ''"--jobs" "8"'' command;
 assert lib.hasInfix "socketfilterfw --getglobalstate | /usr/bin/grep -q enabled" activation;
 assert lib.hasInfix "socketfilterfw --add ${plain qemu}" activation;
 assert lib.hasInfix "socketfilterfw --unblockapp ${plain qemu}" activation;
@@ -70,7 +70,7 @@ assert miniVm.virtualisation.cores == 8;
 assert miniVm.virtualisation.darwin-builder.memorySize == 8192;
 assert miniVm.virtualisation.memorySize == 8192;
 assert bootstrap.nix.linux-builder.enable;
-assert bootstrapVm.virtualisation.cores == 12;
+assert bootstrapVm.virtualisation.cores == 8;
 assert bootstrapVm.virtualisation.darwin-builder.memorySize == 12288;
 assert bootstrapVm.virtualisation.memorySize == 12288;
 assert !(bootstrapVm.systemd.services ? buildaccel-distccd);
