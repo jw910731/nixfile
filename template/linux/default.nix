@@ -11,10 +11,6 @@
     description = "Enable secure boot (lanzaboote is wired per-machine where its module is imported)";
   };
 
-  imports = [
-    ../nix-cache.nix
-  ];
-
   config = lib.mkMerge [
     {
       # Select internationalisation properties.
