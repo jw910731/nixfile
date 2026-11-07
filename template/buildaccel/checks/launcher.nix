@@ -436,6 +436,19 @@ pkgs.runCommand "buildaccel-check-launcher"
       [ ! -s "$T/berr" ] || fail "bridge wrote stderr for [$h]"
       echo "ok: bridge refused [$h] rc=$rc"
     done
+    for kind in fifo directory; do
+      rm -f "$T/.buildaccel/bridge.log"
+      if [[ $kind == fifo ]]; then
+        mkfifo "$T/.buildaccel/bridge.log"
+      else
+        mkdir "$T/.buildaccel/bridge.log"
+      fi
+      rc=0
+      timeout 10 "$BR" Bad_Name distccd --inetd </dev/null >"$T/bout" 2>"$T/berr" || rc=$?
+      eq "$rc" 2 "K bridge refuses invalid host with $kind log"
+      [ ! -s "$T/bout" ] && [ ! -s "$T/berr" ] || fail "K bridge leaked with $kind log"
+      rm -rf "$T/.buildaccel/bridge.log"
+    done
     rc=0
     bout=$(timeout 10 "$BR" qa-echo distccd --inetd --enable-tcp-insecure </dev/null) || rc=$?
     eq "$rc:$bout" "0:bridge-ok" "K bridge connects a valid host"
@@ -977,11 +990,19 @@ pkgs.runCommand "buildaccel-check-launcher"
         stats-*)
           eq "$(m_sum)" "invocations=1 ccache-hits=0 ccache-misses=1 remote-ok=0 remote-failed=0 local=1 unaccounted=unknown hosts= skipped=no-server:1" "T unavailable stats [$kind]" ;;
         no-inv)
-          eq "$(m_sum)" "invocations=0 ccache-hits=0 ccache-misses=0 remote-ok=0 remote-failed=0 local=0 unaccounted=unknown hosts= skipped=" "T unsafe state without invocation skips distcc" ;;
+          eq "$(tail -n 1 "$FCENV2" | sed 's/^umask=[0-9]* cfg=.* ddir=//; s/ dlog=.*//')" "$T/.buildaccel/distcc" "T shared fallback without invocation"
+          [ -f "$T/.buildaccel/distcc/lock/cpu_localhost_0" ] || fail "T no-inv distcc lock missing"
+          eq "$(m_sum)" "invocations=1 ccache-hits=0 ccache-misses=0 remote-ok=0 remote-failed=0 local=0 unaccounted=unknown hosts= skipped=no-server:1" "T unavailable invocation still uses distcc" ;;
         *)
           TD=("$T"/.buildaccel/inv/*)
-          eq "$(tail -n 1 "$FCENV2" | sed 's/^umask=[0-9]* cfg=.* ddir=//; s/ dlog=.*//')" "''${TD[0]}/distcc" "T fresh private state [$kind]"
-          eq "$(m_sum)" "invocations=1 ccache-hits=0 ccache-misses=1 remote-ok=0 remote-failed=0 local=1 unaccounted=0 hosts= skipped=no-server:1" "T private-state outcome [$kind]" ;;
+          if [[ $kind == fallback-lock ]]; then
+            expected_dir="''${TD[0]}/distcc"
+          else
+            expected_dir="$T/.buildaccel/distcc"
+          fi
+          eq "$(tail -n 1 "$FCENV2" | sed 's/^umask=[0-9]* cfg=.* ddir=//; s/ dlog=.*//')" "$expected_dir" "T safe state [$kind]"
+          [ -f "$expected_dir/lock/cpu_localhost_0" ] || fail "T safe distcc lock missing [$kind]"
+          eq "$(m_sum)" "invocations=1 ccache-hits=0 ccache-misses=1 remote-ok=0 remote-failed=0 local=1 unaccounted=0 hosts= skipped=no-server:1" "T safe-state outcome [$kind]" ;;
       esac
     done
     reset_build

@@ -551,7 +551,7 @@ mode_health_check() {
 mode_compile() {
   local real=$1 a deny="" C branch reason cache=1 i ds hosts_spec distcc_dir inv=""
   local exactness=exact loggable=1
-  local unsafe_state=0 entries
+  local unsafe_state=0 entries candidate
   local record_id=-
   shift
   unset_inherited
@@ -601,35 +601,39 @@ mode_compile() {
     U_TOTAL=0
   fi
 
-  distcc_dir="$R/state/distcc"
-  if [[ ( ! -e $distcc_dir && ! -L $distcc_dir ) ||
-    ( -d $distcc_dir && ! -w $distcc_dir ) ]]; then
-    distcc_dir="$B/distcc"
-    "$CU/mkdir" -p "$distcc_dir" 2>/dev/null
-  fi
   # lock.c 253 opens locks/backoff with O_WRONLY|O_CREAT; state.c 142
   # opens process state with O_CREAT|O_WRONLY|O_TRUNC. Neither rejects FIFOs.
-  [[ -d $distcc_dir ]] || unsafe_state=1
-  if ((unsafe_state == 0)); then
-    for a in "$distcc_dir/lock" "$distcc_dir/state"; do
+  distcc_dir=""
+  for candidate in "$R/state/distcc" "$B/distcc"; do
+    if [[ $candidate == "$B/distcc" && ! -e $candidate && ! -L $candidate ]]; then
+      "$CU/mkdir" -p "$candidate" 2>/dev/null
+    fi
+    [[ -d $candidate && -w $candidate ]] || continue
+    unsafe_state=0
+    for a in "$candidate/lock" "$candidate/state"; do
       [[ -e $a || -L $a ]] || continue
-      if [[ ! -d $a ]] ||
+      if [[ ! -d $a || ! -w $a ]] ||
         ! entries=$("@findutils@/bin/find" -H "$a" -mindepth 1 ! -type f -print -quit 2>/dev/null) ||
         [[ -n $entries ]]; then
         unsafe_state=1
         break
       fi
     done
-  fi
-  if ((unsafe_state)); then
-    # Only sabotaged state loses the shared local-slot bound. Fresh private
-    # state cannot contain pre-arranged blocking paths; without it skip distcc.
-    if [[ -z $inv ]] || ! "$CU/mkdir" "$inv/distcc" 2>/dev/null; then
-      exec "$real" "$@"
+    if ((unsafe_state == 0)); then
+      distcc_dir=$candidate
+      break
     fi
-    distcc_dir="$inv/distcc"
+  done
+  if [[ -z $distcc_dir ]]; then
+    # Only doubly sabotaged shared state loses the shared local-slot bound.
+    # Always keep distcc, even when invocation recording is unavailable.
+    if [[ -n $inv ]] && "$CU/mkdir" "$inv/distcc" 2>/dev/null; then
+      distcc_dir="$inv/distcc"
+    else
+      distcc_dir=$("$CU/mktemp" -d "${TMPDIR:-/tmp}/buildaccel-distcc.XXXXXXXX" 2>/dev/null) || distcc_dir=""
+    fi
   fi
-  export DISTCC_DIR="$distcc_dir"
+  [[ -z $distcc_dir ]] || export DISTCC_DIR="$distcc_dir"
   export DISTCC_VERBOSE=1
   # ccache runs its own preprocessor through distcc with the cpp log; only
   # mode_prefix switches to the own-command log immediately before exec.

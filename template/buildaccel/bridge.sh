@@ -12,10 +12,10 @@ set -u
 
 R="${BUILDACCEL_ROOT:-/run/buildaccel/v1}"
 log="${TMPDIR:-/tmp}/.buildaccel/bridge.log"
-if [[ -d ${log%/*} && -w ${log%/*} ]]; then
-  exec 2>>"$log"
-else
-  exec 2>/dev/null
+exec 2>/dev/null
+if [[ -d ${log%/*} && -w ${log%/*} &&
+  ( -f $log || ( ! -e $log && ! -L $log ) ) ]]; then
+  exec 2>>"$log" || exec 2>/dev/null
 fi
 
 host="${1:-}"
