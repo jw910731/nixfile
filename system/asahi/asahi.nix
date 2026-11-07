@@ -10,6 +10,9 @@
         asahi-va-driver
         ;
     })
+    (final: prev: {
+      hyprland = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.hyprland;
+    })
   ];
 
   hardware.asahi.enable = true;
