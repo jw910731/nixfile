@@ -4,9 +4,10 @@
     address = "jw910731-Mac-Studio.local";
     port = 3632;
     systems = [ "aarch64-linux" ];
-    slots = 12;
+    slots = 8;
     vm = {
-      cores = 12;
+      # QEMU's virt machine with GICv2 (what the builder VM uses on HVF) caps at 8 vCPUs.
+      cores = 8;
       memorySize = 12288;
     };
   };
