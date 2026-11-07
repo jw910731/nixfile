@@ -56,12 +56,12 @@ lswitch host:
   sudo nixos-rebuild switch --flake .#{{host}} {{bootstrap_flags}}
 
 up:
-  nix flake update
+  nix flake update {{nh_flags}}
 
 # Update one or more specific inputs
 # Usage: just upp nixpkgs home-manager
 upp +inputs:
-  nix flake update {{inputs}}
+  nix flake update {{nh_flags}} {{inputs}}
 
 history:
   nix profile history --profile /nix/var/nix/profiles/system
@@ -82,7 +82,7 @@ deepclean:
 ############################################################################
 
 fmt:
-  nix fmt
+  nix fmt {{nh_flags}}
 
 ###############################################################
 # Quick Test - emacs
