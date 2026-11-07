@@ -53,6 +53,10 @@
       url = "github:nix-community/lanzaboote/v1.2.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-apple-silicon = {
+      url = "github:nix-community/nixos-apple-silicon";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     intel-lpmd-flake = {
       url = "github:dmfrpro/intel-lpmd-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -187,6 +191,19 @@
             ./home/jw910731/linux-gui.nix
             ./home/jw910731/1p-sign.nix
             { imports = [ ./home/jw910731/device/framework ]; }
+          ];
+        };
+        "asahi" = mkNixos {
+          system = "aarch64-linux";
+          role = "desktop";
+          modules = [
+            ./system/asahi/configuration.nix
+            inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
+          ];
+          homeModules = [
+            ./home/jw910731/linux-gui.nix
+            ./home/jw910731/1p-sign.nix
+            { imports = [ ./home/jw910731/device/asahi ]; }
           ];
         };
       };
