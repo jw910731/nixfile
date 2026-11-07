@@ -289,15 +289,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1793894983,
-        "narHash": "sha256-Edf2dXsfHch4YEjzSdBY5+CEmBTBWa5psnlDWExBKWk=",
-        "owner": "oxcl",
+        "lastModified": 1794068030,
+        "narHash": "sha256-WknDHkYvup37GY20ieNH7Cf+hnZbVmdkPJ1ZHVMHdXc=",
+        "owner": "jw910731",
         "repo": "nix-flake-helium-browser",
-        "rev": "9fe3f8f48c8c25b0d245d13d6c91d4cf77adc729",
+        "rev": "aa9afcf787dd358d2e9f84f14a0b90a006dfb6b9",
         "type": "github"
       },
       "original": {
-        "owner": "oxcl",
+        "owner": "jw910731",
         "repo": "nix-flake-helium-browser",
         "type": "github"
       }

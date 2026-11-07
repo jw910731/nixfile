@@ -86,7 +86,7 @@
 
     ## desktop home-manager
     helium-flake = {
-      url = "github:oxcl/nix-flake-helium-browser";
+      url = "github:jw910731/nix-flake-helium-browser";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=v0.8.0";
