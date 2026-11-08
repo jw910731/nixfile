@@ -35,12 +35,6 @@ buildaccel-bootstrap host:
   until sudo ssh -o ConnectTimeout=2 linux-builder true 2>/dev/null; do sleep 3; done
   echo "bootstrap done: now run 'just switch {{host}}'"
 
-[macos]
-buildaccel-bootstrap host:
-  BUILDACCEL_BOOTSTRAP=1 nh darwin switch -H {{host}} '.' -- --impure
-  until sudo ssh -o ConnectTimeout=2 linux-builder true 2>/dev/null; do sleep 3; done
-  echo "bootstrap done: now run 'just switch {{host}}'"
-
 [linux]
 switch host:
   nh os switch -H {{host}} '.' -- {{nh_flags}}
