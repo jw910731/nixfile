@@ -82,16 +82,38 @@ local function lidClosed()
     return nil
 end
 
+local function isBuiltinConnector(connector)
+    return connector:match("^eDP") or connector:match("^LVDS") or connector:match("^DSI")
+end
+
 -- Reads sysfs rather than hl.get_monitors(), which is still empty while the
 -- config is evaluated at startup.
-local function externalDisplayConnected()
+local function connectedConnectors()
     local connected = readCommand("grep -l '^connected' /sys/class/drm/card*-*/status") or ""
+    local connectors = {}
     for connector in connected:gmatch("card%d+%-([^/]+)/status") do
-        if not (connector:match("^eDP") or connector:match("^LVDS") or connector:match("^DSI")) then
+        table.insert(connectors, connector)
+    end
+    return connectors
+end
+
+local function externalDisplayConnected()
+    for _, connector in ipairs(connectedConnectors()) do
+        if not isBuiltinConnector(connector) then
             return true
         end
     end
     return false
+end
+
+-- nil on a machine with no builtin panel.
+local function detectBuiltinConnector()
+    for _, connector in ipairs(connectedConnectors()) do
+        if isBuiltinConnector(connector) then
+            return connector
+        end
+    end
+    return nil
 end
 
 -- Device names of every input device advertising SW_LID (bit 0 of the SW
@@ -116,27 +138,29 @@ end
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 -- Main monitor
+-- Safe defaults for a machine with no panel spec yet. `builtin_monitor` is
+-- injected from jw.hyprland.builtinMonitor (see builtin-monitor.nix), and any
+-- field it sets wins.
 local laptopMonitor = {
-    output   = "eDP-1",
-    mode   = "2880x1920@120",
-    scale  = 2,
+    output   = detectBuiltinConnector(),
+    mode   = "preferred",
+    scale  = "auto",
     position = "0x0",
-    vrr = 3,
+    vrr = 0,
 }
-
--- Apple Silicon panels: the mode differs per model and VRR is unsupported.
-if (readFile("/proc/device-tree/compatible") or ""):match("apple,arm%-platform") then
-    laptopMonitor.mode = "preferred"
-    laptopMonitor.vrr = 0
+for key, value in pairs(builtin_monitor) do
+    laptopMonitor[key] = value
 end
 
-if lidClosed() == true and externalDisplayConnected() then
-    hl.monitor({
-        output = laptopMonitor.output,
-        disabled = true,
-    })
-else
-    hl.monitor(laptopMonitor)
+if laptopMonitor.output then
+    if lidClosed() == true and externalDisplayConnected() then
+        hl.monitor({
+            output = laptopMonitor.output,
+            disabled = true,
+        })
+    else
+        hl.monitor(laptopMonitor)
+    end
 end
 
 -- Any active monitor besides the builtin panel? (docked / clamshell mode)
@@ -171,9 +195,11 @@ function enableLaptopMonitor()
         hl.exec_cmd("hyprctl reload")
     end
 end
-for name in pairs(lidSwitchNames()) do
-    hl.bind("switch:on:" .. name, disableLaptopMonitor, { locked = true })
-    hl.bind("switch:off:" .. name, enableLaptopMonitor, { locked = true })
+if laptopMonitor.output then
+    for name in pairs(lidSwitchNames()) do
+        hl.bind("switch:on:" .. name, disableLaptopMonitor, { locked = true })
+        hl.bind("switch:off:" .. name, enableLaptopMonitor, { locked = true })
+    end
 end
 
 -- Home monitor
