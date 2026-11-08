@@ -5,6 +5,8 @@
   ...
 }:
 {
+  imports = [ ./builtin-monitor.nix ];
+
   home.packages = with pkgs; [
     wl-clipboard
   ];

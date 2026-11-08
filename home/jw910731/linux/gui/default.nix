@@ -1,6 +1,7 @@
 {
   inputs,
   pkgs,
+  lib,
   config,
   ...
 }:
@@ -10,12 +11,15 @@
     ./flatpak.nix
     ./wayland
   ];
-  home.packages = with pkgs; [
-    noto-fonts-cjk-sans
-    vscode-fhs
-    spotify
-    telegram-desktop
-  ];
+  home.packages =
+    with pkgs;
+    [
+      noto-fonts-cjk-sans
+      vscode-fhs
+      telegram-desktop
+    ]
+    # spotify is x86_64-only on Linux
+    ++ lib.optional (lib.meta.availableOn stdenv.hostPlatform spotify) spotify;
 
   programs.zed-editor.enable = true;
   programs.ghostty.settings = {

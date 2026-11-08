@@ -39,7 +39,7 @@
         launchAtLogin = true;
       };
 
-      services.thermald.enable = true;
+      services.thermald.enable = pkgs.stdenv.hostPlatform.isx86;
       powerManagement = {
         enable = true;
         powertop.enable = true;
@@ -87,7 +87,7 @@
       services.pipewire = {
         enable = true;
         alsa.enable = true;
-        alsa.support32Bit = true;
+        alsa.support32Bit = pkgs.stdenv.hostPlatform.isx86_64;
         pulse.enable = true;
         jack.enable = true;
 
