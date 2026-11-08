@@ -11,7 +11,16 @@
         ;
     })
     (final: prev: {
-      hyprland = inputs.nixpkgs-unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.hyprland;
+      hyprland = prev.hyprland.override {
+        aquamarine = prev.aquamarine.overrideAttrs (old: {
+          patches = (old.patches or []) ++ [
+            (prev.fetchurl {
+              url = "https://patch-diff.githubusercontent.com/raw/hyprwm/aquamarine/pull/291.diff";
+              hash = "sha256-s/arPysXaOf/rTtHU1SLpKYN1CgnFY/7vedMN2jC35s=";
+            })
+          ];
+        });
+      };
     })
   ];
 

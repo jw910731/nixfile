@@ -10,16 +10,104 @@
 -- require("myColors")
 
 
-function lid_is_open()
-    local f = io.open("/proc/acpi/button/lid/LID0/state", "r")
+-----------------------
+---- LID DETECTION ----
+-----------------------
+
+local function readFile(path)
+    local f = io.open(path, "r")
     if not f then
         return nil
     end
-
-    local state = f:read("*a")
+    local content = f:read("*a")
     f:close()
+    return content
+end
 
-    return state:match("open") ~= nil
+local function readCommand(cmd)
+    local p = io.popen("{ " .. cmd .. "; } 2>/dev/null")
+    if not p then
+        return nil
+    end
+    local output = p:read("*a")
+    p:close()
+    return output
+end
+
+-- Lid state sources, tried in order until one gives an answer. Each returns
+-- true (closed), false (open) or nil (cannot tell on this machine).
+-- To support a new machine, add a source here.
+local lidProviders = {
+    -- ACPI laptops. Absent on Apple Silicon and other device-tree machines.
+    function()
+        local state = readCommand("cat /proc/acpi/button/lid/*/state") or ""
+        if state:match("closed") then
+            return true
+        elseif state:match("open") then
+            return false
+        end
+    end,
+
+    -- UPower is the only source that reports whether a lid exists at all.
+    function()
+        local output = readCommand("busctl --timeout=1 get-property org.freedesktop.UPower"
+            .. " /org/freedesktop/UPower org.freedesktop.UPower LidIsPresent LidIsClosed") or ""
+        local present, closed = output:match("b (%a+)%s+b (%a+)")
+        if present == "true" then
+            return closed == "true"
+        end
+    end,
+
+    -- logind reads false both for an open lid and for no lid. Either way the
+    -- panel stays on, so the ambiguity is harmless.
+    function()
+        local output = readCommand("busctl --timeout=1 get-property org.freedesktop.login1"
+            .. " /org/freedesktop/login1 org.freedesktop.login1.Manager LidClosed") or ""
+        local closed = output:match("b (%a+)")
+        if closed then
+            return closed == "true"
+        end
+    end,
+}
+
+-- true / false from the first source that knows, nil if none does. Callers
+-- must compare with `== true` so that unknown keeps the panel online.
+local function lidClosed()
+    for _, provider in ipairs(lidProviders) do
+        local ok, closed = pcall(provider)
+        if ok and closed ~= nil then
+            return closed
+        end
+    end
+    return nil
+end
+
+-- Reads sysfs rather than hl.get_monitors(), which is still empty while the
+-- config is evaluated at startup.
+local function externalDisplayConnected()
+    local connected = readCommand("grep -l '^connected' /sys/class/drm/card*-*/status") or ""
+    for connector in connected:gmatch("card%d+%-([^/]+)/status") do
+        if not (connector:match("^eDP") or connector:match("^LVDS") or connector:match("^DSI")) then
+            return true
+        end
+    end
+    return false
+end
+
+-- Device names of every input device advertising SW_LID (bit 0 of the SW
+-- capability mask, whose last hex digit holds the low bits). Hyprland binds
+-- switches by name, and the name varies by machine.
+local function lidSwitchNames()
+    local names = { ["Lid Switch"] = true } -- common ACPI name, if the read fails
+    local devices = readFile("/proc/bus/input/devices") or ""
+    for block in (devices .. "\n\n"):gmatch("(.-)\n\n") do
+        local name = block:match('N: Name="(.-)"')
+        local lowDigit = block:match("B: SW=[%x ]-(%x)\n") or block:match("B: SW=[%x ]-(%x)$")
+        if name and lowDigit and tonumber(lowDigit, 16) % 2 == 1 then
+            names[name] = true
+        end
+    end
+    return names
 end
 
 ------------------
@@ -36,13 +124,19 @@ local laptopMonitor = {
     vrr = 3,
 }
 
-if lid_is_open() then
-    hl.monitor(laptopMonitor)
-else
+-- Apple Silicon panels: the mode differs per model and VRR is unsupported.
+if (readFile("/proc/device-tree/compatible") or ""):match("apple,arm%-platform") then
+    laptopMonitor.mode = "preferred"
+    laptopMonitor.vrr = 0
+end
+
+if lidClosed() == true and externalDisplayConnected() then
     hl.monitor({
         output = laptopMonitor.output,
-        disabled = true ,
+        disabled = true,
     })
+else
+    hl.monitor(laptopMonitor)
 end
 
 -- Any active monitor besides the builtin panel? (docked / clamshell mode)
@@ -77,8 +171,10 @@ function enableLaptopMonitor()
         hl.exec_cmd("hyprctl reload")
     end
 end
-hl.bind("switch:on:Lid Switch", disableLaptopMonitor, { locked = true })
-hl.bind("switch:off:Lid Switch", enableLaptopMonitor, { locked = true })
+for name in pairs(lidSwitchNames()) do
+    hl.bind("switch:on:" .. name, disableLaptopMonitor, { locked = true })
+    hl.bind("switch:off:" .. name, enableLaptopMonitor, { locked = true })
+end
 
 -- Home monitor
 hl.monitor({

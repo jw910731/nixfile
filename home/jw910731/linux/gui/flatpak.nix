@@ -12,7 +12,6 @@
       location = "https://mark12870.github.io/beeper-flatpak/io.github.mark12870.beeper.flatpakrepo";
     }];
     packages = [
-      "com.discordapp.Discord"
       "com.valvesoftware.Steam"
       "org.kde.keepsecret"
       "org.localsend.localsend_app"
@@ -20,6 +19,8 @@
       "org.onlyoffice.desktopeditors"
       "org.videolan.VLC"
       "org.mozilla.thunderbird"
+    ] ++ lib.optionals pkgs.stdenv.hostPlatform.isx86_64 [
+      "com.discordapp.Discord"
       { appId = "io.github.mark12870.beeper"; origin = "beeper";  }
     ];
     # Hyprland uses xwayland.force_zero_scaling, so apps that land on XWayland
