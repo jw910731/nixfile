@@ -513,6 +513,11 @@ hl.device({
     name = "at-translated-set-2-keyboard",
     kb_options = "ctrl:nocaps,altwin:swap_lalt_lwin",
 })
+-- MacBook (Asahi) built-in keyboard
+hl.device({
+    name = "apple-mtp-keyboard",
+    kb_options = "ctrl:nocaps",
+})
 
 ---------------------
 ---- KEYBINDINGS ----
