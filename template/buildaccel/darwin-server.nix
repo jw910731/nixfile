@@ -42,11 +42,12 @@ in
       (lib.mkIf (cfg.name != null) {
         nix.linux-builder = {
           enable = true;
+          ephemeral = true;
           config = { lib, ... }: {
             imports = lib.optionals (!cfg.bootstrap) [
               (import ./server-core.nix {
                 jobs = e.vm.cores;
-                allow = [ "10.0.2.2/32" ];
+                allow = [ "10.0.2.2/32" "192.168.0.0/24" ];
               })
             ];
             virtualisation = {
