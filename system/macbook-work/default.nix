@@ -5,5 +5,10 @@
     ./app.nix
     ../../template/darwin/mac-common.nix
   ];
-  system.primaryUser = "jw910731";
+  system = {
+    primaryUser = "jerry.wu";
+    defaults = {
+      loginwindow.LoginwindowText = lib.mkForce null;
+    };
+  };
 }
