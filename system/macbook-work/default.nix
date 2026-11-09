@@ -5,4 +5,9 @@
     ./app.nix
     ../../template/darwin/mac-common.nix
   ];
+  system = {
+    defaults = {
+      loginwindow.LoginwindowText = lib.mkForce null;
+    };
+  };
 }

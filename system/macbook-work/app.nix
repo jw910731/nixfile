@@ -11,10 +11,8 @@ in
       brews = [ ];
 
       casks = mapCask [
-        "openlogi"
+        "cursor"
         "meetingbar"
-        "microsoft-teams"
-        "openvpn-connect"
       ];
 
       taps = mapTap [ ];
