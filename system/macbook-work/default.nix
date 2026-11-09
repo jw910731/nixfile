@@ -5,5 +5,4 @@
     ./app.nix
     ../../template/darwin/mac-common.nix
   ];
-  system.primaryUser = "jw910731";
 }

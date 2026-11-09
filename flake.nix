@@ -245,6 +245,7 @@
         "macbook-work" = mkDarwin {
           system = "aarch64-darwin";
           hostName = "jerrywu-macbook";
+          user = "jerry.wu";
           computerName = "jerrywu's Macbook";
           modules = [ ./system/macbook-work ];
           homeModules = [ ./home/jw910731/macos-work.nix ];

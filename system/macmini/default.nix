@@ -4,5 +4,4 @@
     ../../template/darwin
     ./app.nix
   ];
-  system.primaryUser = "jw910731";
 }

@@ -5,6 +5,5 @@
     ../../template/buildaccel/darwin-server.nix
     ./app.nix
   ];
-  system.primaryUser = "jw910731";
   jw.buildAccel.server.enable = true;
 }

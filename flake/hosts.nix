@@ -7,11 +7,15 @@
   moduleModifier',
 }:
 let
-  user = "jw910731";
+  defaultUser = "jw910731";
 
   # Home Manager wiring shared by every host.
   hmBase =
-    { sharedModules, homeModules }:
+    {
+      sharedModules,
+      homeModules,
+      user ? defaultUser,
+    }:
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
@@ -43,6 +47,7 @@ let
 
   # nix-darwin does not derive the HM home directory; pin it for every Mac.
   darwinUser =
+    user:
     { lib, ... }:
     {
       home.username = user;
@@ -89,6 +94,7 @@ in
       computerName,
       modules,
       homeModules,
+      user ? defaultUser,
     }:
     moduleModifier' darwinOverlays inputs.darwin.lib.darwinSystem {
       inherit system;
@@ -96,8 +102,10 @@ in
         inputs.home-manager-darwin.darwinModules.home-manager
         (hmBase {
           sharedModules = darwinHmModules;
-          homeModules = homeModules ++ [ darwinUser ];
+          homeModules = homeModules ++ [ (darwinUser user) ];
+          inherit user;
         })
+        { system.primaryUser = user; }
         (darwinHostSetup { inherit hostName computerName; })
       ];
     };
