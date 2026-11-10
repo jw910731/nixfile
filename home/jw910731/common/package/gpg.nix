@@ -24,7 +24,7 @@ in
           url = "https://keys.openpgp.org/vks/v1/by-fingerprint/${v.fingerprint}";
           hash = v.pkHash;
         })).outPath;
-      trust = "ultimate";
+      trust = null;
     }) pubkeys;
   };
 
