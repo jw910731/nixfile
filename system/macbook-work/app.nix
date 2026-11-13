@@ -8,9 +8,12 @@ in
 {
   homebrew = (
     mylib.recursiveMerge commonOptions {
-      brews = [ ];
+      brews = [
+        "container"
+      ];
 
       casks = mapCask [
+        "android-platform-tools"
         "cursor"
         "meetingbar"
       ];
