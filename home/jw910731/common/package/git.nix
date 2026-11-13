@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   programs.git = {
     # Basic
@@ -12,7 +12,7 @@
       # Editor
       core = {
         editor = "emacs";
-        autocrlf = "input";
+        autocrlf = lib.mkDefault "input";
         excludesfile = "~/.gitignore_global";
       };
 
