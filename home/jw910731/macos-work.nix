@@ -38,5 +38,6 @@ in {
 
   home.packages = with pkgs; [
     minicom
+    docker-client
   ];
 }
