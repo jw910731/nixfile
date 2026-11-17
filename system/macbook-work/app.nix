@@ -16,6 +16,7 @@ in
         "android-platform-tools"
         "cursor"
         "meetingbar"
+        "orbstack"
       ];
 
       taps = mapTap [ ];
