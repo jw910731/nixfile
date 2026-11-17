@@ -12,6 +12,7 @@ in
     enable = true;
     package = llm-agents.claude-code;
     settings = {
+      outputStyle = "Concise";
       hooks = {
         Notification = [
           {
