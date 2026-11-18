@@ -39,5 +39,7 @@ in {
   home.packages = with pkgs; [
     minicom
     docker-client
+    yarn-berry
+    awscli2
   ];
 }
