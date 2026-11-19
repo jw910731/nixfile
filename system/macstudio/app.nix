@@ -32,9 +32,12 @@ in
         "steam"
         "telegram"
         "utm"
+
+        "broyojo/hadron/hadron"
       ];
 
       taps = mapTap [
+        "broyojo/hadron"
       ];
 
       masApps = {
