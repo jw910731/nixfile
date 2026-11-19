@@ -17,6 +17,7 @@ in
         "cursor"
         "meetingbar"
         "orbstack"
+        "pritunl"
       ];
 
       taps = mapTap [ ];
