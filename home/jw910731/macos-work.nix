@@ -37,9 +37,10 @@ in {
   };
 
   home.packages = with pkgs; [
-    minicom
-    docker-client
-    yarn-berry
     awscli2
+    amazon-ecr-credential-helper
+    docker-client
+    minicom
+    yarn-berry
   ];
 }
